@@ -1,4 +1,4 @@
-C:\Users\io\Desktop\7.1.cpp
+ C:\Users\io\Desktop\7.1.cpp
 #include <stdio.h>
 #include <stdlib.h>
 #include <clocale>
