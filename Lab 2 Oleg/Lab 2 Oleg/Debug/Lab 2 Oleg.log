@@ -1,0 +1,9 @@
+﻿  Lab 2 Oleg.cpp
+c:\users\io\source\repos\lab 2 oleg\lab 2 oleg\lab 2 oleg.cpp(38): warning C4477: 'scanf_s' : format string '%d' requires an argument of type 'int *', but variadic argument 1 has type 'char *'
+  c:\users\io\source\repos\lab 2 oleg\lab 2 oleg\lab 2 oleg.cpp(38): note: consider using '%hhd' in the format string
+c:\users\io\source\repos\lab 2 oleg\lab 2 oleg\lab 2 oleg.cpp(54): warning C4477: 'scanf_s' : format string '%d' requires an argument of type 'int *', but variadic argument 1 has type 'char *'
+  c:\users\io\source\repos\lab 2 oleg\lab 2 oleg\lab 2 oleg.cpp(54): note: consider using '%hhd' in the format string
+c:\users\io\source\repos\lab 2 oleg\lab 2 oleg\lab 2 oleg.cpp(71): warning C4477: 'scanf_s' : format string '%d' requires an argument of type 'int *', but variadic argument 1 has type 'char *'
+  c:\users\io\source\repos\lab 2 oleg\lab 2 oleg\lab 2 oleg.cpp(71): note: consider using '%hhd' in the format string
+c:\users\io\source\repos\lab 2 oleg\lab 2 oleg\lab 2 oleg.cpp(93): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+  Lab 2 Oleg.vcxproj -> c:\users\io\source\repos\Lab 2 Oleg\Debug\Lab 2 Oleg.exe

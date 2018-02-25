@@ -1,0 +1,25 @@
+﻿  stdafx.cpp
+  AddingGraphics.cpp
+c:\users\io\source\repos\addinggraphics\addinggraphics\addinggraphics.cpp(10): error C2065: 'hdc': undeclared identifier
+c:\users\io\source\repos\addinggraphics\addinggraphics\addinggraphics.cpp(10): error C2065: 'x': undeclared identifier
+c:\users\io\source\repos\addinggraphics\addinggraphics\addinggraphics.cpp(10): error C2065: 'y': undeclared identifier
+c:\users\io\source\repos\addinggraphics\addinggraphics\addinggraphics.cpp(12): error C3861: 'initwindow': identifier not found
+c:\users\io\source\repos\addinggraphics\addinggraphics\addinggraphics.cpp(13): error C3861: 'moveto': identifier not found
+c:\users\io\source\repos\addinggraphics\addinggraphics\addinggraphics.cpp(14): error C3861: 'lineto': identifier not found
+c:\users\io\source\repos\addinggraphics\addinggraphics\addinggraphics.cpp(15): error C2065: 'GREEN': undeclared identifier
+c:\users\io\source\repos\addinggraphics\addinggraphics\addinggraphics.cpp(15): error C3861: 'setcolor': identifier not found
+c:\users\io\source\repos\addinggraphics\addinggraphics\addinggraphics.cpp(16): error C3861: 'circle': identifier not found
+c:\users\io\source\repos\addinggraphics\addinggraphics\addinggraphics.cpp(17): error C3861: 'COLOR': identifier not found
+c:\users\io\source\repos\addinggraphics\addinggraphics\addinggraphics.cpp(17): error C3861: 'setcolor': identifier not found
+c:\users\io\source\repos\addinggraphics\addinggraphics\addinggraphics.cpp(19): error C3861: 'moveto': identifier not found
+c:\users\io\source\repos\addinggraphics\addinggraphics\addinggraphics.cpp(20): error C3861: 'lineto': identifier not found
+c:\users\io\source\repos\addinggraphics\addinggraphics\addinggraphics.cpp(21): error C3861: 'setcolor': identifier not found
+c:\users\io\source\repos\addinggraphics\addinggraphics\addinggraphics.cpp(22): error C3861: 'moveto': identifier not found
+c:\users\io\source\repos\addinggraphics\addinggraphics\addinggraphics.cpp(23): error C3861: 'lineto': identifier not found
+c:\users\io\source\repos\addinggraphics\addinggraphics\addinggraphics.cpp(24): error C3861: 'COLOR': identifier not found
+c:\users\io\source\repos\addinggraphics\addinggraphics\addinggraphics.cpp(24): error C3861: 'setcolor': identifier not found
+c:\users\io\source\repos\addinggraphics\addinggraphics\addinggraphics.cpp(25): error C3861: 'moveto': identifier not found
+c:\users\io\source\repos\addinggraphics\addinggraphics\addinggraphics.cpp(26): error C3861: 'lineto': identifier not found
+c:\users\io\source\repos\addinggraphics\addinggraphics\addinggraphics.cpp(28): error C3861: 'closegraph': identifier not found
+c:\users\io\source\repos\addinggraphics\addinggraphics\addinggraphics.cpp(27): error C4996: 'getch': The POSIX name for this item is deprecated. Instead, use the ISO C and C++ conformant name: _getch. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.16299.0\ucrt\conio.h(452): note: see declaration of 'getch'

@@ -1,0 +1,3 @@
+﻿  laba3OlegSaod.cpp
+c:\users\io\source\repos\laba3olegsaod\laba3olegsaod\laba3olegsaod.cpp(82): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+  laba3OlegSaod.vcxproj -> c:\users\io\source\repos\laba3OlegSaod\Debug\laba3OlegSaod.exe
