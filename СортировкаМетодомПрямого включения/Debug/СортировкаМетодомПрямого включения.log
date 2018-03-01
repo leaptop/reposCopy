@@ -1,0 +1,4 @@
+﻿  stdafx.cpp
+  СортировкаМетодомПрямого включения.cpp
+c:\users\io\source\repos\сортировкаметодомпрямого включения\сортировкаметодомпрямого включения.cpp(28): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+  СортировкаМетодомПрямого включения.vcxproj -> c:\users\io\source\repos\СортировкаМетодомПрямого включения\Debug\СортировкаМетодомПрямого включения.exe
