@@ -1,7 +1,0 @@
-c:\users\io\source\repos\Percenti\Percenti\bin\Debug\Percenti.exe.config
-c:\users\io\source\repos\Percenti\Percenti\bin\Debug\Percenti.exe
-c:\users\io\source\repos\Percenti\Percenti\bin\Debug\Percenti.pdb
-c:\users\io\source\repos\Percenti\Percenti\obj\Debug\Percenti.csprojResolveAssemblyReference.cache
-c:\users\io\source\repos\Percenti\Percenti\obj\Debug\Percenti.csproj.CoreCompileInputs.cache
-c:\users\io\source\repos\Percenti\Percenti\obj\Debug\Percenti.exe
-c:\users\io\source\repos\Percenti\Percenti\obj\Debug\Percenti.pdb

@@ -1,7 +1,0 @@
-c:\users\io\source\repos\NaNCheck\NaNCheck\bin\Debug\NaNCheck.exe.config
-c:\users\io\source\repos\NaNCheck\NaNCheck\bin\Debug\NaNCheck.exe
-c:\users\io\source\repos\NaNCheck\NaNCheck\bin\Debug\NaNCheck.pdb
-c:\users\io\source\repos\NaNCheck\NaNCheck\obj\Debug\NaNCheck.csprojResolveAssemblyReference.cache
-c:\users\io\source\repos\NaNCheck\NaNCheck\obj\Debug\NaNCheck.csproj.CoreCompileInputs.cache
-c:\users\io\source\repos\NaNCheck\NaNCheck\obj\Debug\NaNCheck.exe
-c:\users\io\source\repos\NaNCheck\NaNCheck\obj\Debug\NaNCheck.pdb

@@ -1,7 +1,0 @@
-c:\users\io\source\repos\Permutations\Permutations\bin\Debug\Permutations.exe.config
-c:\users\io\source\repos\Permutations\Permutations\bin\Debug\Permutations.exe
-c:\users\io\source\repos\Permutations\Permutations\bin\Debug\Permutations.pdb
-c:\users\io\source\repos\Permutations\Permutations\obj\Debug\Permutations.csprojResolveAssemblyReference.cache
-c:\users\io\source\repos\Permutations\Permutations\obj\Debug\Permutations.csproj.CoreCompileInputs.cache
-c:\users\io\source\repos\Permutations\Permutations\obj\Debug\Permutations.exe
-c:\users\io\source\repos\Permutations\Permutations\obj\Debug\Permutations.pdb

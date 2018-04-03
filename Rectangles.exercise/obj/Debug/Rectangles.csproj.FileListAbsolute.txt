@@ -1,8 +1,0 @@
-C:\Users\io\Downloads\Rectangles.exercise\bin\Debug\Rectangles.exe.config
-C:\Users\io\Downloads\Rectangles.exercise\bin\Debug\Rectangles.exe
-C:\Users\io\Downloads\Rectangles.exercise\bin\Debug\Rectangles.pdb
-C:\Users\io\Downloads\Rectangles.exercise\bin\Debug\TestingRoom.dll
-C:\Users\io\Downloads\Rectangles.exercise\obj\Debug\Rectangles.csprojResolveAssemblyReference.cache
-C:\Users\io\Downloads\Rectangles.exercise\obj\Debug\Rectangles.csproj.CoreCompileInputs.cache
-C:\Users\io\Downloads\Rectangles.exercise\obj\Debug\Rectangles.exe
-C:\Users\io\Downloads\Rectangles.exercise\obj\Debug\Rectangles.pdb

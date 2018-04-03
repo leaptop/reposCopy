@@ -4,6 +4,9 @@ using namespace std;// for cout
 #include<conio.h>// for _getch()
 #include<stdlib.h>// for srand
 #include<conio.h>//for _getch()
+The Win32 templates have been renamed to Windows Desktop in Visual Studio
+
+Visual Assist расширение для подсказок
 
 int random(int N) { return rand() % N; }/* 
 разобрался наконец-то как это работает. 

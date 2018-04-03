@@ -1,7 +1,0 @@
-c:\users\io\source\repos\MoveOfTheQueen\MoveOfTheQueen\bin\Debug\MoveOfTheQueen.exe.config
-c:\users\io\source\repos\MoveOfTheQueen\MoveOfTheQueen\bin\Debug\MoveOfTheQueen.exe
-c:\users\io\source\repos\MoveOfTheQueen\MoveOfTheQueen\bin\Debug\MoveOfTheQueen.pdb
-c:\users\io\source\repos\MoveOfTheQueen\MoveOfTheQueen\obj\Debug\MoveOfTheQueen.csprojResolveAssemblyReference.cache
-c:\users\io\source\repos\MoveOfTheQueen\MoveOfTheQueen\obj\Debug\MoveOfTheQueen.csproj.CoreCompileInputs.cache
-c:\users\io\source\repos\MoveOfTheQueen\MoveOfTheQueen\obj\Debug\MoveOfTheQueen.exe
-c:\users\io\source\repos\MoveOfTheQueen\MoveOfTheQueen\obj\Debug\MoveOfTheQueen.pdb

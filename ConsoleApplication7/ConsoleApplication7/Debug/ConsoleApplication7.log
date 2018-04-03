@@ -1,3 +1,0 @@
-﻿  ConsoleApplication7.cpp
-c:\users\io\source\repos\consoleapplication7\consoleapplication7\consoleapplication7.cpp(27): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-  ConsoleApplication7.vcxproj -> C:\Users\io\source\repos\ConsoleApplication7\Debug\ConsoleApplication7.exe

@@ -1,8 +1,0 @@
-C:\Users\io\source\repos\AngryBirds.exercise\bin\Debug\AngryBirds.exe.config
-C:\Users\io\source\repos\AngryBirds.exercise\bin\Debug\AngryBirds.exe
-C:\Users\io\source\repos\AngryBirds.exercise\bin\Debug\AngryBirds.pdb
-C:\Users\io\source\repos\AngryBirds.exercise\bin\Debug\TestingRoom.dll
-C:\Users\io\source\repos\AngryBirds.exercise\obj\Debug\AngryBirds.csprojResolveAssemblyReference.cache
-C:\Users\io\source\repos\AngryBirds.exercise\obj\Debug\AngryBirds.csproj.CoreCompileInputs.cache
-C:\Users\io\source\repos\AngryBirds.exercise\obj\Debug\AngryBirds.exe
-C:\Users\io\source\repos\AngryBirds.exercise\obj\Debug\AngryBirds.pdb

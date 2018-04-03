@@ -1,7 +1,0 @@
-c:\users\io\source\repos\ПроизвЦифер\ПроизвЦифер\bin\Debug\ПроизвЦифер.exe.config
-c:\users\io\source\repos\ПроизвЦифер\ПроизвЦифер\bin\Debug\ПроизвЦифер.exe
-c:\users\io\source\repos\ПроизвЦифер\ПроизвЦифер\bin\Debug\ПроизвЦифер.pdb
-c:\users\io\source\repos\ПроизвЦифер\ПроизвЦифер\obj\Debug\ПроизвЦифер.csprojResolveAssemblyReference.cache
-c:\users\io\source\repos\ПроизвЦифер\ПроизвЦифер\obj\Debug\ПроизвЦифер.csproj.CoreCompileInputs.cache
-c:\users\io\source\repos\ПроизвЦифер\ПроизвЦифер\obj\Debug\ПроизвЦифер.exe
-c:\users\io\source\repos\ПроизвЦифер\ПроизвЦифер\obj\Debug\ПроизвЦифер.pdb

@@ -1,7 +1,0 @@
-C:\Users\io\Downloads\DragonFractal.exercise\bin\Debug\DragonFractal.exe.config
-C:\Users\io\Downloads\DragonFractal.exercise\bin\Debug\DragonFractal.exe
-C:\Users\io\Downloads\DragonFractal.exercise\bin\Debug\DragonFractal.pdb
-C:\Users\io\Downloads\DragonFractal.exercise\obj\Debug\DragonFractal.csprojResolveAssemblyReference.cache
-C:\Users\io\Downloads\DragonFractal.exercise\obj\Debug\DragonFractal.csproj.CoreCompileInputs.cache
-C:\Users\io\Downloads\DragonFractal.exercise\obj\Debug\DragonFractal.exe
-C:\Users\io\Downloads\DragonFractal.exercise\obj\Debug\DragonFractal.pdb

@@ -1,8 +1,0 @@
-C:\Users\io\Downloads\Billiards.exercise\bin\Debug\Billiards.exe.config
-C:\Users\io\Downloads\Billiards.exercise\bin\Debug\Billiards.exe
-C:\Users\io\Downloads\Billiards.exercise\bin\Debug\Billiards.pdb
-C:\Users\io\Downloads\Billiards.exercise\bin\Debug\TestingRoom.dll
-C:\Users\io\Downloads\Billiards.exercise\obj\Debug\Billiards.csprojResolveAssemblyReference.cache
-C:\Users\io\Downloads\Billiards.exercise\obj\Debug\Billiards.csproj.CoreCompileInputs.cache
-C:\Users\io\Downloads\Billiards.exercise\obj\Debug\Billiards.exe
-C:\Users\io\Downloads\Billiards.exercise\obj\Debug\Billiards.pdb

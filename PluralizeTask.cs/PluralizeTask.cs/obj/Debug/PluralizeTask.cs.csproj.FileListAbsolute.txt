@@ -1,7 +1,0 @@
-c:\users\io\source\repos\PluralizeTask.cs\PluralizeTask.cs\bin\Debug\PluralizeTask.cs.exe.config
-c:\users\io\source\repos\PluralizeTask.cs\PluralizeTask.cs\bin\Debug\PluralizeTask.cs.exe
-c:\users\io\source\repos\PluralizeTask.cs\PluralizeTask.cs\bin\Debug\PluralizeTask.cs.pdb
-c:\users\io\source\repos\PluralizeTask.cs\PluralizeTask.cs\obj\Debug\PluralizeTask.cs.csprojResolveAssemblyReference.cache
-c:\users\io\source\repos\PluralizeTask.cs\PluralizeTask.cs\obj\Debug\PluralizeTask.cs.csproj.CoreCompileInputs.cache
-c:\users\io\source\repos\PluralizeTask.cs\PluralizeTask.cs\obj\Debug\PluralizeTask.cs.exe
-c:\users\io\source\repos\PluralizeTask.cs\PluralizeTask.cs\obj\Debug\PluralizeTask.cs.pdb

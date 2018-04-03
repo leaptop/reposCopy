@@ -1,3 +1,0 @@
-﻿  C2.4.1.cpp
-c:\users\io\source\repos\c2.4.1\c2.4.1\c2.4.1.cpp(21): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-  C2.4.1.vcxproj -> c:\users\io\source\repos\C2.4.1\Debug\C2.4.1.exe
