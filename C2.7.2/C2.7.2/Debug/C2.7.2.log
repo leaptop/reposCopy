@@ -1,3 +1,0 @@
-﻿  C2.7.2.cpp
-c:\users\io\source\repos\c2.7.2\c2.7.2\c2.7.2.cpp(21): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-LINK : fatal error LNK1168: cannot open C:\Users\io\source\repos\C2.7.2\Debug\C2.7.2.exe for writing

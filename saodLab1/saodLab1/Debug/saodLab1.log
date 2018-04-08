@@ -1,3 +1,8 @@
 ﻿  saodLab1.cpp
 c:\users\io\source\repos\saodlab1\saodlab1\saodlab1.cpp(148): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+<<<<<<< HEAD
   saodLab1.vcxproj -> C:\Users\io\source\repos\saodLab1\Debug\saodLab1.exe
+=======
+c:\users\io\source\repos\saodlab1\saodlab1\saodlab1.cpp(142): error C4716: 'CountFormulas': must return a value
+c:\users\io\source\repos\saodlab1\saodlab1\saodlab1.cpp(153): error C4700: uninitialized local variable 'a' used
+>>>>>>> e61307e

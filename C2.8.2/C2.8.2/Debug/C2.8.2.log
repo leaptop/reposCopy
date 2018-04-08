@@ -1,4 +1,0 @@
-﻿  stdafx.cpp
-  C2.8.2.cpp
-c:\users\io\source\repos\c2.8.2\c2.8.2\c2.8.2.cpp(57): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-  C2.8.2.vcxproj -> C:\Users\io\source\repos\C2.8.2\Debug\C2.8.2.exe
