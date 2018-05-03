@@ -1,10 +1,3 @@
 ﻿  C2.9.1.cpp
-c:\users\io\source\repos\c2.9.1\c2.9.1\c2.9.1.cpp(34): warning C4473: 'scanf_s' : not enough arguments passed for format string
-  c:\users\io\source\repos\c2.9.1\c2.9.1\c2.9.1.cpp(34): note: placeholders and their parameters expect 2 variadic arguments, but 1 were provided
-  c:\users\io\source\repos\c2.9.1\c2.9.1\c2.9.1.cpp(34): note: the missing variadic argument 2 is required by format string '%s'
-  c:\users\io\source\repos\c2.9.1\c2.9.1\c2.9.1.cpp(34): note: this argument is used as a buffer size
-c:\users\io\source\repos\c2.9.1\c2.9.1\c2.9.1.cpp(37): warning C4473: 'scanf_s' : not enough arguments passed for format string
-  c:\users\io\source\repos\c2.9.1\c2.9.1\c2.9.1.cpp(37): note: placeholders and their parameters expect 2 variadic arguments, but 1 were provided
-  c:\users\io\source\repos\c2.9.1\c2.9.1\c2.9.1.cpp(37): note: the missing variadic argument 2 is required by format string '%s'
-  c:\users\io\source\repos\c2.9.1\c2.9.1\c2.9.1.cpp(37): note: this argument is used as a buffer size
-  C2.9.1.vcxproj -> C:\Users\io\source\repos\C2.9.1\Debug\C2.9.1.exe
+c:\users\io\source\repos\c2.9.1\c2.9.1\c2.9.1.cpp(60): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+c:\users\io\source\repos\c2.9.1\c2.9.1\c2.9.1.cpp(111): error C3861: 'gets': identifier not found

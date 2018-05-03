@@ -1,12 +1,21 @@
 Процедура - функция с типом возвр зн void.
-#include <iostream>//  for cout
-using namespace std;// for cout
+#include <iostream>//  for cout(for C++ only)
+using namespace std;// for cout(for C++ only)
 #include<conio.h>// for _getch()
 #include<stdlib.h>// for srand
 #include<conio.h>//for _getch()
 The Win32 templates have been renamed to Windows Desktop in Visual Studio
 
-Visual Assist расширение для подсказок
+typedef struct st {
+    struct st *next;
+} slist;
+это вроде как равносильно этому:
+ struct st {
+	struct st *next;
+} ;
+ typedef st slist;
+
+Visual Assist расширение для подсказок(есть только прбная версия(потом отключается))
 
 int random(int N) { return rand() % N; }/* 
 разобрался наконец-то как это работает. 
@@ -25,3 +34,6 @@ o(f), «о малое от  f» обозначает «бесконечно ма
 
 фраза «сложность алгоритма есть  O(f(n))» означает, что с увеличением параметра n, характеризующего количество входной информации алгоритма, время работы алгоритма будет возрастать не быстрее, чем некоторая константа, умноженная на f(n);
 фраза «функция f(x) является „о“ малым от функции  g(x) в окрестности точки p» означает, что с приближением x к p f(x) уменьшается быстрее, g(x) (отношение  |f(x)|/|g(x)|стремится к нулю).
+
+char str[4] = {"e2e4"};
+printf("%d", (int)str[1]);// Выдаст аски код цифры 2
