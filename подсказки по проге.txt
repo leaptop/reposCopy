@@ -39,3 +39,6 @@ o(f), «о малое от  f» обозначает «бесконечно ма
 
 char str[4] = {"e2e4"};
 printf("%d", (int)str[1]);// Выдаст аски код цифры 2
+
+Если выдаёт warning из-за использования deprecated функций:
+Project->Properties->c/c++->Preprocessor->Добавить _CRT_SECURE_NO_WARNINGS; в Preprocessor Definitions
