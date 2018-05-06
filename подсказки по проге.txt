@@ -42,3 +42,9 @@ printf("%d", (int)str[1]);// Выдаст аски код цифры 2
 
 Если выдаёт warning из-за использования deprecated функций:
 Project->Properties->c/c++->Preprocessor->Добавить _CRT_SECURE_NO_WARNINGS; в Preprocessor Definitions
+
+float *p; // указатель на вещественные числа 
+ p=(float *) malloc(n*sizeof(float));// Выделяем  память под n    
+вещественных чисел;
+ for (i=0;i<n;i++)  
+    Доступ существляется через p[i]
