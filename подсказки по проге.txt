@@ -1,9 +1,11 @@
 Процедура - функция с типом возвр зн void.
+
 #include <iostream>//  for cout(for C++ only)
 using namespace std;// for cout(for C++ only)
 #include<conio.h>// for _getch()
 #include<stdlib.h>// for srand
 #include<conio.h>//for _getch()
+
 The Win32 templates have been renamed to Windows Desktop in Visual Studio
 
 typedef struct st {
@@ -48,3 +50,9 @@ float *p; // указатель на вещественные числа
 вещественных чисел;
  for (i=0;i<n;i++)  
     Доступ существляется через p[i]
+	
+	Чтобы ввести строку через консоль cin>>str; не сработает(пробелы воспринимает как конец ввода). Нужно так
+#include <iostream>
+#include <string>
+ string mystr;
+ getline (cin, mystr);
