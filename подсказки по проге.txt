@@ -76,3 +76,34 @@ void f(int &c){c=10;}
 
 In Russian "parameters" are called "formal parameters", while "arguments" are called "actual parameters".
 argument is the one you use it, while parameter is a blank to be filled in
+
+void swap(int *xp, int *yp)
+{
+	int temp = *xp;
+	*xp = *yp;
+	*yp = temp;
+}
+swap(&arr[j], &arr[j + 1]);
+
+void iswap(int &n1, int &n2) {
+	int temp = n1;
+	n1 = n2;
+	n2 = temp;
+}
+iswap(a[i + sh], a[i * 2 + 2 + sh]);
+
+tmp = arr[i];// самый простой способ
+arr[i] = arr[j];
+arr[j] = tmp;
+
+QuickSort из методички работает
+
+char **AddPtr (char **pp, int size, char *str); //прототип функции //Интересный прототип... без имени?
+
+Бился с передачей массива указателей на указатели. Оказалось, что звёздочки должны быть впереди при передаче
+void boardGeneration(char **a)
+Хотя так тоже работало void boardGeneration(char a[][9]), но выдавало предупреждение при компиляции 
+ note: expected 'char (*)[9]' but argument is of type 'char **'
+ или  warning: passing argument 1 of 'boardRenew' from incompatible pointer type [-Wincompatible-pointer-types]
+ 
+ Notepad++ Опции-определение стиля  -  можно поменять цвет фона, текста
