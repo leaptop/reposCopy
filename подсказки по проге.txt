@@ -1,3 +1,9 @@
+
+
+777
+
+
+
 Процедура - функция с типом возвр зн void.
 
 #include <iostream>//  for cout(for C++ only)
@@ -15,6 +21,9 @@ typedef struct st {
 	struct st *next;
 } ;
  typedef st slist;
+ Вроде как небольшие отличия есть, но по Подбельскому/Фомину единственное отличие st и stlist(в обоих способах объявления)
+ в том, что для выделения памяти под структуру можно писать struct st name; и stlist name; 
+ Т.е. typedef просто позволяет избавиться от слова struct при инициализациях.
 
 Visual Assist расширение для подсказок(есть только прбная версия(потом отключается))
 
@@ -127,3 +136,5 @@ actual foreground on white.
 #include <iostream>// for cout
 #include<conio.h>// for _getch()
 using namespace std;// for cout
+
+
