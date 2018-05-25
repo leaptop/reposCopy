@@ -137,4 +137,4 @@ actual foreground on white.
 #include<conio.h>// for _getch()
 using namespace std;// for cout
 
-
+Натуральные числа a и b называют взаимно простыми, если их наибольший общий делитель равен 1
