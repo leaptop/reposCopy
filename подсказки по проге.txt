@@ -145,3 +145,18 @@ char arr[n][8]; // двумерный массив статическое выд
 Hash1(arr,n); // n - константа
 
 mod = modulus = модуль
+
+*& - это ссылка на указатель. Используется в С++ как альтернатива двойному указателю. К примеру, для инициализации указателя.
+void someFunc(someType *& param) 
+{
+    someType * result = NULL;
+    // Выполняем некоторые действия.
+    param = result;
+}
+void someFunc(someType ** param) 
+{
+    someType * result = NULL;
+    // Выполняем некоторые действия.
+    *param = result;
+}
+Эти функции эквиваленты
