@@ -20,9 +20,9 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
-    <ProjectGuid>{A8F9547D-E865-49E5-8641-D50A6BE92A48}</ProjectGuid>
+    <ProjectGuid>{38B81F4A-D999-4640-A5F2-289DD4575182}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>saodL14Hashing</RootNamespace>
+    <RootNamespace>Saod14HashS</RootNamespace>
     <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -151,7 +151,7 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="saodL14Hashing.cpp" />
+    <ClCompile Include="Saod14HashS.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>

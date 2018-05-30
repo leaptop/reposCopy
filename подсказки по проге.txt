@@ -133,8 +133,15 @@ actual foreground on white.
 Итак есть два волшебных оператора: * и &. Второй по данной переменной узнаёт её адрес в памяти. Первый по данному адресу (который, как мы помним, хранится в переменной типа int*) возвращает собственно данные, расположенные по этому адресу.
 
 #include<cstdlib>// for rand
+#include<cstdlib>// for rand
 #include <iostream>// for cout
 #include<conio.h>// for _getch()
 using namespace std;// for cout
 
 Натуральные числа a и b называют взаимно простыми, если их наибольший общий делитель равен 1
+
+int Hash1(char(*arr)[8], int n);
+char arr[n][8]; // двумерный массив статическое выделение памяти
+Hash1(arr,n); // n - константа
+
+mod = modulus = модуль
