@@ -52,26 +52,34 @@ public:
 	FILE * f;
 	string path;
 	int x = 1000;
+	string text;
 
 	//terminal():x(100), buffer(x) {	}// как инициализировать буфер иксом?
 	void openFile() {//Получает текст для терминала из файла
-
+		const int MAX_LENGTH = 100;
+		char line[MAX_LENGTH];
 
 	   // FILE *pFile;
-		//char buffer[1000];
-
-		//fopen_s(&f,"myfile.txt", "r");
-		//if (f == NULL) perror("\nError opening file");
-		//else
-		//{
-		   // cout << "\nopening";
-		   // /*while (!feof(pFile))
-		   // {
-		   //	 if (fgets(buffer, 100, pFile) == NULL) break;
-		   //	 fputs(buffer, stdout);
-		   // }*/
-		   //
-		//}
+		char buffer[1000], ch;
+		int k = 0;
+		fopen_s(&f,"myfile.txt", "r");
+		if (f == NULL) perror("\nError opening file");
+		else
+		{
+		    cout << "\nopening\n";
+		    while (!feof(f))
+			{
+				f.getline( text, f);
+		   	 /*if (fgets(buffer, 100, f) == NULL) break;
+		   	 fputs(text, stdout);*/
+				/*ch = getc(f);
+				buffer[k++] += ch;*/
+		    }
+			/*while ((ch = getc(f)) != EOF )
+				printf("%c", ch);*/
+		   
+		}
+		printf("%s", buffer);
 	   //cout << "Введите имя файла для открытия\n";
 	   //cin >> buffer;
 	   //fopen_s(&f, buffer, "rb");

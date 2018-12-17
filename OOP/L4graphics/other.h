@@ -36,7 +36,7 @@ class Point
 		void Move()
 		{
 			Show();
-//						delay(6);
+						delay(6);
 			Hide();
 
 			x=x+k;						
@@ -71,7 +71,7 @@ class Line:public Point
 		void Move()
 		{
 			Show();
-			delay(6);
+			delay(1);
 			Hide();
 			x=x+k;	
 			x1=x1+k;					
@@ -105,7 +105,7 @@ class Circle:public Point
 		void Move()
 		{
 			Show();
-//			delay(6);
+			delay(6);
 			Hide();
 			x=x+k;						
 			if (x+rad==600 || x-rad==0)

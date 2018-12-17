@@ -255,7 +255,7 @@ void someFunc(someType ** param)
 }
 Эти функции эквиваленты.// т.е. это *& используется чтобы не писать звёздочку перед сслыками в коде
 
-<!-- text --> комментарий для HTML
+<!-- text --> комментарий для HTML // also works
 
 Для подключения графики SFML: https://www.youtube.com/watch?v=w339OWGlSo0&list=LLGo7Lb_DJ4_5SABWFqT616Q
 В принципе можно не тратить эти 10 минут на настройку, а просто скопировать папку с готовым проектом... Ну и библиотеки на E должны лежать в том же месте.
@@ -286,3 +286,12 @@ FILE *fp;
 The <div> tag defines a division or a section in an HTML document.
 The <div> element is often used as a container for other HTML elements to style them with CSS or to perform certain tasks with JavaScript.
 	
+Функция c_str() возвращает указатель на символьный массив, который содержит строку объекта  стринг (string) в том виде, в котором она размещалась бы, во встроенном строковом типе. Например:
+std::string str;
+const char* str2 = str.c_str();
+
+dev cpp tools - editor options - general - highlight current line; colors - changes a theme цвет
+
+Оператор ~ побитовый NOT, он инвертирует биты в двоичном числе:
+
+~ перед именем конструктора - это деструктор, он уничтожает экземпляр, освобождает память и т.д. и т.д.
