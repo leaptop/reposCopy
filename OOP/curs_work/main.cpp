@@ -1,36 +1,34 @@
-#include "const.h"
-#include "class.h"
+#include "constants.h"
+#include "classes.h"
 #include <stdio.h>
+#include <stdlib.h>
 #include <ctime>
 #include <iostream>
-#include <stdlib.h>
 #include <graphics.h>
 
-main(){
-	
+main(){	
 	srand(time(NULL));
-	initwindow(700, 700);
-	
+	initwindow(750, 750);
 
 					 
-	circleClass circleObg( 220 ,150 ,15 );
-	circleClass *Circle = &circleObg;
+	circleCls circleObj( 220 ,150 ,15 );
+	circleCls *Circle = &circleObj;
 					 
-	rectangleClass rectangleObg( 200, 110,11);
-	rectangleClass *Rectangle = &rectangleObg;
+	rectangleCls rectanObj( 200, 110,11);
+	rectangleCls *Rectangle = &rectanObj;
 					 
-	triangleClass triangleObg( 220, 49, 4);
-	triangleClass *Triangle = &triangleObg;
+	triangleCls trianObj( 220, 49, 4);
+	triangleCls *Triangle = &trianObj;
 					 
-	triangleLeftClass triangleLObg( 241, 160, 1);				 		    
-	triangleLeftClass *LTriangle = &triangleLObg;
+	triangLCls trianLObj( 241, 160, 1);				 		    
+	triangLCls *LTriangle = &trianLObj;
 	
-	triangleRightClass triangleRObg(199, 160,  1);				 		    
-	triangleRightClass *RTriangle = &triangleRObg;
+	trianRCls trianRObj(199, 160,  1);				 		    
+	trianRCls *RTriangle = &trianRObj;
 	
-	figures **array = new figures*[ARRAY_SIZE];
+	shapes **array = new shapes*[ARR_SIZE];
 	int count = 0;
-	for(int i = 0; i < ARRAY_SIZE; i++){
+	for(int i = 0; i < ARR_SIZE; i++){
 		switch(count){
         	case 0:  array[i] = Rectangle; break;
         	case 1:  array[i] = Circle; break;
@@ -44,7 +42,7 @@ main(){
 
 	while(true){
 		cleardevice();
-		for(int i = 0; i < ARRAY_SIZE; i++){
+		for(int i = 0; i < ARR_SIZE; i++){
 			array[i] -> draw();
 			array[i] -> move();
 		}

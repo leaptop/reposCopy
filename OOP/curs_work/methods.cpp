@@ -1,6 +1,6 @@
-#include "class.h"
+#include "classes.h"
 #include <math.h>
-#include "const.h"
+#include "constants.h"
 #define N 0.1
 
 float t = 0; 
@@ -10,34 +10,34 @@ float g = 0;
 float k = 0; 
 
 
-float figures::getPosX() const{
+float shapes::getXpos() const{
 	return x;
 }
 
-void figures::setPosX(const float x){
-	figures::x = x;
+void shapes::setXpos(const float x){
+	shapes::x = x;
 }
 
-float figures::getPosY() const{
+float shapes::getYpos() const{
 	return y;
 }
 
-void figures::setPosY(const float y){
-	figures::y = y;
+void shapes::setYpos(const float y){
+	shapes::y = y;
 }
 
-int figures::getColor() const{
+int shapes::getClr() const{
 	return color;
 }
 
-void figures::setColor(const int color){
-	figures::color = color;
+void shapes::setClr(const int color){
+	shapes::color = color;
 }
 
 
 
 
-void circleClass::move(){
+void circleCls::move(){
 	
 	x = x + 15 * cos(t);
 	y = y + 15 * sin(t);
@@ -45,35 +45,35 @@ void circleClass::move(){
 	
 }
 
-void circleClass::draw(){
-	setcolor(getColor());
-	circle(getPosX(), 
-		   getPosY(), 10);
+void circleCls::draw(){
+	setcolor(getClr());
+	circle(getXpos(), 
+		   getYpos(), 10);
 }
 
 
-void rectangleClass::move(){
+void rectangleCls::move(){
 	
 	x = x + 15 * cos(r);
 	y = y + 15 * sin(r);
 	r+= N;
 }
 
-void rectangleClass::draw(){
-	setcolor(getColor());
-	rectangle(getPosX(), getPosY(),
-			  getPosX() + RECTANGLE_SIZE/ 2, 
-			  getPosY() + RECTANGLE_SIZE );
+void rectangleCls::draw(){
+	setcolor(getClr());
+	rectangle(getXpos(), getYpos(),
+			  getXpos() + RECTAN_SIZE/ 2, 
+			  getYpos() + RECTAN_SIZE );
 }
 
-void triangleClass::move(){
+void triangleCls::move(){
 	
 	x = x + 15 * cos(s);
 	y = y + 15 * sin(s);
 	s+= N;
 }
 
-void triangleClass::draw(){
+void triangleCls::draw(){
 	setcolor(color);
 	line(x, y, x + 17, y + 60);
 	line(x, y, x - 17, y + 60);
@@ -81,14 +81,14 @@ void triangleClass::draw(){
 		 x + 19, y + 60);
 }
 
-void triangleLeftClass::move(){
+void triangLCls::move(){
 	
 	x = x + 15 * cos(k);
 	y = y + 15 * sin(k);
 	k+= N;
 }
 
-void triangleLeftClass::draw(){
+void triangLCls::draw(){
 	setcolor(color);
 	line(x, y, x + 17, y + 60);
 	line(x, y, x , y + 60);
@@ -96,14 +96,14 @@ void triangleLeftClass::draw(){
 		 x + 18, y + 60);
 }
 
-void triangleRightClass::move(){
+void trianRCls::move(){
 	
 	x = x + 15 * cos(g);
 	y = y + 15 * sin(g);
 	g+= N;
 }
 
-void triangleRightClass::draw(){
+void trianRCls::draw(){
 	setcolor(color);
 	line(x, y, x-17 , y + 60);
 	line(x, y, x , y + 60);

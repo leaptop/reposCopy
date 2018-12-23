@@ -1,0 +1,1 @@
+"C:\Program Files (x86)\Dev-Cpp\MinGW64\bin\g++.exe" "main.o" "methods.o" "-o" "Curs.exe" "-LC:/Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/lib32" "-lbgi" "-lgdi32" "-lcomdlg32" "-luuid" "-loleaut32" "-lole32" "-lbgi" "-lgdi32" "-luser32" "-m32" 2>"dev-cpp-err.log"
