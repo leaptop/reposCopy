@@ -1,7 +1,7 @@
 #include "classes.h"
 #include <math.h>
 #include "constants.h"
-#define N 0.1
+#define N 0.09
 
 float t = 0; 
 float r = 0; 
@@ -10,28 +10,28 @@ float g = 0;
 float k = 0; 
 
 
-float shapes::getXpos() const{
+float shape::getXpos() const{
 	return x;
 }
 
-void shapes::setXpos(const float x){
-	shapes::x = x;
+void shape::setXpos(const float x){
+	shape::x = x;
 }
 
-float shapes::getYpos() const{
+float shape::getYpos() const{
 	return y;
 }
 
-void shapes::setYpos(const float y){
-	shapes::y = y;
+void shape::setYpos(const float y){
+	shape::y = y;
 }
 
-int shapes::getClr() const{
+int shape::getClr() const{
 	return color;
 }
 
-void shapes::setClr(const int color){
-	shapes::color = color;
+void shape::setClr(const int color){
+	shape::color = color;
 }
 
 
@@ -48,7 +48,7 @@ void circleCls::move(){
 void circleCls::draw(){
 	setcolor(getClr());
 	circle(getXpos(), 
-		   getYpos(), 10);
+		   getYpos(), CIRCLE_RADIUS);
 }
 
 
@@ -63,7 +63,7 @@ void rectangleCls::draw(){
 	setcolor(getClr());
 	rectangle(getXpos(), getYpos(),
 			  getXpos() + RECTAN_SIZE/ 2, 
-			  getYpos() + RECTAN_SIZE );
+			  getYpos() + 130 );
 }
 
 void triangleCls::move(){

@@ -8,7 +8,7 @@
 #include <graphics.h>
 #include "constants.h"
 
-class shapes
+class shape
 {
 public:
 	float getXpos() const;
@@ -25,7 +25,7 @@ public:
     virtual void move() = 0;
 	virtual void draw() = 0;
     
-    shapes(){}
+    shape(){}
     
 protected:
 	float x;
@@ -35,68 +35,71 @@ protected:
 
 
 
-class circleCls : public shapes
+class circleCls : public shape
 {
 public:
 	void move();
 	void draw();
 	
-	circleCls(float x, float y, int color):shapes(){
+	circleCls(float x, float y, int color):shape(){
 		setXpos(x);
 		setYpos(y);
 		setClr(color);
 	}
 };
 
-class triangleCls : public shapes
+class triangleCls : public shape
 {
 public:
 	void move();
     void draw();
 	
-	triangleCls(float x, float y, int color):shapes(){
+	triangleCls(float x, float y, int color):shape(){
 		setXpos(x);
 		setYpos(y);
 		setClr(color);
 	}
 };
 
-class triangLCls : public shapes
+class triangLCls : public shape
 {
 public:
 	void move();
     void draw();
 	
-	triangLCls(float x, float y, int color):shapes(){
+	triangLCls(float x, float y, int color):shape(){
 		setXpos(x);
 		setYpos(y);
 		setClr(color);
 	}
 };
 
-class trianRCls : public shapes
+class trianRCls : public shape
 {
 public:
 	void move();
     void draw();
 	
-	trianRCls(float x, float y, int color):shapes(){
+	trianRCls(float x, float y, int color):shape(){
 		setXpos(x);
 		setYpos(y);
 		setClr(color);
 	}
 };
 
-class rectangleCls : public shapes
+class rectangleCls : public shape
 {
 public:
 	void move();
 	void draw();
+	int pl;
 	
-	rectangleCls(float x, float y, int color):shapes(){
+	rectangleCls(float x, float y, int color):shape(){
 		setXpos(x);
 		setYpos(y);
 		setClr(color);
+	}
+	rectangleCls(void) : pl(300){
 	}
 };
 

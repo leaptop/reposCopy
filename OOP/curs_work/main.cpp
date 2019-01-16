@@ -26,20 +26,13 @@ main(){
 	trianRCls trianRObj(199, 160,  1);				 		    
 	trianRCls *RTriangle = &trianRObj;
 	
-	shapes **array = new shapes*[ARR_SIZE];
-	int count = 0;
-	for(int i = 0; i < ARR_SIZE; i++){
-		switch(count){
-        	case 0:  array[i] = Rectangle; break;
-        	case 1:  array[i] = Circle; break;
-        	case 2:  array[i] = Triangle; break;
-        	case 3:  array[i] = LTriangle; break;
-        	case 4:  array[i] = RTriangle; break;
-   	    }
-   	    count++;
-   	    if(count == 5) count = 0;
-	}
-
+	shape **array = new shape*[ARR_SIZE];
+	
+			 array[0] = Rectangle; 
+   			 array[1] = Circle; 
+   			 array[2] = Triangle;
+   			 array[3] = LTriangle;
+   			 array[4] = RTriangle;
 	while(true){
 		cleardevice();
 		for(int i = 0; i < ARR_SIZE; i++){
