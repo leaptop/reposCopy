@@ -21,15 +21,9 @@
     <ClCompile Include="vm.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="vm2.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="vm.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="vm2.h">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>

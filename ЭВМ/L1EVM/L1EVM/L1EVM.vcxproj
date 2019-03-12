@@ -117,11 +117,9 @@
   <ItemGroup>
     <ClCompile Include="main.c" />
     <ClCompile Include="vm.c" />
-    <ClCompile Include="vm2.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="vm.h" />
-    <ClInclude Include="vm2.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

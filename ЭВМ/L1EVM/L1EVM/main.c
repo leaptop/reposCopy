@@ -7,13 +7,13 @@ void check_mem()
     int tmp = 0;
     sc_memoryInit();
     if (!sc_memorySet(0, 1)) {
-        printf("Set pass\n");
+        printf("Set passed\n");
         if (!sc_memoryGet(0, &tmp) && tmp == 1) {
-            printf("Get pass\n");
-            if (!sc_memorySave("mda")) {
-                printf("Save pass\n");
-                if (!sc_memoryLoad("mda") && memory[0] == 1) {
-                    printf("Load pass\n**MEMTEST DONE**\n");
+            printf("Get passed\n");
+            if (!sc_memorySave("testFile")) {
+                printf("Save passed\n");
+                if (!sc_memoryLoad("testFile") && memory[0] == 1) {
+                    printf("Load passed\n**MEMTEST DONE**\n");
                 } else
                     printf("Wrong loaded value\n");
             }
@@ -29,11 +29,11 @@ void check_reg()
     sc_regInit();
     int tmp = 0;
     if (!sc_regSet(FREQ_ERR, 1)) {
-        printf("Set pass\n");
+        printf("Set passed\n");
         printf("%d\n", reg_flag);
         if (!sc_regGet(FREQ_ERR, &tmp) && tmp == 1) {
             printf("%d\n", tmp);
-            printf("Get pass\n");
+            printf("Get passed\n");
             printf("**REGISTER OK\n");
         }
     }

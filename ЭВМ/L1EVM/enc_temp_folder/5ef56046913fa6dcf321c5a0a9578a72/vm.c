@@ -116,7 +116,7 @@ int sc_commandEncode(int command, int operand, int *value)
 int sc_commandDecode(int value, int *command, int *operand)
 {
     *command = (value >> 7);
-    *operand = value & (~(*command << 7));
+    *operand = value & (~(*command << 7));//что здесь будет? проверить!
     if (*command >= 10 && *command <= 76) {
         if (*operand >= 0 && *operand < 128) {
             return OK;
