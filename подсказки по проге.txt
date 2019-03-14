@@ -392,3 +392,5 @@ add_executable(labs main.c vm.c vm.h)
 
 There is a cool option - paste the CMakeLists.txt in Templates folder. After that it is possible to create new CMakeLists.txt with a couple of clicks.
 
+
+Возможно писать программы будет проще, если вместо абстрактных переменных я сначала буду прописывать конкретные переменные или сразу числа
