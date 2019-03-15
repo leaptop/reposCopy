@@ -1,8 +1,7 @@
 //когда пишу х1, х2 и т.д., то имею ввиду конечно коэффициенты в матрице при переменных х1, х2 и т.д.
 import java.io.*;
 public class mainGauss {  //public class GaussianElimination {
-    private static final double EPSILON = 1e-10;
-
+   
     // Gaussian elimination with partial pivoting
     public static double[] lsolve(double[][] A, double[] b) {
         int n = b.length;
@@ -19,12 +18,6 @@ public class mainGauss {  //public class GaussianElimination {
             double[] temp = A[p]; A[p] = A[max]; A[max] = temp;//меняю строки местами(первую с максимальной)
             double   t    = b[p]; b[p] = b[max]; b[max] = t;//здесь одномерный массив, так что просто числа переставляются
 //р - тую в темп(р = 0), нулевой максовую, указатель на максовую теперь указывает на темповую(изначально нулевую)
-
-            // singular or nearly singular
-            //if (Math.abs(A[p][p]) <= EPSILON) {
-              //  throw new ArithmeticException("Matrix is singular or nearly singular");}//singular - вырожденная.
-            //Квадратная матрица невырожденная, если её определитель не равен нулю
-
             // pivot within A and b
             for (int i = p + 1; i < n; i++) {
                 double alpha = A[i][p] / A[p][p];//перв прох: alpha = х1(из второй строки)/х1(из первой строки)
@@ -45,7 +38,7 @@ public class mainGauss {  //public class GaussianElimination {
                 sum += A[i][j] * x[j];
             }//здесь в общем коэффициенты A[i][j] домножаются на решения(х[j]) и произведения складываются
             x[i] = (b[i] - sum) / A[i][i];//сначала sum = 0, в итоге переменная х3(не коэффициент при х3) = х4/х3
-        }//т.е. x[i] - это решение// в итоге из х4(константа) вычитаются посчитанные числа, кроме неизвестной переменной
+        }// в итоге из х4(константа или свободный член) вычитаются посчитанные числа, кроме неизвестной переменной
         return x;//потом разность делится на коэффициент при неизвестной переменной х
     }
 
