@@ -48,7 +48,7 @@ public class mainGauss {  //public class GaussianElimination {
 
             if(max != p){
                 print(A, b);
-                System.out.println("Поменяли местами ");
+                System.out.println("Поменяли местами "+(max+1)+"-ю строку с "+(p+1)+"-й строкой");
                 System.out.println();
             }
 
