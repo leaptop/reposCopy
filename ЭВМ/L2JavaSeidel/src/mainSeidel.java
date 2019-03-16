@@ -40,7 +40,7 @@ public class mainSeidel
             if (iterations == MAX_ITERATIONS) break;
         }
     }
-    public void solveYakobi()//(МПИ)
+    public void solveMPI()//(МПИ)
     {
         int iterations = 0;
         int n = M.length;
@@ -93,7 +93,7 @@ public class mainSeidel
                     M[i][j] = Integer.parseInt(strtk.nextToken());
         }
         mainSeidel sei = new mainSeidel(M);
-        sei.solveYakobi();
+        sei.solveMPI();
     }
 }
 /*
