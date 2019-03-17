@@ -2,7 +2,7 @@ import java.util.function.DoubleFunction;
 
 public class Main {
     private static final double DX = 0.0001;
-    public static double a = 1, b = 2, x = 0, e = 0.0001;
+    public static double a = 1, b = 2, x = 0, e = 0.00001;
     static int c = 0;
 
     public static void init() {
@@ -30,8 +30,8 @@ public class Main {
         DoubleFunction<Double> fDeriv2 = derive(fDeriv);
 
         if (f(x) * fDeriv2.apply(a) < 0)
-            x = a;
-        else x = b;
+            x = a;//условие сходимости выполнено для a
+        else x = b;//условие сходимости выполнено для b
 
         while (Math.abs(f(x)) > e) {
             x = x - f(x) / fDeriv.apply(x);
