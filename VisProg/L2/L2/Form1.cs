@@ -14,32 +14,43 @@ namespace L2
 {
     public partial class Form1 : Form
     {
-        Color historyColor;
+
         int historyCounter;
         bool drawing;
         GraphicsPath currentPath;
         Point oldLocation;
-       public  Pen currentPen;
-       Color hisoryColor;//Сохранение текущего цвета перед исапользованием ластика
-       List<Image> History; // Список для истории
+        public Pen currentPen;
+        Color historyColor;//Сохранение текущего цвета перед исапользованием ластика
+        List<Image> History; // Список для истории
 
         private void myPictureBox_MouseDown(object sender, MouseEventArgs e)
         {
+
             if (pictureBox1.Image == null)
             {
                 MessageBox.Show("Сначала создайте новый файл!");
                 return;
             }
-            if(e.Button == MouseButtons.Left)
+            if (e.Button == MouseButtons.Left)
+            {
+                //currentPen.Color = historyColor;
+                drawing = true;
+                oldLocation = e.Location;                
+                currentPath = new GraphicsPath();
+            } else if(e.Button == MouseButtons.Right)
             {
                 drawing = true;
                 oldLocation = e.Location;
                 currentPath = new GraphicsPath();
+                historyColor = currentPen.Color;
+                currentPen.Color = Color.White;
             }
+            
         }
         private void myPictureBox_MouseUp(object sender, MouseEventArgs e)
         {
             drawing = false;
+            currentPen.Color = historyColor;
             try
             {
                 currentPath.Dispose();
@@ -48,7 +59,7 @@ namespace L2
         }
         private void myPictureBox_MouseMove(object sender, MouseEventArgs e)
         {
-            if(drawing)
+            if (drawing)
             {
                 Graphics g = Graphics.FromImage(pictureBox1.Image);
                 currentPath.AddLine(oldLocation, e.Location);
@@ -63,15 +74,16 @@ namespace L2
         {
             InitializeComponent();
             drawing = false;
-            
+
             // pictureBox1.MouseDown += new MouseEventHandler(pictureBox1_MouseDown);// не нашёл MouseDown в событиях, поэтому пришлось это прописывать
             pictureBox1.MouseDown += new MouseEventHandler(myPictureBox_MouseDown);
-            pictureBox1.MouseUp += new MouseEventHandler  (myPictureBox_MouseUp);
+            pictureBox1.MouseUp += new MouseEventHandler(myPictureBox_MouseUp);
             pictureBox1.MouseMove += new MouseEventHandler(myPictureBox_MouseMove);
             currentPen = new Pen(Color.Black);
             currentPen.Width = trackBar1.Value;// pen's width initialization
             History = new List<Image>();// инициализация списка для истории
-           
+            //pictureBox1.Mouse
+
         }
 
         private void toolStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
@@ -162,7 +174,7 @@ namespace L2
                 }
                 fs.Close();
             }
-            
+
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
