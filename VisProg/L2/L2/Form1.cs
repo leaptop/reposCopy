@@ -10,7 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace L2
+namespace L2//why can't I get the scrollbar appeared
 {
     public partial class Form1 : Form
     {
@@ -18,7 +18,6 @@ namespace L2
         int historyCounter;
         bool drawing;
         GraphicsPath currentPath;
-        GraphicsPath currentPath2;
         Point oldLocation;
         public Pen currentPen;
         Color historyColor = Color.Cyan;//Сохранение текущего цвета перед исапользованием ластика
@@ -34,27 +33,30 @@ namespace L2
             } currentPath = new GraphicsPath();
             if (e.Button == MouseButtons.Left)
             {
-                //currentPen.Color = historyColor;
                 drawing = true;
                 currentPen.Color = historyColor;
                 oldLocation = e.Location;
-                
-                
-            } else if(e.Button == MouseButtons.Right)
+
+
+            }
+            else if (e.Button == MouseButtons.Right)
             {
                 historyColor = currentPen.Color;
                 drawing = true;
                 oldLocation = e.Location;
-               // currentPath = new GraphicsPath();
-                
                 currentPen.Color = Color.White;
             }
-            
+
         }
         private void myPictureBox_MouseUp(object sender, MouseEventArgs e)
         {
+            //Очистка ненужной истории
+            History.RemoveRange(historyCounter + 1, History.Count - historyCounter - 1);
+            History.Add(new Bitmap(pictureBox1.Image));
+            if (historyCounter + 1 < 10) historyCounter++;
+            if (History.Count - 1 == 10) History.RemoveAt(0);
+            
             drawing = false;
-           
             try
             {
                 currentPath.Dispose();
@@ -108,8 +110,11 @@ namespace L2
 
         private void newToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            History.Clear();
+            historyCounter = 0;
             Bitmap pic = new Bitmap(693, 371);
             pictureBox1.Image = pic;// не смог переименовать в picDrawingSurface в свойствах(Name)
+            History.Add(new Bitmap(pictureBox1.Image));
 
             if (pictureBox1.Image != null)
             {
@@ -153,6 +158,10 @@ namespace L2
 
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            /*Graphics g = Graphics.FromImage(pictureBox1.Image);
+            g.Clear(Color.White);
+            g.DrawImage(pictureBox1.Image, 0, 0, 693, 371);*///how does it work?
+
             SaveFileDialog SaveDlg = new SaveFileDialog();
             SaveDlg.Filter = "JPEG Image|*.jpg|Bitmap Image|*.bmp|GIF Image|*.gif|PNG Image|*.png";
             SaveDlg.Title = "Save an Image File";
@@ -220,6 +229,42 @@ namespace L2
         private void label1_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void undoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (History.Count != 0 && historyCounter != 0)
+            {
+                pictureBox1.Image = new Bitmap(History[--historyCounter]);
+            }
+            else MessageBox.Show("История пуста");
+        }
+
+        private void redoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if(historyCounter < History.Count - 1)
+            {
+                pictureBox1.Image = new Bitmap(History[++historyCounter]);
+            }
+        }
+
+        private void toolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            currentPen.DashStyle = DashStyle.Solid;
+
+           /* solidStyleMenu.Checked = true;//как сделать меню с галочками?
+            dotStyleMenu.Checked = false;
+            dashDotStyleMenu.Checked = false;*/
+        }
+
+        private void dotToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            currentPen.DashStyle = DashStyle.Dot;
+        }
+
+        private void dashDotDotToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            currentPen.DashStyle = DashStyle.DashDotDot;
         }
 
 
