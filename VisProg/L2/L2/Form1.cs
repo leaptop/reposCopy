@@ -18,9 +18,10 @@ namespace L2
         int historyCounter;
         bool drawing;
         GraphicsPath currentPath;
+        GraphicsPath currentPath2;
         Point oldLocation;
         public Pen currentPen;
-        Color historyColor;//Сохранение текущего цвета перед исапользованием ластика
+        Color historyColor = Color.Cyan;//Сохранение текущего цвета перед исапользованием ластика
         List<Image> History; // Список для истории
 
         private void myPictureBox_MouseDown(object sender, MouseEventArgs e)
@@ -30,19 +31,22 @@ namespace L2
             {
                 MessageBox.Show("Сначала создайте новый файл!");
                 return;
-            }
+            } currentPath = new GraphicsPath();
             if (e.Button == MouseButtons.Left)
             {
                 //currentPen.Color = historyColor;
                 drawing = true;
-                oldLocation = e.Location;                
-                currentPath = new GraphicsPath();
+                currentPen.Color = historyColor;
+                oldLocation = e.Location;
+                
+                
             } else if(e.Button == MouseButtons.Right)
             {
+                historyColor = currentPen.Color;
                 drawing = true;
                 oldLocation = e.Location;
-                currentPath = new GraphicsPath();
-                historyColor = currentPen.Color;
+               // currentPath = new GraphicsPath();
+                
                 currentPen.Color = Color.White;
             }
             
@@ -50,12 +54,14 @@ namespace L2
         private void myPictureBox_MouseUp(object sender, MouseEventArgs e)
         {
             drawing = false;
-            currentPen.Color = historyColor;
+           
             try
             {
                 currentPath.Dispose();
+
             }
             catch { };
+            currentPen.Color = historyColor;
         }
         private void myPictureBox_MouseMove(object sender, MouseEventArgs e)
         {
@@ -82,7 +88,6 @@ namespace L2
             currentPen = new Pen(Color.Black);
             currentPen.Width = trackBar1.Value;// pen's width initialization
             History = new List<Image>();// инициализация списка для истории
-            //pictureBox1.Mouse
 
         }
 
