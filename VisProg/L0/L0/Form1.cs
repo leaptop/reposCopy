@@ -92,8 +92,8 @@ namespace L0
             dataGridView2.ColumnCount = 1;
             for (i = 0; i < n; ++i)
                 dataGridView2.Rows[i].Cells[0].Value = mas[i];
-            button2.Enabled = false;
-            maxToolStripMenuItem.Enabled = false;
+            button2.Enabled = true;
+            maxToolStripMenuItem.Enabled = true;//стрип меню - главное меню
         }
 
         private void dataGridView2_CellContentClick(object sender, DataGridViewCellEventArgs e)
