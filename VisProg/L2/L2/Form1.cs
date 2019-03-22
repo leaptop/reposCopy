@@ -20,7 +20,7 @@ namespace L2//why can't I get the scrollbar appeared
         GraphicsPath currentPath;
         Point oldLocation;
         public Pen currentPen;
-        Color historyColor = Color.Cyan;//Сохранение текущего цвета перед исапользованием ластика
+        public Color historyColor = Color.Cyan;//Сохранение текущего цвета перед исапользованием ластика
         List<Image> History; // Список для истории
 
         private void myPictureBox_MouseDown(object sender, MouseEventArgs e)

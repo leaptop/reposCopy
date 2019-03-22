@@ -13,7 +13,7 @@ namespace L2
     public partial class Form2 : Form
     {
         
-        Color colorResult;
+      public  Color colorResult;
         public Form2()
         {
             InitializeComponent();
@@ -82,13 +82,23 @@ namespace L2
 
         private void button3_Click(object sender, EventArgs e)
         {
+            ColorDialog colorDialog = new ColorDialog();
+            if (colorDialog.ShowDialog() == DialogResult.OK)
+            {
+                hScrollBar1.Value = colorDialog.Color.R;
+                hScrollBar2.Value = colorDialog.Color.G;
+                hScrollBar3.Value = colorDialog.Color.B;
 
+                colorResult = colorDialog.Color;
+
+                UpdateColor();
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)
-        {
+        {//its better not to try changing the color through main.currentPen.Color... why doesn't it work?
             Form1 main  = this.Owner as Form1;
-            main.currentPen.Color = colorResult;
+            main.historyColor = colorResult;
             this.Close();
         }
         private void UpdateColor()
