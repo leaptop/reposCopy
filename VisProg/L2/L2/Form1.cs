@@ -267,6 +267,14 @@ namespace L2//why can't I get the scrollbar appeared
             currentPen.DashStyle = DashStyle.DashDotDot;
         }
 
+        private void toolStripButton5_Click(object sender, EventArgs e)
+        {
+            Form2 form2 = new Form2();
+            form2.Owner = this;
+            form2.ShowDialog();            
+        }
+        
+
 
     }
 }
