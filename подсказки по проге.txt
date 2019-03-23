@@ -402,3 +402,6 @@ Ctrl+Alt+L - Reformat code
 IntelliJ IDEA Default Keymap.pdf
 
 Ctrl+k, Ctrl+D text formatting in Visual Studio выровнять текст в виже
+
+Чтобы комбинация class Smth extends Application, start @Override public void start(Stage stage){, psvm(...){launch(args); 
+работала class должен быть публичным. См пример ВМ L5Graphics
