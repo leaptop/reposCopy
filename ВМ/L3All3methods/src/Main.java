@@ -1,8 +1,8 @@
 import java.util.function.DoubleFunction;
 
 public class Main {
-    private static final double DX = 0.0001;
-    public static double a = 1, b = 2, x = 0, e = 0.00001;
+    private static final double DX = 0.00000001;
+    public static double a = 1, b = 2, x = 0, e = 0.000000001;
     static int c = 0;
 
     public static void init() {
@@ -41,7 +41,7 @@ public class Main {
 
     public static void print() {
         System.out.print("Итерация номер: " + ++c + ", промежуточное значение X = ");
-        System.out.printf("%2.7f", x);
+        System.out.printf("%2.15f", x);
         System.out.println();
     }
 
