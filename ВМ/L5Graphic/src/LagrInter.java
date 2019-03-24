@@ -9,23 +9,30 @@ import javafx.scene.chart.XYChart;
 import javafx.stage.Stage;
 
 public class LagrInter extends Application {
-    @Override
-    public void start(Stage stage) {
-        int n = 3, z = 300;
-        double[] xx = new double[200];//array for counting
-        double[] yy = new double[200];//array for counting
-        double[] x = new double[z];//array for x-es
-        double[] y = new double[z];//array for y-s
-        x[0] = -17;
-        xx[0] = 5;//Заданные точки
-        xx[1] = 10;
-        xx[2] = 20;
-        yy[0] = 12;
-        yy[1] = 25;
-        yy[2] = 18;//Заданные точки
-        double chisl;
-        double znam;
+    int n = 3, z = 170;// z - кол-во шагов
+    double[] xx = new double[200];//array for counting
+    double[] yy = new double[200];//array for counting
+    double[] x = new double[z];//array for x-es
+    double[] y = new double[z];//array for y-s
+    double chisl;
+    double znam;
 
+    public void clear() {
+        xx[0] = 0;
+        xx[1] = 0;
+        xx[2] = 0;
+        yy[0] = 0;
+        yy[1] = 0;
+        yy[2] = 0;
+        chisl = 0;
+        znam = 0;
+        for (int i = 0; i < z; i++) {
+            x[i] = 0;
+            y[i] = 0;
+        }
+    }
+
+    public void lagr() {
         for (int m = 1; m < z; m++) {
             x[m] = x[m - 1] + 0.2;
             for (int i = 0; i < n; i++) {// здесь i - номер избегаемой переменной
@@ -40,8 +47,11 @@ public class LagrInter extends Application {
                 y[m] += (chisl *= (yy[i])) / znam;
             }
             System.out.println("Если x = " + x[m] + ", то" + " y = " + y[m]);
-            //xx[3] = x; yy[3] = y;
         }
+    }
+
+    @Override
+    public void start(Stage stage) {
         stage.setTitle("Интерполяция по формуле Лагранжа");
         //defining the axes
         final NumberAxis xAxis = new NumberAxis();
@@ -55,15 +65,55 @@ public class LagrInter extends Application {
 
         lineChart.setTitle("Title");
         //defining a series
-        XYChart.Series series = new XYChart.Series();
-        series.setName("01");
-        //populating the series with data
 
+
+        XYChart.Series series1 = new XYChart.Series();
+        series1.setName("(5,12) (10,25) (20,18)");
+        //populating the series with data
+        x[0] = -17;
+        xx[0] = 5;//Заданные точки
+        xx[1] = 10;
+        xx[2] = 20;
+        yy[0] = 12;
+        yy[1] = 25;
+        yy[2] = 18;//Заданные точки
+        lagr();
         for (int i = 1; i < z; i++) {
-            series.getData().add(new XYChart.Data(x[i], y[i]));
+            series1.getData().add(new XYChart.Data(x[i], y[i]));
         }
+        clear();
+        XYChart.Series series2 = new XYChart.Series();
+        series2.setName("(-1,1) (0,0) (1,1)");
+        x[0] = -17;
+        xx[0] = -1;
+        xx[1] = 0;
+        xx[2] = 1;
+        yy[0] = 1;
+        yy[1] = 0;
+        yy[2] = 1;
+
+        lagr();
+        for (int i = 1; i < z; i++) {
+            series2.getData().add(new XYChart.Data(x[i], y[i]));
+        }
+        clear();
+
+       /* XYChart.Series series3 = new XYChart.Series();
+        series3.setName("(-1,1) (0,0) (1,1)");
+        x[0] = -17;
+        xx[0] = 0;
+        xx[1] = -5;
+        yy[0] = 100;
+        yy[1] = 0;
+
+        lagr();
+        for (int i = 1; i < z; i++) {
+            series3.getData().add(new XYChart.Data(x[i], y[i]));
+        }
+        clear();*/
+
         Scene scene = new Scene(lineChart, 800, 600);
-        lineChart.getData().add(series);
+        lineChart.getData().addAll(series1, series2);
 
         stage.setScene(scene);
         stage.show();
