@@ -9,7 +9,7 @@ import javafx.scene.chart.XYChart;
 import javafx.stage.Stage;
 
 public class LagrInter extends Application {
-    int n = 3, z = 170;// z - кол-во шагов
+    int n = 3, z = 50;// z - кол-во шагов по 0.2 по иксам// n = 3 - по трём точкам считаем
     double[] xx = new double[200];//array for counting
     double[] yy = new double[200];//array for counting
     double[] x = new double[z];//array for x-es
@@ -68,9 +68,9 @@ public class LagrInter extends Application {
 
 
         XYChart.Series series1 = new XYChart.Series();
-        series1.setName("(5,12) (10,25) (20,18)");
+        series1.setName("(5, 12) (10, 25) (20, 18)");
         //populating the series with data
-        x[0] = -17;
+        x[0] = -5;
         xx[0] = 5;//Заданные точки
         xx[1] = 10;
         xx[2] = 20;
@@ -83,8 +83,8 @@ public class LagrInter extends Application {
         }
         clear();
         XYChart.Series series2 = new XYChart.Series();
-        series2.setName("(-1,1) (0,0) (1,1)");
-        x[0] = -17;
+        series2.setName("(-1, 1) (0, 0) (1, 1)");
+        x[0] = -5;
         xx[0] = -1;
         xx[1] = 0;
         xx[2] = 1;
@@ -98,22 +98,26 @@ public class LagrInter extends Application {
         }
         clear();
 
-       /* XYChart.Series series3 = new XYChart.Series();
-        series3.setName("(-1,1) (0,0) (1,1)");
-        x[0] = -17;
+        XYChart.Series series3 = new XYChart.Series();
+        series3.setName("(0, 1) (0.25, 0.707) (0.33, 0.5)");
+        x[0] = -5;
         xx[0] = 0;
-        xx[1] = -5;
-        yy[0] = 100;
-        yy[1] = 0;
+        xx[1] = 0.25;
+        xx[2] = 0.33;
+
+        yy[0] = 1;
+        yy[1] = 0.707;
+        yy[2] = 0.5;
+
 
         lagr();
         for (int i = 1; i < z; i++) {
             series3.getData().add(new XYChart.Data(x[i], y[i]));
         }
-        clear();*/
+        clear();
 
         Scene scene = new Scene(lineChart, 800, 600);
-        lineChart.getData().addAll(series1, series2);
+        lineChart.getData().addAll(series1, series2, series3);
 
         stage.setScene(scene);
         stage.show();
