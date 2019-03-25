@@ -67,9 +67,6 @@ public class LagrInter extends Application {
         //defining a series
 
 
-        XYChart.Series series1 = new XYChart.Series();
-        series1.setName("(5, 12) (10, 25) (20, 18)");
-        //populating the series with data
         x[0] = -5;
         xx[0] = 5;//Заданные точки
         xx[1] = 10;
@@ -77,13 +74,15 @@ public class LagrInter extends Application {
         yy[0] = 12;
         yy[1] = 25;
         yy[2] = 18;//Заданные точки
+        XYChart.Series series1 = new XYChart.Series();
+        series1.setName("("+xx[0]+", "+yy[0]+") "+"("+xx[1]+", "+yy[1]+")...   ");
         lagr();
         for (int i = 1; i < z; i++) {
             series1.getData().add(new XYChart.Data(x[i], y[i]));
         }
         clear();
-        XYChart.Series series2 = new XYChart.Series();
-        series2.setName("(-1, 1) (0, 0) (1, 1)");
+
+
         x[0] = -5;
         xx[0] = -1;
         xx[1] = 0;
@@ -91,25 +90,23 @@ public class LagrInter extends Application {
         yy[0] = 1;
         yy[1] = 0;
         yy[2] = 1;
-
+        XYChart.Series series2 = new XYChart.Series();
+        series2.setName("("+xx[0]+", "+yy[0]+") "+"("+xx[1]+", "+yy[1]+")...");
         lagr();
         for (int i = 1; i < z; i++) {
             series2.getData().add(new XYChart.Data(x[i], y[i]));
         }
         clear();
 
-        XYChart.Series series3 = new XYChart.Series();
-        series3.setName("(0, 1) (0.25, 0.707) (0.33, 0.5)");
         x[0] = -5;
         xx[0] = 0;
         xx[1] = 0.25;
         xx[2] = 0.33;
-
         yy[0] = 1;
         yy[1] = 0.707;
         yy[2] = 0.5;
-
-
+        XYChart.Series series3 = new XYChart.Series();
+        series3.setName("("+xx[0]+", "+yy[0]+") "+"("+xx[1]+", "+yy[1]+")...");
         lagr();
         for (int i = 1; i < z; i++) {
             series3.getData().add(new XYChart.Data(x[i], y[i]));

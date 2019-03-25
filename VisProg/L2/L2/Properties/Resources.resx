@@ -148,6 +148,9 @@
   <data name="variation" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\variation.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="chamelion" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\chamelion.jpeg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="year-of-monkey" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\year-of-monkey.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -172,7 +175,7 @@
   <data name="stork-with-bundle1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\stork-with-bundle.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="chamelion" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\chamelion.jpeg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Без названия" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Без названия.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>
