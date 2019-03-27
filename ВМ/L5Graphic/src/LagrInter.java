@@ -53,11 +53,11 @@ public class LagrInter extends Application {
     @Override
     public void start(Stage stage) {
         stage.setTitle("Интерполяция по формуле Лагранжа");
-        //defining the axes
+        //d]объявляю оси
         final NumberAxis xAxis = new NumberAxis();
         final NumberAxis yAxis = new NumberAxis();
         xAxis.setLabel("X");
-        //creating the chart
+        //создаю график
         final LineChart<Number, Number> lineChart =
                 new LineChart<Number, Number>(xAxis, yAxis);
 
