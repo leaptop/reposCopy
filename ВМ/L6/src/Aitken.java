@@ -8,8 +8,35 @@ import javafx.stage.Stage;
 import java.lang.*;
 
 public class Aitken extends Application {
+    public double ait(double x, double xx[], double yy[]) {
+        System.out.println("\nait is starting with x = " + x);
+        for (int i = 0; i < xx.length - 1; i++) {
+            for (int k = 1; k < xx.length - i; k++) {//после каждого прохода расстояние между иксами должно увеличиваться на 1. Для этого можно использовать i, для этого добавляю i в каждый вызов xx[] ниже
+                yy[k - 1] = (yy[k - 1] * (x - xx[k + i]) - yy[k] * (x - xx[k - 1 + i])) / (xx[k - 1 + i] - xx[k + i]);//Последний k при этом не должен использоваться. Поэтому внутренний цикл укорачивается на i каждый раз.
+                System.out.println("ait counting yy[k-1] = " + yy[k - 1]);
+            }
+        }
+        System.out.println("ait is over,   yy[0] = " + yy[0]);
+        return yy[0];
+    }
+
+    public double aitken(double x, double[] xi, double[] fi) {
+        int n = xi.length - 1;
+        double[] ft = fi.clone();
+        for (int i = 0; i < n; ++i) {
+            for (int j = 0; j < n - i; ++j) {
+                yg[j] = ft[j] = (x - xi[j]) / (xi[i + j + 1] - xi[j]) * ft[j + 1]
+                        + (x - xi[i + j + 1]) / (xi[j] - xi[i + j + 1]) * ft[j];
+                System.out.println("i = " + i + "; j = " + j + ";static Интерполированное значение: " + ft[j]);
+            }
+        }
+
+        System.out.println("Если x = " + x + ", то" + " y = " + ft[0]);
+        return ft[0];
+    }
+
     double[] xx = {1, 1.2, 1.4, 1.6};
-    double[] yy = {1, 1.0954, 1.1832, 1.2649};
+    double[] yy = {1, 1.0954451, 1.1832159, 1.264911};
     int z = 25;// z - кол-во шагов по 0.2 по иксам
     double[] xg = new double[z];//array for x-es
     double[] yg = new double[z];//array for y-s
@@ -36,18 +63,6 @@ public class Aitken extends Application {
         launch(argv);
     }
 
-    public double ait(double x, double xx[], double yy[]) {
-        System.out.println("\nait is starting with x = " + x);
-        for (int i = 0; i < xx.length - 1; i++) {
-            for (int k = 1; k < xx.length - i; k++) {//после каждого прохода расстояние между иксами должно увеличиваться на 1. Для этого можно использовать i, для этого добавляю i в каждый вызов xx[] ниже
-                yy[k - 1] = (yy[k - 1] * (x - xx[k + i]) - yy[k] * (x - xx[k - 1 + i])) / (xx[k - 1 + i] - xx[k + i]);//Последний k при этом не должен использоваться. Поэтому внутренний цикл укорачивается на i каждый раз.
-                System.out.println("ait counting yy[k-1] = " + yy[k - 1]);
-            }
-        }
-        System.out.println("ait is over,   yy[0] = " + yy[0]);
-        return yy[0];
-    }
-
     @Override
     public void start(Stage stage) {
         stage.setTitle("Интерполяция по схеме Эйткена");
@@ -60,19 +75,15 @@ public class Aitken extends Application {
         lineChart.setCreateSymbols(false);//убирает кружочки из узлов
         lineChart.setTitle("Title");
         XYChart.Series series1 = new XYChart.Series();
-        //series1.setName("("+xx[0]+", "+yy[0]+") "+"("+xx[1]+", "+yy[1]+")...   ");
         double x = 1.44;
-        //ait(x, xx, yy);
-        x = 1.49;
-        // ait(x, xx, yy);
-        // xg[0] = 1.2;
-        //yg[0] = 1;
+        ait(x, xx, yy);
+
         renewCoords();
         //xg[0] = 1.0;
-        for (int m = 0; m < 25; m++) {
-            if (m == 0) xg[0] = 0;
+        for (int m = z; m < z; m++) {//"raskoment"  (m=0)
+            if (m == 0) xg[0] = 1.2;
             else
-                xg[m] += (xg[m-1] + 0.01);
+                xg[m] += (xg[m - 1] + 0.01);
             yg[m] = ait(xg[m], xx, yy);
             renewBase();
             System.out.println("Если x = " + xg[m] + ", то" + " y = " + yg[m]);
@@ -85,8 +96,34 @@ public class Aitken extends Application {
         lineChart.getData().addAll(series1);
 
         stage.setScene(scene);
-        stage.show();
+        //stage.show();//raskoment
+    }
+}
+/*
+* import java.lang.*;
+
+public class Aitken {
+    public static void main(String []argv) {
+        double []xi = {1, 1.2, 1.4, 1.6};
+        double []fi = {1, 1.0954, 1.1832, 1.2649};
+
+        double x = 1.44;
+        double f = aitken(x, xi, fi);
+        System.out.println("Интерполированное значение: " + f);
     }
 
-
+    public static double aitken(double x, double []xi,  double []fi) {
+        int n = xi.length - 1;
+        double []ft =  fi.clone();
+        for (int i = 0; i < n; ++i) {
+            for (int j = 0; j < n - i; ++j) {
+                ft[j] = (x - xi[j]) / (xi[i + j + 1] - xi[j]) * ft[j + 1]
+                        + (x - xi[i + j + 1]) / (xi[j] - xi[i + j + 1]) * ft[j];
+                System.out.println("i = " + i + "; j = " + j + "; Интерполированное значение: " + ft[j]);
+            }
+        }
+        return ft[0];
+    }
 }
+
+* */
