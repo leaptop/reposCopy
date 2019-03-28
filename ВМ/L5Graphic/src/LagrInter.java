@@ -8,7 +8,7 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 public class LagrInter extends Application {
-    int n = 2; // n - число точек, по которым интерполируем
+    int n = 4; // n - число точек, по которым интерполируем
     int numD = 100;// число точек для корня из икс и остальных графиков
     double sh = 0.1; //шаг приращения икс для графиков
     double start = 0;//точка, с которой начнётся построение графиков
@@ -222,6 +222,7 @@ public class LagrInter extends Application {
         printInterpolationDots(xx, yy, lineChart, numD, sh, maxY, minY);
         Scene scene = new Scene(lineChart, 800, 600);
         lineChart.getData().addAll(seriesNewt, seriesAitk, seriesLagr, seriesPrecise);
+        scene.getStylesheets().add("Style.css");
         stage.setScene(scene);
         stage.show();
     }//Графики на самом деле не совпадают. Это можно проверить, подправив добавляемую координату: y[i]+0.08, sh2 = 0.8
