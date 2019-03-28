@@ -6,17 +6,40 @@ import javafx.scene.chart.XYChart;
 import javafx.stage.Stage;
 
 public class LagrInter extends Application {
-    int n = 4; // n - число точек, по которым интерполируем
-    int numD = 100;// число точек для корня из икс
-    //int numD = 100;
-    double[] xx = new double[n];//array for counting
-    double[] yy = new double[n];//array for counting
-    double[] x = new double[numD];//array for x-es for sqr
-    double[] y = new double[numD];//array for y-s
+    int n = 3; // n - число точек, по которым интерполируем
+    int numD = 100;// число точек для корня из икс и остальных графиков
+    double sh = 0.1; //шаг приращения икс для графиков
+    double sh2 = 0.2;// шаг приращения икс для точек для интерполяции
+    double[] xx = new double[n];//given array of dots for lagr() counting
+    double[] yy = new double[n];//array of y-s for lagr()
+    double[] x = new double[numD];//array for x-es for graphics
+    double[] y = new double[numD];//array for y-s for graphics
     double chisl;
     double znam;
-    double xF = 1.44; //точка для интерполирования
+    double xF = 1.44; //точка для интерполирования. При построении графика не нужна
 
+    //заполнение массивов x, y точными значениями, посчитанными по формуле y = sqrt(x),
+    //x,y - ссылки, sh - шаг изменения x, n - число точек для заполнения
+    public void sqrBuild(double x[], double y[], double start, double sh, int n) {
+        x[0] = start;
+        y[0] = Math.sqrt(x[0]);
+        for (int i = 1; i < n; i++) {
+            x[i] = x[i - 1] + sh;
+            y[i] = Math.sqrt(x[i]);
+        }
+    }
+    //заполнение массивов x, y значениями, посчитанными по интерполяционной формуле Лагранжа lagr():
+    //start - начальная точка, с которой интерполируем, n -  количество точек для запуска lagr(), sh - шаг изменеия икс:
+    public void interpBuild(double x[], double y[], double start, double sh, int n) {
+        x[0] = start;
+        y[0] = lagr(x[0]);
+        for (int i = 1; i < n; i++) {
+            x[i] = x[i - 1] + sh;
+            y[i] = lagr(x[i]);
+        }
+    }
+
+    // прописываю 4 вручную заданные для интерполяции точки. В принципе это можно сделать и с пом.sqrBuild():
     public void initXXYY() {
         xx[0] = 1;
         yy[0] = 1;
@@ -26,39 +49,9 @@ public class LagrInter extends Application {
         yy[2] = 1.1832;
         xx[3] = 1.6;
         yy[3] = 1.2649;
-
-    }
-    public void buildInterLine(){
-        x[4] = 1.44;
-        y[4] = lagr(xx[4]);
-        x[5] = 5;
-        y[5] = lagr(xx[5]);
     }
 
-    public void init2() {
-
-    }
-
-   /* public void buildStraightLine() {
-        for (int i = 0; i < numD; i++) {
-            x[i] = 0;
-            y[i] = 0;
-        }
-        double m = (yy[4] - yy[5]) / (xx[4] - xx[5]);
-        double b = -(m * xx[4]) + yy[4];
-        if (b >= 0) {
-            System.out.println("y = " + m + "x=" + b);
-        } else {
-            System.out.println("y = " + m + "x=" + b);
-        }
-        x[0] = 0;
-        for (int i = 1; i < numD; i++) {
-            x[i] = x[i - 1] + 0.1;
-            y[i] = m * x[i] + b;
-        }
-
-    }*/
-
+    //обнуляю массив точек для графиков(похоже ненужная функция):
     public void clearXY() {
         for (int i = 0; i < numD; i++) {
             x[i] = 0;
@@ -66,6 +59,8 @@ public class LagrInter extends Application {
         }
     }
 
+    //Функция интерполирования основанная на полиноме Лагранжа. t - точка, в которой ищем зн-ие ф-ции;
+// возвращаемое зн-ие - интерполированное? значение функции. Точки берутся из массивов xx[], yy[]:
     public double lagr(double t) {
         double y = 0;
         for (int i = 0; i < n; i++) {// здесь i - номер избегаемой переменной
@@ -83,22 +78,9 @@ public class LagrInter extends Application {
         return y;
     }
 
-    public void sqrBuild() {
-        x[0] = 0;
-        y[0] = 0;
-        for (int i = 1; i < numD - 1; i++) {
-            x[i] = x[i - 1] + 0.1;
-            y[i] = Math.sqrt(x[i]);
-        }
-    }
-
     @Override
     public void start(Stage stage) {
-        sqrBuild();
-        initXXYY();
-
         stage.setTitle("Интерполяция по формуле Лагранжа");
-        //d]объявляю оси
         final NumberAxis xAxis = new NumberAxis();
         final NumberAxis yAxis = new NumberAxis();
         xAxis.setLabel("X");
@@ -107,65 +89,24 @@ public class LagrInter extends Application {
         lineChart.setCreateSymbols(false);//убирает кружочки из узлов
         lineChart.setTitle("Title");
 
+
+        sqrBuild(x, y, 0, sh, numD);
         XYChart.Series series1 = new XYChart.Series();
         for (int i = 1; i < numD; i++) {
             series1.getData().add(new XYChart.Data(x[i], y[i]));
         }
+        series1.setName("Корень из икс");
 
-        clearXY();
+        //clearXY();
+        //initXXYY();
+        sqrBuild(xx, yy, 1, sh2, n);//заполняю xx, yy точками, по которым потом буду интерполировать
+        interpBuild(x, y, 0, sh, numD);
 
         XYChart.Series series2 = new XYChart.Series();
-        for (int i = 4; i < 6; i++) {
+        for (int i = 1; i < numD; i++) {
             series2.getData().add(new XYChart.Data(x[i], y[i]));
         }
-
-        series2.setName("interp");
-
-       /* x[0] = -5;
-        xx[0] = 5;//Заданные точки
-        xx[1] = 10;
-        xx[2] = 20;
-        yy[0] = 12;
-        yy[1] = 25;
-        yy[2] = 18;//Заданные точки
-        XYChart.Series series1 = new XYChart.Series();
-        series1.setName("("+xx[0]+", "+yy[0]+") "+"("+xx[1]+", "+yy[1]+")...   ");
-        lagr();
-        for (int i = 1; i < z; i++) {
-            series1.getData().add(new XYChart.Data(x[i], y[i]));
-        }
-        clear();
-
-        x[0] = -5;
-        xx[0] = -1;
-        xx[1] = 0;
-        xx[2] = 1;
-        yy[0] = 1;
-        yy[1] = 0;
-        yy[2] = 1;
-        XYChart.Series series2 = new XYChart.Series();
-        series2.setName("("+xx[0]+", "+yy[0]+") "+"("+xx[1]+", "+yy[1]+")...");
-        lagr();
-        for (int i = 1; i < z; i++) {
-            series2.getData().add(new XYChart.Data(x[i], y[i]));
-        }
-        clear();
-
-        x[0] = -5;
-        xx[0] = 0;
-        xx[1] = 0.25;
-        xx[2] = 0.33;
-        yy[0] = 1;
-        yy[1] = 0.707;
-        yy[2] = 0.5;
-        XYChart.Series series3 = new XYChart.Series();
-        series3.setName("("+xx[0]+", "+yy[0]+") "+"("+xx[1]+", "+yy[1]+")...");
-        lagr();
-        for (int i = 1; i < z; i++) {
-            series3.getData().add(new XYChart.Data(x[i], y[i]));
-        }
-        clear();*/
-
+        series2.setName("Интерполированные");
         Scene scene = new Scene(lineChart, 800, 600);
         lineChart.getData().addAll(series1, series2);
 
