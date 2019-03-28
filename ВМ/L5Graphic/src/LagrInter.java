@@ -6,20 +6,19 @@ import javafx.scene.chart.XYChart;
 import javafx.stage.Stage;
 
 public class LagrInter extends Application {
-    int n = 3; // n - число точек, по которым интерполируем
+    int n = 4; // n - число точек, по которым интерполируем
     int numD = 100;// число точек для корня из икс и остальных графиков
     double sh = 0.1; //шаг приращения икс для графиков
-    double sh2 = 0.2;// шаг приращения икс для точек для интерполяции
-    double[] xx = new double[n];//given array of dots for lagr() counting
-    double[] yy = new double[n];//array of y-s for lagr()
-    double[] x = new double[numD];//array for x-es for graphics
-    double[] y = new double[numD];//array for y-s for graphics
-    double chisl;
-    double znam;
+    double sh2 = 2;// шаг приращения икс для точек для интерполяции
+    double[] xx = new double[n];//массив точек для интерполяции с помощью lagr()
+    double[] yy = new double[n];//массив точек для интерполяции с помощью lagr()
+    double[] x = new double[numD];//массив точек для записи координат графиков
+    double[] y = new double[numD];//массив точек для записи координат графиков
+
     double xF = 1.44; //точка для интерполирования. При построении графика не нужна
 
-    //заполнение массивов x, y точными значениями, посчитанными по формуле y = sqrt(x),
-    //x,y - ссылки, sh - шаг изменения x, n - число точек для заполнения
+    //заполнение массивов x, y точными значениями, посчитанными по формуле y = sqrt(x);
+    //x,y - ссылки; sh - шаг изменения x; n - число точек для заполнения
     public void sqrBuild(double x[], double y[], double start, double sh, int n) {
         x[0] = start;
         y[0] = Math.sqrt(x[0]);
@@ -62,6 +61,8 @@ public class LagrInter extends Application {
     //Функция интерполирования основанная на полиноме Лагранжа. t - точка, в которой ищем зн-ие ф-ции;
 // возвращаемое зн-ие - интерполированное? значение функции. Точки берутся из массивов xx[], yy[]:
     public double lagr(double t) {
+        double chisl;
+        double znam;
         double y = 0;
         for (int i = 0; i < n; i++) {// здесь i - номер избегаемой переменной
             chisl = 1;
@@ -87,9 +88,6 @@ public class LagrInter extends Application {
         yAxis.setLabel("Y");
         final LineChart<Number, Number> lineChart = new LineChart<Number, Number>(xAxis, yAxis);
         lineChart.setCreateSymbols(false);//убирает кружочки из узлов
-        lineChart.setTitle("Title");
-
-
         sqrBuild(x, y, 0, sh, numD);
         XYChart.Series series1 = new XYChart.Series();
         for (int i = 1; i < numD; i++) {
