@@ -1,6 +1,3 @@
-import javax.swing.*;
-import java.awt.*;
-
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.chart.LineChart;
@@ -9,15 +6,16 @@ import javafx.scene.chart.XYChart;
 import javafx.stage.Stage;
 
 public class LagrInter extends Application {
-    int n = 4; //, z = 50;// z - кол-во шагов по 0.2 по иксам// n = 3 - по трём точкам считаем
-    int nu = 100;// число точек для корня из икс
-    int numD = 100;
-    double[] xx = new double[200];//array for counting
-    double[] yy = new double[200];//array for counting
+    int n = 4; // n - число точек, по которым интерполируем
+    int numD = 100;// число точек для корня из икс
+    //int numD = 100;
+    double[] xx = new double[n];//array for counting
+    double[] yy = new double[n];//array for counting
     double[] x = new double[numD];//array for x-es for sqr
     double[] y = new double[numD];//array for y-s
     double chisl;
     double znam;
+    double xF = 1.44; //точка для интерполирования
 
     public void initXXYY() {
         xx[0] = 1;
@@ -28,17 +26,20 @@ public class LagrInter extends Application {
         yy[2] = 1.1832;
         xx[3] = 1.6;
         yy[3] = 1.2649;
-        xx[4] = 1.44;
-        yy[4] = lagr(xx[4]);
-        xx[5] = 5;
-        yy[5] = lagr(xx[5]);
-    }
-
-    public void init() {
 
     }
+    public void buildInterLine(){
+        x[4] = 1.44;
+        y[4] = lagr(xx[4]);
+        x[5] = 5;
+        y[5] = lagr(xx[5]);
+    }
 
-    public void buildLine() {
+    public void init2() {
+
+    }
+
+   /* public void buildStraightLine() {
         for (int i = 0; i < numD; i++) {
             x[i] = 0;
             y[i] = 0;
@@ -56,9 +57,9 @@ public class LagrInter extends Application {
             y[i] = m * x[i] + b;
         }
 
-    }
+    }*/
 
-    public void clear() {
+    public void clearXY() {
         for (int i = 0; i < numD; i++) {
             x[i] = 0;
             y[i] = 0;
@@ -79,7 +80,6 @@ public class LagrInter extends Application {
             y += (chisl *= (yy[i])) / znam;
         }
         System.out.println("Лагранж - если x = " + t + ", то" + " y = " + y);
-        // }
         return y;
     }
 
@@ -108,14 +108,14 @@ public class LagrInter extends Application {
         lineChart.setTitle("Title");
 
         XYChart.Series series1 = new XYChart.Series();
-        for (int i = 1; i < nu; i++) {
+        for (int i = 1; i < numD; i++) {
             series1.getData().add(new XYChart.Data(x[i], y[i]));
         }
 
-        clear();
-        buildLine();
+        clearXY();
+
         XYChart.Series series2 = new XYChart.Series();
-        for (int i = 1; i < numD; i++) {
+        for (int i = 4; i < 6; i++) {
             series2.getData().add(new XYChart.Data(x[i], y[i]));
         }
 
