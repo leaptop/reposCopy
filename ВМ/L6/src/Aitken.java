@@ -43,6 +43,18 @@ public class Aitken extends Application {
             yg[i] = 0;
         }
     }
+    public  double aitken(double x, double []xi,  double []fi) {
+        int n = xi.length - 1;
+        double []ft =  fi.clone();
+        for (int i = 0; i < n; ++i) {
+            for (int j = 0; j < n - i; ++j) {
+                ft[j] = (x - xi[j]) / (xi[i + j + 1] - xi[j]) * ft[j + 1]
+                        + (x - xi[i + j + 1]) / (xi[j] - xi[i + j + 1]) * ft[j];
+                System.out.println("i = " + i + "; j = " + j + "; Интерполированное значение: " + ft[j]);
+            }
+        }
+        return ft[0];
+    }
 
     public static void main(String[] argv) {
         launch(argv);
@@ -65,11 +77,11 @@ public class Aitken extends Application {
 
         renewCoords();
         //xg[0] = 1.0;
-        for (int m = z; m < z; m++) {//"raskoment"  (m=0)
+        for (int m = 0; m < z; m++) {//"raskoment"  (m=0)
             if (m == 0) xg[0] = 1.2;
             else
                 xg[m] += (xg[m - 1] + 0.01);
-            yg[m] = ait(xg[m], xx, yy);
+            yg[m] = aitken(xg[m], xx, yy);
             renewBase();
             System.out.println("Если x = " + xg[m] + ", то" + " y = " + yg[m]);
 
@@ -81,7 +93,7 @@ public class Aitken extends Application {
         lineChart.getData().addAll(series1);
 
         stage.setScene(scene);
-        //stage.show();//raskoment
+        stage.show();//raskoment
     }
 }
 /*
