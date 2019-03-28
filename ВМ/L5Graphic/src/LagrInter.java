@@ -14,8 +14,7 @@ public class LagrInter extends Application {
     double[] yy = new double[n];//массив точек для интерполяции с помощью lagr()
     double[] x = new double[numD];//массив точек для записи координат графиков
     double[] y = new double[numD];//массив точек для записи координат графиков
-
-    double xF = 1.44; //точка для интерполирования. При построении графика не нужна
+    double start = 0;// точка, с которой начнутся вызовы lagr();
 
     //заполнение массивов x, y точными значениями, посчитанными по формуле y = sqrt(x);
     //x,y - ссылки; sh - шаг изменения x; n - число точек для заполнения
@@ -59,7 +58,7 @@ public class LagrInter extends Application {
     }
 
     //Функция интерполирования основанная на полиноме Лагранжа. t - точка, в которой ищем зн-ие ф-ции;
-// возвращаемое зн-ие - интерполированное? значение функции. Точки берутся из массивов xx[], yy[]:
+// возвращаемое зн-ие - интерполированное значение функции. Точки берутся из массивов xx[], yy[]:
     public double lagr(double t) {
         double chisl;
         double znam;
@@ -88,17 +87,16 @@ public class LagrInter extends Application {
         yAxis.setLabel("Y");
         final LineChart<Number, Number> lineChart = new LineChart<Number, Number>(xAxis, yAxis);
         lineChart.setCreateSymbols(false);//убирает кружочки из узлов
-        sqrBuild(x, y, 0, sh, numD);
+
+        sqrBuild(x, y, 0, sh, numD);// запускаю заполнение точными значениями корень из икс
         XYChart.Series series1 = new XYChart.Series();
         for (int i = 1; i < numD; i++) {
             series1.getData().add(new XYChart.Data(x[i], y[i]));
         }
         series1.setName("Корень из икс");
 
-        //clearXY();
-        //initXXYY();
         sqrBuild(xx, yy, 1, sh2, n);//заполняю xx, yy точками, по которым потом буду интерполировать
-        interpBuild(x, y, 0, sh, numD);
+        interpBuild(x, y, start, sh, numD);//заполнение  x, y значениями, посчитанными по интерполяционной формуле Лагранжа lagr():
 
         XYChart.Series series2 = new XYChart.Series();
         for (int i = 1; i < numD; i++) {
