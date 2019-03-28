@@ -6,15 +6,16 @@ import javafx.scene.chart.XYChart;
 import javafx.stage.Stage;
 
 public class LagrInter extends Application {
-    int n = 4; // n - число точек, по которым интерполируем
+    int n = 7; // n - число точек, по которым интерполируем
     int numD = 100;// число точек для корня из икс и остальных графиков
     double sh = 0.1; //шаг приращения икс для графиков
     double sh2 = 2;// шаг приращения икс для точек для интерполяции
+    double start = 0;// точка, с которой начнутся вызовы lagr();
     double[] xx = new double[n];//массив точек для интерполяции с помощью lagr()
     double[] yy = new double[n];//массив точек для интерполяции с помощью lagr()
     double[] x = new double[numD];//массив точек для записи координат графиков
     double[] y = new double[numD];//массив точек для записи координат графиков
-    double start = 0;// точка, с которой начнутся вызовы lagr();
+    double maxY = 0, minY = 0;//вспомогательные переменные для рассчета размеров выделения точек интерполяции
 
     //заполнение массивов x, y точными значениями, посчитанными по формуле y = sqrt(x);
     //x,y - ссылки; sh - шаг изменения x; n - число точек для заполнения
@@ -24,8 +25,10 @@ public class LagrInter extends Application {
         for (int i = 1; i < n; i++) {
             x[i] = x[i - 1] + sh;
             y[i] = Math.sqrt(x[i]);
+
         }
     }
+
     //заполнение массивов x, y значениями, посчитанными по интерполяционной формуле Лагранжа lagr():
     //start - начальная точка, с которой интерполируем, n -  количество точек для запуска lagr(), sh - шаг изменеия икс:
     public void interpBuild(double x[], double y[], double start, double sh, int n) {
@@ -34,6 +37,29 @@ public class LagrInter extends Application {
         for (int i = 1; i < n; i++) {
             x[i] = x[i - 1] + sh;
             y[i] = lagr(x[i]);
+            if (y[i] > Math.abs(maxY)) {
+                maxY = y[i];
+            }
+            if (y[i] < minY) {
+                minY = y[i];
+            }
+        }
+    }
+
+    public void printInterpolationDots(double x[], double y[], LineChart<Number,
+            Number> lineChart, int numD, double sh, double maxY, double minY) {
+        double coefficientX = numD * sh / 100;
+        //x[0] = 5;        y[0] = 1;
+        double coefficientY = (maxY + Math.abs(minY)) / 100;
+        for (int i = 0; i < n; i++) {
+            XYChart.Series seriesE = new XYChart.Series();
+            seriesE.getData().add(new XYChart.Data(x[i], y[i]));// сложно нарисовать...
+            seriesE.getData().add(new XYChart.Data(x[i], y[i] - coefficientY));
+            seriesE.getData().add(new XYChart.Data(x[i], y[i] + coefficientY));
+            seriesE.getData().add(new XYChart.Data(x[i], y[i] - coefficientY / 6));
+            seriesE.getData().add(new XYChart.Data(x[i] + coefficientX / 1.7, y[i]));
+            seriesE.getData().add(new XYChart.Data(x[i] - coefficientX / 1.7, y[i]));
+            lineChart.getData().add(seriesE);
         }
     }
 
@@ -90,6 +116,7 @@ public class LagrInter extends Application {
 
         sqrBuild(x, y, 0, sh, numD);// запускаю заполнение точными значениями корень из икс
         XYChart.Series series1 = new XYChart.Series();
+
         for (int i = 1; i < numD; i++) {
             series1.getData().add(new XYChart.Data(x[i], y[i]));
         }
@@ -103,9 +130,11 @@ public class LagrInter extends Application {
             series2.getData().add(new XYChart.Data(x[i], y[i]));
         }
         series2.setName("Интерполированные");
-        Scene scene = new Scene(lineChart, 800, 600);
-        lineChart.getData().addAll(series1, series2);
 
+        printInterpolationDots(xx, yy, lineChart, numD, sh, maxY, minY);
+        Scene scene = new Scene(lineChart, 800, 600);
+        lineChart.getData().addAll(series1);
+        lineChart.getData().add(series2);
         stage.setScene(scene);
         stage.show();
     }
