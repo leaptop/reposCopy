@@ -8,11 +8,11 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 public class LagrInter extends Application {
-    int n = 5; // n - число точек, по которым интерполируем
-    int numD = 100;// число точек для корня из икс и остальных графиков
+    int n = 4; // n - число точек, по которым интерполируем
+    int numD = 50;// число точек для корня из икс и остальных графиков
     double sh = 0.1; //шаг приращения икс для графиков
-    double start = -0.1;//точка, с которой начнётся построение графиков(начальная абсцисса всех графиков)
-    double sh2 = 0.8;// шаг приращения икс для точек для интерполяции
+    double start = 0;//точка, с которой начнётся построение графиков(начальная абсцисса всех графиков)
+    double sh2 = 0.9;// шаг приращения икс для точек для интерполяции
     double start2 = 1.0;// точка для интерполяции, с которой начнутся вызовы интерполирующей функции(например lagr())
     double[] xx = new double[n];//массив точек для интерполяции с помощью lagr() и других
     double[] yy = new double[n];//массив точек для интерполяции с помощью lagr() и других
@@ -26,7 +26,7 @@ public class LagrInter extends Application {
     public void preciseBuild(double x[], double y[], double start, double sh, int n) {
         x[0] = start;
         y[0] = Math.sqrt(x[0]);//подставить любую функцию
-        for (int i = 1; i < n; i++) {
+        for (int i = 1; i < n; ++i) {
             x[i] = x[i - 1] + sh;
             y[i] = Math.floor(Math.sqrt(x[i]) * 1e4) / 1e4;//подставить любую функцию
             //Math.sqrt(x[i]);//округление до 4-го знака
@@ -131,27 +131,29 @@ public class LagrInter extends Application {
 
     //функция интерполирования по схеме Эйткина:
     public double aitken(double x, double[] xx, double[] yy) {
-        double[] ft = yy.clone();
+        double[] yw = yy.clone();
         for (int i = 0; i < n - 1; ++i) {
             for (int j = 0; j < n - i - 1; ++j) {
-                ft[j] = (x - xx[j]) / (xx[i + j + 1] - xx[j]) * ft[j + 1]
-                        + (x - xx[i + j + 1]) / (xx[j] - xx[i + j + 1]) * ft[j];
+                yw[j] = (x - xx[j]) * yw[j + 1]
+                        / (xx[j + i + 1] - xx[j])
+                        - (x - xx[i + j + 1])  * yw[j]
+                        / (xx[j + i + 1] - xx[j] );
             }
         }
-        System.out.println(" Эйткен - если х = " + x + ", то у = " + ft[0]);
-        return ft[0];
+        System.out.println(" Эйткен - если х = " + x + ", то у = " + yw[0]);
+        return yw[0];
     }
-    //Функция, реализующая интерполирование по схеме Эйткена. Считает только от 1.2 до 1.49 почему-то:
-    // в принципе эта формула равносильна верхней... значит у меня где-то ошибка
-    public double ait(double x, double xx[], double yy[]) {
-        double yw[]=yy.clone();
+
+    //Функция, реализующая интерполирование по схеме Эйткена. :
+    public double ait(double x, double[] xx, double[] yy) {
+        double yw[] = yy.clone();
         for (int i = 0; i < n - 1; i++) {
-            for (int k = 1; k < n - i - 1; k++) {//после каждого прохода расстояние между иксами должно увеличиваться на 1. Для этого можно использовать i,
-                yw[k - 1] = (yw[k - 1] * (x - xx[k + i]) - yw[k] * (x - xx[k - 1 + i])) / (xx[k - 1 + i] - xx[k + i]);//для этого добавляю i в каждый вызов xx[] ниже
+            for (int j = 0; j < n - i - 1; j++) {//после каждого прохода расстояние между иксами должно увеличиваться на 1. Для этого можно использовать i,
+                yw[j] = (yw[j] * (x - xx[j + i + 1]) - yw[j + 1] * (x - xx[j])) / (xx[j] - xx[j + i + 1]);//для этого добавляю i в каждый вызов xx[] ниже
                 //System.out.println("ait counting yy[k-1] = " + yy[k - 1]);//Последний k при этом не должен использоваться.
             }//Поэтому внутренний цикл укорачивается на i каждый раз.
         }
-        System.out.println("Айткен: если х = " + x+", то у = "+yw[0]);
+        System.out.println(" Эйткен - если х = " + x + ", то у = " + yw[0]);
         return yw[0];
     }
 
