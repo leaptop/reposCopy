@@ -8,17 +8,17 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 public class LagrInter extends Application {
-    int n = 4; // n - число точек, по которым интерполируем
+    int n = 3; // n - число точек, по которым интерполируем
     int numD = 100;// число точек для корня из икс и остальных графиков
     double sh = 0.1; //шаг приращения икс для графиков
-    double start = 0;//точка, с которой начнётся построение графиков
+    double start = -0.1;//точка, с которой начнётся построение графиков
     double sh2 = 0.9;// шаг приращения икс для точек для интерполяции
     double start2 = 1;// точка, с которой начнутся вызовы интерполирующей функции(например lagr())
     double[] xx = new double[n];//массив точек для интерполяции с помощью lagr() и других
     double[] yy = new double[n];//массив точек для интерполяции с помощью lagr() и других
     double[] x = new double[numD];//массив точек для записи координат графиков
     double[] y = new double[numD];//массив точек для записи координат графиков
-    double maxY = 0, minY = 0;//вспомогательные переменные для рассчета размеров выделения точек интерполяции
+    //double maxY = 0, minY = 0;//вспомогательные переменные для рассчета размеров выделения точек интерполяции
 
     //заполнение массивов x, y точными значениями, посчитанными по формуле y = sqrt(x);
     //x,y - ссылки; sh - шаг изменения x; n - число точек для заполнения; округление до 4-го знака;
@@ -42,12 +42,6 @@ public class LagrInter extends Application {
         for (int i = 1; i < numD; i++) {
             x[i] = x[i - 1] + sh;
             y[i] = lagr(x[i], xx, yy);
-            if (y[i] > Math.abs(maxY)) {
-                maxY = y[i];
-            }
-            if (y[i] < minY) {
-                minY = y[i];
-            }
         }
     }
 
@@ -60,12 +54,6 @@ public class LagrInter extends Application {
         for (int i = 1; i < numD; i++) {
             x[i] = x[i - 1] + sh;
             y[i] = aitken(x[i], xx, yy);
-            if (y[i] > Math.abs(maxY)) {
-                maxY = y[i];
-            }
-            if (y[i] < minY) {
-                minY = y[i];
-            }
         }
     }
 
@@ -80,16 +68,9 @@ public class LagrInter extends Application {
         for (int i = 1; i < numD; i++) {
             x[i] = x[i - 1] + sh;
             y[i] = L7N.mn(x[i], xx, yy, n);
-            if (y[i] > Math.abs(maxY)) {
-                maxY = y[i];
-            }
-            if (y[i] < minY) {
-                minY = y[i];
-            }
         }
     }
-
-
+    //кривое обозначение точек, по которым интерполировалм:
     public void printInterpolationDots(double x[], double y[], LineChart<Number,
             Number> lineChart, int numD, double sh, double maxY, double minY) {
         double coefficientX = numD * sh / 100;
@@ -105,6 +86,10 @@ public class LagrInter extends Application {
             seriesE.getData().add(new XYChart.Data(x[i] - coefficientX / 1.7, y[i]));
             lineChart.getData().add(seriesE);
         }
+    }
+    //Правильное обозначение точек, по которым интерполировали. Обеспечено с помощью css:
+    public void printIntPoints(double xx[], double yy[], int n){
+
     }
 
     // прописываю 4 вручную заданные для интерполяции точки. В принципе это можно сделать и с пом.preciseBuild():
@@ -218,11 +203,21 @@ public class LagrInter extends Application {
             seriesNewt.getData().add(new XYChart.Data(x[i], y[i]));
         }
         seriesNewt.setName("Ньютон");
-//
-        printInterpolationDots(xx, yy, lineChart, numD, sh, maxY, minY);
+
+        XYChart.Series seriesInt = new XYChart.Series();
+        for (int i = 0; i<n;i++){
+            seriesInt.getData().add(new XYChart.Data(xx[i], yy[i]));
+        }
+        seriesInt.setName("Точки интерполяции");
+
+        lineChart.setAnimated(false);
+        lineChart.setCreateSymbols(true);
+
+        lineChart.getData().addAll(seriesInt, seriesPrecise, seriesLagr, seriesAitk, seriesNewt);
         Scene scene = new Scene(lineChart, 800, 600);
-        lineChart.getData().addAll(seriesNewt, seriesAitk, seriesLagr, seriesPrecise);
-        scene.getStylesheets().add("Style.css");
+        //lineChart.getData().addAll(seriesNewt, seriesPrecise);
+        //scene.getStylesheets().add("Style.css");
+        scene.getStylesheets().add(getClass().getResource("Style.css").toExternalForm());
         stage.setScene(scene);
         stage.show();
     }//Графики на самом деле не совпадают. Это можно проверить, подправив добавляемую координату: y[i]+0.08, sh2 = 0.8
