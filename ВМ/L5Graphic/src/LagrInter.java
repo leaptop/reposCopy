@@ -8,12 +8,12 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 public class LagrInter extends Application {
-    int n = 3; // n - число точек, по которым интерполируем
+    int n = 5; // n - число точек, по которым интерполируем
     int numD = 100;// число точек для корня из икс и остальных графиков
     double sh = 0.1; //шаг приращения икс для графиков
-    double start = -0.1;//точка, с которой начнётся построение графиков
-    double sh2 = 0.9;// шаг приращения икс для точек для интерполяции
-    double start2 = 1;// точка, с которой начнутся вызовы интерполирующей функции(например lagr())
+    double start = -0.1;//точка, с которой начнётся построение графиков(начальная абсцисса всех графиков)
+    double sh2 = 0.8;// шаг приращения икс для точек для интерполяции
+    double start2 = 1.0;// точка для интерполяции, с которой начнутся вызовы интерполирующей функции(например lagr())
     double[] xx = new double[n];//массив точек для интерполяции с помощью lagr() и других
     double[] yy = new double[n];//массив точек для интерполяции с помощью lagr() и других
     double[] x = new double[numD];//массив точек для записи координат графиков
@@ -29,8 +29,7 @@ public class LagrInter extends Application {
         for (int i = 1; i < n; i++) {
             x[i] = x[i - 1] + sh;
             y[i] = Math.floor(Math.sqrt(x[i]) * 1e4) / 1e4;//подставить любую функцию
-            Math.sqrt(x[i]);//округление до 4-го знака
-
+            //Math.sqrt(x[i]);//округление до 4-го знака
         }
     }
 
@@ -50,10 +49,10 @@ public class LagrInter extends Application {
     //запуска интерп. ф-ции(в общем для псотроения конечного массива иксов и игреков), sh - шаг изменеия икс:
     public void interpBuildAitk(double x[], double y[], double xx[], double yy[], double start, double sh, int numD) {
         x[0] = start;
-        y[0] = aitken(x[0], xx, yy);
+        y[0] = ait(x[0], xx, yy);
         for (int i = 1; i < numD; i++) {
             x[i] = x[i - 1] + sh;
-            y[i] = aitken(x[i], xx, yy);
+            y[i] = ait(x[i], xx, yy);
         }
     }
 
@@ -70,6 +69,7 @@ public class LagrInter extends Application {
             y[i] = L7N.mn(x[i], xx, yy, n);
         }
     }
+
     //кривое обозначение точек, по которым интерполировалм:
     public void printInterpolationDots(double x[], double y[], LineChart<Number,
             Number> lineChart, int numD, double sh, double maxY, double minY) {
@@ -86,10 +86,6 @@ public class LagrInter extends Application {
             seriesE.getData().add(new XYChart.Data(x[i] - coefficientX / 1.7, y[i]));
             lineChart.getData().add(seriesE);
         }
-    }
-    //Правильное обозначение точек, по которым интерполировали. Обеспечено с помощью css:
-    public void printIntPoints(double xx[], double yy[], int n){
-
     }
 
     // прописываю 4 вручную заданные для интерполяции точки. В принципе это можно сделать и с пом.preciseBuild():
@@ -134,30 +130,29 @@ public class LagrInter extends Application {
     }
 
     //функция интерполирования по схеме Эйткина:
-    public double aitken(double x, double[] xi, double[] fi) {
-        int n = xi.length - 1;
-        double[] ft = fi.clone();
-        for (int i = 0; i < n; ++i) {
-            for (int j = 0; j < n - i; ++j) {
-                ft[j] = (x - xi[j]) / (xi[i + j + 1] - xi[j]) * ft[j + 1]
-                        + (x - xi[i + j + 1]) / (xi[j] - xi[i + j + 1]) * ft[j];
+    public double aitken(double x, double[] xx, double[] yy) {
+        double[] ft = yy.clone();
+        for (int i = 0; i < n - 1; ++i) {
+            for (int j = 0; j < n - i - 1; ++j) {
+                ft[j] = (x - xx[j]) / (xx[i + j + 1] - xx[j]) * ft[j + 1]
+                        + (x - xx[i + j + 1]) / (xx[j] - xx[i + j + 1]) * ft[j];
             }
         }
         System.out.println(" Эйткен - если х = " + x + ", то у = " + ft[0]);
         return ft[0];
     }
-
-    //Функция, реализующая интерполирование по схеме Эйткена:
+    //Функция, реализующая интерполирование по схеме Эйткена. Считает только от 1.2 до 1.49 почему-то:
+    // в принципе эта формула равносильна верхней... значит у меня где-то ошибка
     public double ait(double x, double xx[], double yy[]) {
-        System.out.println("\nait is starting with x = " + x);
-        for (int i = 0; i < xx.length - 1; i++) {
-            for (int k = 1; k < xx.length - i; k++) {//после каждого прохода расстояние между иксами должно увеличиваться на 1. Для этого можно использовать i,
-                yy[k - 1] = (yy[k - 1] * (x - xx[k + i]) - yy[k] * (x - xx[k - 1 + i])) / (xx[k - 1 + i] - xx[k + i]);//для этого добавляю i в каждый вызов xx[] ниже
-                System.out.println("ait counting yy[k-1] = " + yy[k - 1]);//Последний k при этом не должен использоваться.
+        double yw[]=yy.clone();
+        for (int i = 0; i < n - 1; i++) {
+            for (int k = 1; k < n - i - 1; k++) {//после каждого прохода расстояние между иксами должно увеличиваться на 1. Для этого можно использовать i,
+                yw[k - 1] = (yw[k - 1] * (x - xx[k + i]) - yw[k] * (x - xx[k - 1 + i])) / (xx[k - 1 + i] - xx[k + i]);//для этого добавляю i в каждый вызов xx[] ниже
+                //System.out.println("ait counting yy[k-1] = " + yy[k - 1]);//Последний k при этом не должен использоваться.
             }//Поэтому внутренний цикл укорачивается на i каждый раз.
         }
-        System.out.println("ait is over,   yy[0] = " + yy[0]);
-        return yy[0];
+        System.out.println("Айткен: если х = " + x+", то у = "+yw[0]);
+        return yw[0];
     }
 
     @Override
@@ -196,7 +191,6 @@ public class LagrInter extends Application {
         clearXY();
         L7NewtInter L7N = new L7NewtInter();
         interpBuildNewton(x, y, xx, yy, start, sh, numD, L7N, n);
-        //
 
         XYChart.Series seriesNewt = new XYChart.Series();
         for (int i = 1; i < numD; i++) {
@@ -205,7 +199,7 @@ public class LagrInter extends Application {
         seriesNewt.setName("Ньютон");
 
         XYChart.Series seriesInt = new XYChart.Series();
-        for (int i = 0; i<n;i++){
+        for (int i = 0; i < n; i++) {
             seriesInt.getData().add(new XYChart.Data(xx[i], yy[i]));
         }
         seriesInt.setName("Точки интерполяции");
@@ -213,14 +207,13 @@ public class LagrInter extends Application {
         lineChart.setAnimated(false);
         lineChart.setCreateSymbols(true);
 
-        lineChart.getData().addAll(seriesInt, seriesPrecise, seriesLagr, seriesAitk, seriesNewt);
+        lineChart.getData().addAll(seriesInt, seriesPrecise, seriesAitk, seriesLagr, seriesNewt);
         Scene scene = new Scene(lineChart, 800, 600);
-        //lineChart.getData().addAll(seriesNewt, seriesPrecise);
-        //scene.getStylesheets().add("Style.css");
         scene.getStylesheets().add(getClass().getResource("Style.css").toExternalForm());
         stage.setScene(scene);
         stage.show();
     }//Графики на самом деле не совпадают. Это можно проверить, подправив добавляемую координату: y[i]+0.08, sh2 = 0.8
+    //Ну и по последним цифрам полученных значений функций тоже видна разница
 
     public static void main(String[] args) {
         launch(args);
