@@ -9,9 +9,9 @@ import javafx.stage.Stage;
 
 public class LagrInter extends Application {
     int n = 4; // n - число точек, по которым интерполируем
-    int numD = 50;// число точек для корня из икс и остальных графиков
+    int numD = 200;// число точек для точного графика( для корня из икс и остальных )
     double sh = 0.1; //шаг приращения икс для графиков
-    double start = 0;//точка, с которой начнётся построение графиков(начальная абсцисса всех графиков)
+    double start = -10;//точка, с которой начнётся построение графиков(начальная абсцисса всех графиков)
     double sh2 = 0.9;// шаг приращения икс для точек для интерполяции
     double start2 = 1.0;// точка для интерполяции, с которой начнутся вызовы интерполирующей функции(например lagr())
     double[] xx = new double[n];//массив точек для интерполяции с помощью lagr() и других
@@ -22,13 +22,16 @@ public class LagrInter extends Application {
 
     //заполнение массивов x, y точными значениями, посчитанными по формуле y = sqrt(x);
     //x,y - ссылки; sh - шаг изменения x; n - число точек для заполнения; округление до 4-го знака;
-    // здесь можно прописать любую функцию для интерполяции
+    // здесь можно прописать любую функцию для интерполяции(кроме разрывных, их надо обрабатывать по-особенному,
+    // например для 1/х надо исключить ноль и, похоже делать две серии XYChart.Series, т.к. я не знаю, есть ли
+    // встроенная опция разрывов)
     public void preciseBuild(double x[], double y[], double start, double sh, int n) {
         x[0] = start;
-        y[0] = Math.sqrt(x[0]);//подставить любую функцию
+        y[0] = 1/(x[0]);//подставить любую функцию
         for (int i = 1; i < n; ++i) {
             x[i] = x[i - 1] + sh;
-            y[i] = Math.floor(Math.sqrt(x[i]) * 1e4) / 1e4;//подставить любую функцию
+            if(x[i]>-0.1&&x[i]<0.1)continue;
+            y[i] = Math.floor(1/(x[i]) * 1e4) / 1e4;//подставить любую функцию
             //Math.sqrt(x[i]);//округление до 4-го знака
         }
     }
@@ -170,7 +173,7 @@ public class LagrInter extends Application {
         preciseBuild(x, y, start, sh, numD);// запускаю заполнение точными значениями интерполируемой ф-ции
         XYChart.Series seriesPrecise = new XYChart.Series();
 
-        for (int i = 1; i < numD; i++) {
+        for (int i = 0; i < numD; i++) {
             seriesPrecise.getData().add(new XYChart.Data(x[i], y[i]));
         }
         seriesPrecise.setName("Точный график");
@@ -178,7 +181,7 @@ public class LagrInter extends Application {
         preciseBuild(xx, yy, start2, sh2, n);//заполняю xx, yy точками, по которым потом буду интерполировать
         interpBuildLagrange(x, y, xx, yy, start, sh, numD);
         XYChart.Series seriesLagr = new XYChart.Series();
-        for (int i = 1; i < numD; i++) {
+        for (int i = 0; i < numD; i++) {
             seriesLagr.getData().add(new XYChart.Data(x[i], y[i]));
         }
         seriesLagr.setName("Лагранж");
@@ -186,7 +189,7 @@ public class LagrInter extends Application {
         clearXY();
         interpBuildAitk(x, y, xx, yy, start, sh, numD);
         XYChart.Series seriesAitk = new XYChart.Series();
-        for (int i = 1; i < numD; i++) {
+        for (int i = 0; i < numD; i++) {
             seriesAitk.getData().add(new XYChart.Data(x[i], y[i]));
         }
         seriesAitk.setName("Эйткен");
@@ -195,7 +198,7 @@ public class LagrInter extends Application {
         interpBuildNewton(x, y, xx, yy, start, sh, numD, L7N, n);
 
         XYChart.Series seriesNewt = new XYChart.Series();
-        for (int i = 1; i < numD; i++) {
+        for (int i = 0; i < numD; i++) {
             seriesNewt.getData().add(new XYChart.Data(x[i], y[i]));
         }
         seriesNewt.setName("Ньютон");
