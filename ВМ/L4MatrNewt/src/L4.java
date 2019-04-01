@@ -4,11 +4,7 @@ import java.util.function.DoubleFunction;
 
 public class L4 {
     private static final double DX = 0.00000001;
-    public static double a = 1, b = 2, x = 2, y = 1, e = 0.0001;
-    static int c = 0;
-    public static double det;
-
-
+    public static double x = 2, y = 1, e = 0.01, det;
     private static DoubleFunction<Double> derive(DoubleFunction<Double> f) {// здесь как-то считается производная
         return (x) -> (f.apply(x + DX) - f.apply(x)) / DX;
     }
@@ -53,16 +49,16 @@ public class L4 {
     }
 
     public static void finalCount() {//расчёт икс и игрек
+        double f11 = x * x / y - 3;
+        double f22 = x * x + y * y * y - 5;
+
         x = x - (m[0][0] * f11 + m[0][1] * f22);
         y = y - (m[1][0] * f11 + m[1][1] * f22);
     }
 
-    public static double f11 = x * x + y * y * y - 4;
-    public static double f22 = x / y - 2;
-
     public static double nm00(double argX, double y) {//argX - отдельная переменная, т.к. лямбда по-другому не разрешает
         //f1(x) = x*x + y*y*y - 4
-        DoubleFunction<Double> f1 = (x) -> (x * x + y * y * y - 4);//f11
+        DoubleFunction<Double> f1 = (x) -> (x * x / y - 3);//f11
         //f1'(x) = 2x( производная по икс)
         DoubleFunction<Double> f1Deriv = derive(f1);
         return f1Deriv.apply(argX);
@@ -70,7 +66,7 @@ public class L4 {
 
     public static double nm10(double argX, double y) {
         //f2(x) = x/y - 2
-        DoubleFunction<Double> f2 = (x) -> (x / y - 2);//f22
+        DoubleFunction<Double> f2 = (x) -> (x * x + y * y * y - 5);//f22
         //f2'(x) = 1/y(производная по икс)
         DoubleFunction<Double> f2Deriv = derive(f2);
         return f2Deriv.apply(argX);
@@ -78,7 +74,7 @@ public class L4 {
 
     public static double nm01(double x, double argY) {
         //f1(x) = x*x + y*y*y - 4
-        DoubleFunction<Double> f1 = (y) -> (x * x + y * y * y - 4);//f11
+        DoubleFunction<Double> f1 = (y) -> (x * x / y - 3);//f11
         //f1'(x) = 3*y*y( производная по игрек)
         DoubleFunction<Double> f1Deriv = derive(f1);
         return f1Deriv.apply(argY);
@@ -86,35 +82,16 @@ public class L4 {
 
     public static double nm11(double x, double argY) {
         //f2(x) = x/y - 2
-        DoubleFunction<Double> f2 = (y) -> (x / y - 2);//f22
+        DoubleFunction<Double> f2 = (y) -> (x * x + y * y * y - 5);//f22
         //f2'(x) = -x/(y*y) (производная по игрек)
         DoubleFunction<Double> f2Deriv = derive(f2);
         return f2Deriv.apply(argY);
     }
 
     public static void main(String[] args) {
-
-        double xt = x, yt = y;
-
-        //System.out.println(" x = " + nm11(10, 6));
-
-        for(int i =0; i<8; i++){
-            System.out.println("№1 X = " + x + "; Y = " + y);
-            mCount();
-            System.out.println("№2 X = " + x + "; Y = " + y);
-            determCount();
-            System.out.println("№3 X = " + x + "; Y = " + y);
-            mAlgebrDopoln();
-            System.out.println("№4 X = " + x + "; Y = " + y);
-            mTranspon();
-            System.out.println("№5 X = " + x + "; Y = " + y);
-            mObratn();
-            System.out.println("№6 X = " + x + "; Y = " + y);
-            finalCount();
-            System.out.println("№7 X = " + x + "; Y = " + y);
-        }
-
-        /*do {
+      double xt , yt;
+       do {
+            xt = x; yt = y;
             mCount();
             determCount();
             mAlgebrDopoln();
@@ -123,27 +100,5 @@ public class L4 {
             finalCount();
             System.out.println("X = " + x + "; Y = " + y);
         } while (Math.abs((Math.abs(x) - Math.abs(xt))) > e && Math.abs((Math.abs(y) - Math.abs(yt))) > e);
-*/
     }
-
-
-
-     /* public static void newt() {// метод Ньютона или метод касательных
-
-        // f(x) = x^2 -2
-        DoubleFunction<Double> ff = (x) -> (x * x - 2);
-        //f'(x) = 2*x
-        DoubleFunction<Double> fDeriv = derive(ff);
-        //f''(x) = 2
-        DoubleFunction<Double> fDeriv2 = derive(fDeriv);
-
-        if (f(x) * fDeriv2.apply(a) < 0)
-            x = a;//условие сходимости выполнено для a
-        else x = b;//условие сходимости выполнено для b
-
-        while (Math.abs(f(x)) > e) {
-            x = x - f(x) / fDeriv.apply(x);//в этом выражении суть метода Ньютона
-            print();
-        }
-    }*/
 }
