@@ -4,7 +4,8 @@ import java.util.function.DoubleFunction;
 
 public class L4 {
     private static final double DX = 0.00000001;
-    public static double x = 2, y = 1, e = 0.01, det;
+    public static double x = 2, y = 1, e = 0.0000001, det;
+
     private static DoubleFunction<Double> derive(DoubleFunction<Double> f) {// здесь как-то считается производная
         return (x) -> (f.apply(x + DX) - f.apply(x)) / DX;
     }
@@ -48,9 +49,11 @@ public class L4 {
         m[1][1] = m[1][1] * (1 / det);
     }
 
+    public static double f11, f22;
+
     public static void finalCount() {//расчёт икс и игрек
-        double f11 = x * x / y - 3;
-        double f22 = x * x + y * y * y - 5;
+        f11 = x * x / y - 3;
+        f22 = x * x + y * y * y - 5;
 
         x = x - (m[0][0] * f11 + m[0][1] * f22);
         y = y - (m[1][0] * f11 + m[1][1] * f22);
@@ -89,16 +92,18 @@ public class L4 {
     }
 
     public static void main(String[] args) {
-      double xt , yt;
-       do {
-            xt = x; yt = y;
+        double xt, yt;
+        do {
+            xt = x;
+            yt = y;
             mCount();
             determCount();
             mAlgebrDopoln();
             mTranspon();
             mObratn();
             finalCount();
-            System.out.println("X = " + x + "; Y = " + y);
+            System.out.println("F1(x) = " + f11 + "; F2(x) = " + f22);
+            System.out.println("X = " + x + "; Y = " + y + "\n");
         } while (Math.abs((Math.abs(x) - Math.abs(xt))) > e && Math.abs((Math.abs(y) - Math.abs(yt))) > e);
     }
 }
