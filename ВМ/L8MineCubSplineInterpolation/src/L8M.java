@@ -11,34 +11,17 @@ public class L8M extends Application {
     int numD = 100;// число точек для точного графика( для корня из икс и остальных )
     double[] x= new double[n];//точки по которым интерполируем
     double[] y= new double[n];//точки по которым интерполируем
-    double[] h= new double[n];
-    double[] l= new double[n];
-    double[] delta= new double[n];
-    double[] lambda= new double[n];
-    double[] c= new double[n];//коэффициенты в уравнении для сплайнов
-    double[] d= new double[n];//коэффициенты в уравнении для сплайнов
-    double[] b= new double[n];//коэффициенты в уравнении для сплайнов
+    double[] h= new double[n];//расстояния между иксами (только по икс)
+    double[] l= new double[n];// l[k] = (y[k] - y[k-1])/h[k]
+    double[] delta= new double[n];//прогоночные коэффициенты
+    double[] lambda= new double[n];//прогоночные коэффициенты
+    double[] c= new double[n];//коэффициенты в уравнениях для сплайнов
+    double[] d= new double[n];//коэффициенты в уравнениях для сплайнов
+    double[] b= new double[n];//коэффициенты в уравнениях для сплайнов
     double[] xc= new double[numD];//массив точек для записи координат графиков
     double[] yc= new double[numD];//массив точек для записи координат графиков
 
-
-
-   /* void allocmatrix() {
-        //allocate memory for matrixes
-        x
-        y = new double[n];
-        h = new double[n];
-        l = new double[n];
-        delta = new double[n];
-        lambda = new double[n];
-        c = new double[n];
-        d = new double[n];
-        b = new double[n];
-        xc = new double[numD];
-        yc = new double[numD];
-    }*/
-
-    public void initXXYY() {
+    public void initXXYY() {//инициализация интерполяционных точек
         x[0] = 1;
         y[0] = 2;
         x[1] = 3;
@@ -51,7 +34,7 @@ public class L8M extends Application {
 
     public void coefficients() {
         int k = 0;
-        System.out.printf("\nA[k]\t\tB[k]\t\tC[k]\t\tD[k]\n");
+        System.out.printf("\na[k]\t\tb[k]\t\tc[k]\t\td[k]\n");
         for (k = 1; k < n; k++) {
             System.out.printf("%f\t%f\t%f\t%f\n", y[k], b[k], c[k], d[k]);
         }
@@ -63,53 +46,44 @@ public class L8M extends Application {
         double step = (end - start) / numD;
         int i = 0;
         for (double s = start; s <= end; s += step) {
-            //find k, where s in [x_k-1; x_k]
             int k;
             for (k = 1; k < n; k++) {
                 if (s >= x[k - 1] && s <= x[k]) {
                     break;
                 }
             }
-            double F = y[k] + b[k] * (s - x[k]) + c[k] * Math.pow(s - x[k], 2) + d[k] * Math.pow(s - x[k], 3);
-            yc[i] = F;
-            xc[i++] = s;
-            System.out.printf("s = %f\t F = %f\n", s, F);
+            yc[i] = y[k] + b[k] * (s - x[k]) + c[k] * Math.pow(s - x[k], 2) + d[k] * Math.pow(s - x[k], 3);//считаем значения функции с помощью сплайнов
+            xc[i] = s;
+            System.out.printf("s = %f\t F = %f\n", s, yc[i]);
+            i++;
         }
 
     }
 
-    void main() {
+    void interpolate() {
         int k = 0;
         initXXYY();
         for (k = 1; k < n; k++) {
-            h[k] = x[k] - x[k - 1];
-            if (h[k] == 0) {
-                System.out.printf("\nError, x[%d]=x[%d]\n", k, k - 1);
-                return;
-            }
-            l[k] = (y[k] - y[k - 1]) / h[k];
+            h[k] = x[k] - x[k - 1];//считаем расстояние(только по икс) между точками интерполяции
+            l[k] = (y[k] - y[k - 1]) / h[k];//это из уравнения прямой, проходящей через две точки
         }
-        delta[1] = -h[2] / (2 * (h[1] + h[2]));
-        lambda[1] = 1.5 * (l[2] - l[1]) / (h[1] + h[2]);
+        delta[1] = -h[2] / (2 * (h[1] + h[2]));//прогоночные коэффициенты
+        lambda[1] = 1.5 * (l[2] - l[1]) / (h[1] + h[2]);//прогоночные коэффициенты
         for (k = 3; k < n; k++) {
-            delta[k - 1] = -h[k] / (2 * h[k - 1] + 2 * h[k] + h[k - 1] * delta[k - 2]);
+            delta[k - 1] = -h[k] / (2 * h[k - 1] + 2 * h[k] + h[k - 1] * delta[k - 2]);//прогоночные коэффициенты
             lambda[k - 1] = (3 * l[k] - 3 * l[k - 1] - h[k - 1] * lambda[k - 2]) /
-                    (2 * h[k - 1] + 2 * h[k] + h[k - 1] * delta[k - 2]);
+                    (2 * h[k - 1] + 2 * h[k] + h[k - 1] * delta[k - 2]);//прогоночные коэффициенты
         }
         c[0] = 0;
         c[n-1] = 0;
         for (k = n-1; k >= 2; k--) {
-            c[k - 1] = delta[k - 1] * c[k] + lambda[k - 1];
+            c[k - 1] = delta[k - 1] * c[k] + lambda[k - 1];//находим коэффициенты с[k] по формулам обратной прогонки
         }
         for (k = 1; k < n; k++) {
-            d[k] = (c[k] - c[k - 1]) / (3 * h[k]);
+            d[k] = (c[k] - c[k - 1]) / (3 * h[k]);//нахождение d[k] и b[k] по специальным формулам
             b[k] = l[k] + (2 * c[k] * h[k] + h[k] * c[k - 1]) / 3;
         }
-        coefficients();
-        interpBuildCubSpl();
-
     }
-
 
     @Override
     public void start(Stage stage) {
@@ -121,8 +95,6 @@ public class L8M extends Application {
         final LineChart<Number, Number> lineChart = new LineChart<Number, Number>(xAxis, yAxis);
         lineChart.setCreateSymbols(false);//убирает кружочки из узлов
 
-        main();
-
         initXXYY();
         XYChart.Series seriesInt = new XYChart.Series();
         for (int i = 0; i < n; i++) {
@@ -130,10 +102,13 @@ public class L8M extends Application {
         }
         seriesInt.setName("Точки интерполяции");
 
+        interpolate();
+        coefficients();
+        interpBuildCubSpl();
         XYChart.Series seriesSpline = new XYChart.Series();
-        for (int i = 0; i < numD; i++) {
+        for (int i = 0; i < numD ; i++) {
             seriesSpline.getData().add(new XYChart.Data(xc[i], yc[i]));
-        }
+        }seriesSpline.getData().add(new XYChart.Data(x[n-1], y[n-1]));
         seriesSpline.setName("Интерполяция кубическими сплайнами");
 
         lineChart.setAnimated(false);
