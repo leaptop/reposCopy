@@ -411,3 +411,6 @@ Ctrl+k, Ctrl+D text formatting in Visual Studio выровнять текст в
 В джаве всё на ссылках, поэтому для копирования объекта, а не ссылки используется функция clone()
 
 Java external library adding - добавление внешней библиотеки - Создаю новую папку lib в корне, кидаю туда jar файл, жму на нём правой кнопкой, выбираю add as library
+
+https://www.onlinedocumentviewer.com нормально открывает файлы по вычмату
+https://www.pdfexport.net конвертирует в быстрые файлы(только на почту gmail.com)
