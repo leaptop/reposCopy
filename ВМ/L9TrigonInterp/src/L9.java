@@ -4,10 +4,12 @@ import java.util.Scanner;
 public class L9 {
 
     static double pi = 3.1415926;
-    static int n, numD = 100;
+    static int n = 4, numD = 100;
     static double a[], b[];
     static double xc[] = new double[numD];
     static double yc[] = new double[numD];
+    static double ix[] = new double[n];
+    static double iy[] = new double[n];
 
     static double A(int j) {
         double S = 0;
@@ -45,16 +47,12 @@ public class L9 {
         return S;
     }
 
-    public static void mainN(int n, double xc[], double yc[]) {
+    public static void mainN(int n) {
         {
-             n = n;
-            Scanner in = new Scanner(System.in);
-
-            double size = 4;
+            int size = 50;
 
            // System.out.println(" Size of result vector? ");
             //size = in.nextDouble();
-
 
 //double* xj=new double[N];
             // cout <<n<<endl;
@@ -81,23 +79,27 @@ public class L9 {
                 System.out.println("b[j] = "+b[j]);
             }
             double x;
-            System.out.println("Координаты узлов  и значения в них");
-            for (int j = 0; j < size; j++) {
-              xc[j] = x = -pi + 2 * pi / size * j;
+            System.out.println("Координаты узлов  и значения в них");//эти узлы - точки интерполяции?//а вектор - набор координат?
+            for (int j = 0; j < n; j++) {
+              ix[j] = x = -pi + 2 * pi / size * j;
                 //oo<<x<<"\t"<<Function(x)<<endl;
-              yc[j] =  Function(x);
+              iy[j] =  Function(x);
             }
             System.out.println(" STOP ");
-            for (int j = 0; j < size; j++) {
+            for (int j = 0; j < n; j++) {
                 x = -pi + 2 * pi / size * j;
                 // oo<<x<<"\t"<<Interpolate(x)<<endl;
                 Interpolate(x);
             }
-            System.out.println(" Error ");
+            System.out.println(" Error ");//типа походу выдаёт разницу между реальным и интерполированным значениями
             for (int j = 0; j < 400; j++) {
                 x = -pi + 2 * pi / size * j;
                 //oo<<x<<"\t"<<Interpolate(x)-Function(x)<<endl;
                 System.out.println("x = " + x + "Interpolate(x)-Function(x) = " + (Interpolate(x) - Function(x)));
+            }
+            for(int r = 0; r<numD; r++){
+                xc[r]  = -pi + 2 * pi / size * numD;
+                yc[r] = Interpolate(xc[r]);
             }
         }
     }
