@@ -1,6 +1,8 @@
 import org.apache.commons.math3.analysis.UnivariateFunction;
 import org.apache.commons.math3.analysis.integration.*;
 
+// ТАК РЕАЛИЗУЮТСЯ ФУНКЦИИ ВЫСШЕЙ МАТЕМАТИКИ
+
 public class Main {
     public static void main(String[] args) {
        // SimpsonIntegratorTest st = new SimpsonIntegratorTest();
@@ -14,7 +16,7 @@ public class Main {
                 return v;
             }
         };
-        System.out.println(stt.integrate(40, f, 2, 3));
+        System.out.println(stt.integrate(40, f, 2, 3));//MaxEval - число шагов?
 
 
 

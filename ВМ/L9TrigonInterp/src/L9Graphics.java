@@ -20,94 +20,112 @@ public class L9Graphics extends Application {
     double[] b = new double[n];//коэффициенты в уравнениях для сплайнов
     double[] xc = new double[numD];//массив точек для записи координат графиков
     double[] yc = new double[numD];//массив точек для записи координат графиков
-    //int[] k = new int[n - 1];
     double[] j = new double[n - 1];
     double[] A = new double[n - 1];
-    double h = 1 / n;
+    double h;
     double[] x = new double[n - 1];
     double[] y = new double[n - 1];
-    double[] dbx = new double[numD];
-    double[] dby = new double[numD];
-     double pi = 3.1415926;
-     double a[];
-     double ix[] = new double[n];
-     double iy[] = new double[n];
-     double A(int j) {
-        double S = 0;
-        int ii;
-        for (int i = -n; i < n + 1; i++) {
+    double pi = 3.1415926;
+    double a[];
+    double ix[] = new double[n];
+    double iy[] = new double[n];
 
-            S = S + Function(2 * pi * (double) (i) / (2 * n + 1)) * Math.cos(2 * pi * (double) (j) * (double) (i) / (2 * n + 1));
-        }
-        if (j == 0) return 1 / (double) (2 * n + 1) * S;
-
-        return 2 / (double) (2 * n + 1) * S;
-    }
-
-     double B(int j) {
+    double B(int j) {
         int ii;
         double S = 0;
-        for (int i = -n; i < n + 1; i++) {
+        for (int i = 0; i < n; i++) {
             ii = -n + i;
-            S = S + Function(2 * pi * (double) (i) / (double) (2 * n + 1)) * Math.sin(2 * pi * (double) (j * i) / (double) (2 * n + 1));
+            S = S + yy[i] * Math.sin(2 * pi * (double) (j * i) / (double) (2 * n + 1));
         }
         return 2 / (double) (2 * n + 1) * S;
     }
 
-     double Function(double x) {
-        if (x < -1.5) return (double) (1);
-        if (x >= -1.5 && x < 1.6) return 0.5;
-        return -0.333;
-    }
-
-     double Interpolate(double x) {
-        double S = a[0];
+    double Interpolate(double x) {
+        double S = a[0];//b[i] по формулам начинается с единицы...
         for (int i = 1; i < n; i++) {
             S = S + a[i] * Math.cos((double) (i) * x) + b[i] * Math.sin((double) (i) * x);
         }
         return S;
     }
 
-    public  void mainN() {
-        {
-            int size = 50;
+    double A(int j) {
+        double S = 0;
+        int ii;
+        for (int i = 0; i < n; i++) {
 
+            S = S + yy[i] * Math.cos(2 * pi * (double) (j) * (double) (i) / (2 * n + 1));
+        }
+        if (j == 0) return 1 / (double) (2 * n + 1) * S;
+
+        return 2 / (double) (2 * n + 1) * S;
+    }
+
+    double AA(int j) {
+        double S = 0;
+        double ii = 1;
+        for (int k = 0; k < n - 1; k++) {
+
+            S = S + yy[k] * Math.exp(-2 * pi * ii * (double) k * (double) j / (double) n);
+        }
+        return S / (double) n;
+    }
+
+    double Interpolate2(double x) {
+        double S = 0;
+        double ii = 1;
+        int c = 0, j = 0;
+        while (x > xx[j + 1]) j++;
+        h = 1 / (double) n;
+        if(j==0)j=1;
+        for (double t = (double)n/2; t > (double)-n/2; t--) {
+            S = S + a[j] * Math.exp(2 * pi * ii * t *  (double)j * (x - xx[j]) / ((double) n * h));
+
+        }
+        return S;
+    }
+
+    public void mainN() {
+        {
             a = new double[n];
             b = new double[n];
             System.out.println(" Коэффициенты a :");
             for (int j = 0; j < n; j++) {
-                a[j] = A(j);
-                System.out.println("a[j] = "+a[j]); }
+                a[j] = AA(j);
+                System.out.println("a[j] = " + a[j]);
+            }
 
-            System.out.println(" Коэффициенты b :");
+            //System.out.println(" Коэффициенты b :");
             for (int j = 1; j < n; j++) {
                 b[j] = B(j);
-                System.out.println("b[j] = "+b[j]);
+                //System.out.println("b[j] = " + b[j]);
             }
-            double x;
-            System.out.println("Координаты узлов  и значения в них");//эти узлы - точки интерполяции?//а вектор - набор координат?
-            for (int j = 0; j < n; j++) {
-                ix[j] = x = -pi + 2 * pi / size * j;
-                iy[j] =  Function(x);
+            for (int jj = 0; jj < numD; jj++) {
+                int j = 0;
+                //if (j == 0) { xc[0] = xx[0]; } else
+                // xc[j] = xc[j - 1] + ((xx[n - 1] - xx[0]) / numD);
+                xc[jj] = xx[0] + (xx[n - 1] - xx[0]) / numD * jj;
+                // System.out.println("X: "+xc[j]);
+               // yc[jj] = Interpolate2(xc[jj]);
             }
-            System.out.println(" STOP ");
-            for (int j = 0; j < n; j++) {
-                x = -pi + 2 * pi / size * j;
-                Interpolate(x);
-            }
-            System.out.println(" Error ");//типа походу выдаёт разницу между реальным и интерполированным значениями
-            for (int j = 0; j < numD; j++) {
-              xc[j]=  x = -pi + 2 * pi / size * j;
-              yc[j]=Interpolate(xc[j]);
-                //System.out.println("x = " + x + "Interpolate(x)-Function(x) = " + (Interpolate(x) - Function(x)));
-            }/*
-            for(int r = 0; r<numD; r++){
-                xc[r]  = -pi + 2 * pi / size * numD;
-                yc[r] = Interpolate(xc[r]);
-            }*/
         }
     }
-    public void initXXYY() {//инициализация интерполяционных точек
+
+    public void initXXYY() {//инициализация интерполяционных точек//sin{x)
+        xx[0] = -4;
+        yy[0] = 0.7;
+        xx[1] = 0.87;
+        yy[1] = 0.76;
+        xx[2] = 2.96;
+        yy[2] = 0.17;
+        xx[3] = 5.86;
+        yy[3] = -0.4;
+        // x = xx.clone();
+        y = yy.clone();
+        //x[4] = 9;
+        //y[4] = 2;
+    }// 5 2
+
+    public void initXXYYе() {//инициализация интерполяционных точек//ДОМАШКА
         xx[0] = 2;
         yy[0] = 1;
         xx[1] = 4;
@@ -235,16 +253,6 @@ public class L9Graphics extends Application {
         }
         seriesTrig.setName("Тригонометрическая интерполяция");
 
-        //interpolate();
-        // coefficients();
-        // interpBuildCubSpl();
-        //XYChart.Series seriesSpline = new XYChart.Series();
-        // for (int i = 0; i < numD; i++) {
-        //    seriesSpline.getData().add(new XYChart.Data(xc[i], yc[i]));
-        //  }
-        //  seriesSpline.getData().add(new XYChart.Data(xx[n - 1], yy[n - 1]));
-        //  seriesSpline.setName("Интерполяция кубическими сплайнами");
-
         lineChart.setAnimated(false);
         lineChart.setCreateSymbols(true);
 
@@ -253,10 +261,14 @@ public class L9Graphics extends Application {
         scene.getStylesheets().add(getClass().getResource("Style.css").toExternalForm());
         stage.setScene(scene);
         stage.show();
+        System.out.println("Int2(-2.7): " + Interpolate2(-2.7) + ", must be -0.4266");
+        System.out.println("Int2(-1): " + Interpolate2(-1) + ", must be -0.844");
+        System.out.println("Int2(2): " + Interpolate2(2) + ", must be 0.9");
     }
 
     public static void main(String[] args) {
         launch(args);
+
     }
 }
 
