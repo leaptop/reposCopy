@@ -23,7 +23,7 @@ public class L9Graphics extends Application {
         double ii = 1;
         for (int k = 0; k < n - 1; k++) {
 
-            S = S + yy[j] *
+            S = S + yy[k] *
                     Math.exp(-2 * pi * ii * (double) k *
                             (double) j / (double) n);
         }

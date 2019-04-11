@@ -12,17 +12,37 @@ public class L10Mine {
         return 1 / x;
     }
 
+    //медленная функция: (но я всё равно горжусь ею)
     public static double integrateTrapezii(double a, double b, double h) {
-
+        int counter = 0;
         double sum = 0, x = 0;
         for (int i = 0; x < b; i++) {
             x = a + h * i;
             sum += h * (f(x) + f(x + h)) / 2;
+            counter++;
         }
+        System.out.println("Counter = " + counter);
         return sum;
     }
 
-    public static double integrateSimpson(double a, double b, double h, int N) {
+    //эта реализация побыстрее считает:
+    public static double trapezoid(double a, double b, int n) {
+        double h = (b - a) / n;
+        double x = a;
+        double sum = 0;
+
+        for (int i = 1; i < n; i++) {
+            x = a + i * h;
+            sum += f(x);
+        }
+
+        sum = 2 * sum + (f(a) + f(b));
+        //System.out.println("Counter = " + counter);
+        return sum * h / 2;
+    }
+
+    //медленная функция:
+    public static double integrateSimpson0(double a, double b, double h, int N) {
         // 1/3
         double sum = 1.0 / 3.0 * (f(a) + f(b));//
 
@@ -41,46 +61,63 @@ public class L10Mine {
         return sum * h;
     }
 
-    public static void main(String[] args) {
-        double aa, bb, dif ;
+    // быстрая функция:
+    public static double simpson(double a, double b, double hh, int n) {
+        double range = b - a;
+        double nFloat = (double) n;
+        double sum1 = f(a + range / (nFloat * 2.0));
+        double sum2 = 0.0;
+        for (int i = 1; i < n; i++) {
+            double x1 = a + range * ((double) i + 0.5) / nFloat;
+            sum1 += f(x1);
+            double x2 = a + range * (double) i / nFloat;
+            sum2 += f(x2);
+        }
+        return (f(a) + f(b) + sum1 * 4.0 + sum2 * 2.0) * range / (nFloat * 6.0);
+    }
 
-        /*
+    public static void main(String[] args) {
+        double aa, bb, dif;
         System.out.println("\nTrapezii: ");
         Razb = 10;// число разбиений
         N = Razb;
         n = Razb / 2;
         h = (b - a) / N;
         H = (b - a) / n;
-        System.out.println("Trapezii(h) : " + integrateTrapezii(a, b, h));
-        System.out.println("Trapezii(H) : " + integrateTrapezii(a, b, H));
-        aa = integrateTrapezii(a, b, h);
-        bb = integrateTrapezii(a, b, H);
+        System.out.println("Trapezii(H) : " + trapezoid(a, b, n) + ", H = " + H);
+        System.out.println("Trapezii(h) : " + trapezoid(a, b, N) + ", h = " + h);
+        aa = trapezoid(a, b, n);
+        bb = trapezoid(a, b, N);
         dif = Math.abs(Math.abs(bb) - Math.abs(aa));
-        while (dif > e) {// если здесь д.б. цикл, то как его реализовать?
+
+        while (dif > e) {
             //correct = aa + 1.0 / 3.0 * (aa - bb);
             dif = Math.abs(Math.abs(bb) - Math.abs(aa));
-            Razb *= 10.0;
+            Razb += 100;
             N = Razb; //большее число разбиений
             n = Razb / 2;//меньшее число разбиений
             h = (b - a) / N;//меньший шаг
             H = (b - a) / n;//больший шаг
-            aa = integrateTrapezii(a, b, h);
-            bb = integrateTrapezii(a, b, H);
-            System.out.println("    Correct = " + aa + ", h = " + h + "\n");
+            aa = trapezoid(a, b, n);
+            bb = trapezoid(a, b, N);
+            System.out.println("    Correct = " + aa + ", h = " + h + "");
+            System.out.println("    Correct = " + bb + ", H = " + H + "");
         }
-        // correct = correct + 1.0 / 3.0 * (aa - bb);
-        System.out.println("FinlCorrect = " + aa);
         System.out.println("Точность : " + e);
-*/
 
 
-         aa = integrateSimpson(a, b, h, N);
-         bb = integrateSimpson(a, b, H, n);
-        double correct = 0, correct2 = 0;
         System.out.println("\nSimpson: ");
-        dif = dif = Math.abs(Math.abs(bb) - Math.abs(aa));
-        System.out.println("Simpson(h) : " + aa);
-        System.out.println("Simpson(H) : " + bb);
+        Razb = 10;// число разбиений
+        N = Razb;
+        n = Razb / 2;
+        h = (b - a) / N;
+        H = (b - a) / n;
+        aa = simpson(a, b, h, N);
+        bb = simpson(a, b, H, n);
+        double correct = 0, correct2 = 0;
+        dif = Math.abs(Math.abs(bb) - Math.abs(aa));
+        System.out.println("Simpson(h) : " + aa + ", h = " + h);
+        System.out.println("Simpson(H) : " + bb + ", H = " + H);
         while (dif > 3.0 * e) {// если здесь д.б. цикл, то как его реализовать?
             dif = Math.abs(Math.abs(bb) - Math.abs(aa));
             Razb += 10;
@@ -88,21 +125,14 @@ public class L10Mine {
             n = Razb / 2;//меньшее число разбиений
             h = (b - a) / N;//меньший шаг
             H = (b - a) / n;//больший шаг
-            aa = integrateSimpson(a, b, h, N);
-            bb = integrateSimpson(a, b, H, n);
-            System.out.println("    Correct = " + aa + ", h = " + h + "\n");
+            aa = simpson(a, b, h, N);
+            bb = simpson(a, b, H, n);
+            System.out.println("    Correct = " + aa + ", h = " + h + "");
+            System.out.println("    Correct = " + bb + ", H = " + H + "");
         }
         // correct = correct + 1.0 / 3.0 * (aa - bb);
         correct = aa + 1.0 / 3.0 * (aa - bb);
-        System.out.println("FinlCorrect = " + correct);
         System.out.println("Точность : " + e);
-
-
-
-
-
-
-
     }// ln(2) = 0.6931471805599
-    //Simpson при шаге 0.01 даёт погрешность десять в минус восьмой, трапеции тоже быстрые
+    //Simpson при шаге 0.01 даёт погрешность десять в минус восьмой, трапеции тоже быстрее должны быть
 }
