@@ -3,7 +3,7 @@
 public class L10Mine {
     static double a = 2;
     static double b = 3;
-    static int Razb = 10000;// число разбиений
+    static int Razb = 1000000;// число разбиений
     static int N = Razb, n = Razb / 2;
     static double h = (b - a) / N;
     static double H = (b - a) / n;
@@ -43,19 +43,22 @@ public class L10Mine {
         return sum * h;
     }
 
-
-    // sample client program
     public static void main(String[] args) {
 
-        System.out.println("Trapezii : " + integrateTrapezii(a, b, h));
-        System.out.println("Trapezii : " + integrateTrapezii(a, b, H));
+        System.out.println("Trapezii(h) : " + integrateTrapezii(a, b, h));
+        System.out.println("Trapezii(H) : " + integrateTrapezii(a, b, H));
         double aa = integrateTrapezii(a, b, h);
         double bb = integrateTrapezii(a, b, H);
         double correct;
-        if (Math.abs(aa - bb) > 3 * e) {
+        if (Math.abs(bb - aa) > 3.0 * e) {// если здесь д.б. цикл, то как его реализовать?
             correct = aa + 1.0/3.0 * (aa-bb);
             System.out.println("Correct = "+ correct);
         }else System.out.println("aa = "+ aa);
+
+        while(Math.abs(aa - bb) > 3.0 * e){
+            aa = aa + 1.0/3.0 * Math.abs(aa-bb);
+            System.out.println("bb = "+bb);
+        }
     }
 
 }

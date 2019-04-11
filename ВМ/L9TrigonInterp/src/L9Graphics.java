@@ -72,19 +72,20 @@ public class L9Graphics extends Application {
 
     double Interpolate2(double x) {
         double S = 0;
-        double ii = 1;
+        double ii = -1;
         int c = 0, j = 0;
-        while (x > xx[j + 1]) j++;
-        h = 1 / (double) n;
-        if(j==0)j=1;
-        for (double t = (double)n/2; t > (double)-n/2; t--) {
-            S = S + a[j] * Math.exp(2 * pi * ii * t *  (double)j * (x - xx[j]) / ((double) n * h));
+        while (x > xx[j + 1]) j++;// ищу нужный j
+        h = 1 / (double) numD;// считаю шаг
+       // if (j == 0) j = 1;
+        for (double t = (double) n / 2; t > (double) -n / 2; t--) {// пытаюсь реализовать цикл от n/2 до -n/2
+            //наверное число в скобках(степень экспоненты д.б. отрицательным)
+            S = S + a[j] * Math.exp(2 * pi * ii * t * (double) j * (x - xx[j]) / ((double) n * h));
 
         }
         return S;
     }
 
-    public void mainN() {
+    public void countAll() {
         {
             a = new double[n];
             b = new double[n];
@@ -105,12 +106,13 @@ public class L9Graphics extends Application {
                 // xc[j] = xc[j - 1] + ((xx[n - 1] - xx[0]) / numD);
                 xc[jj] = xx[0] + (xx[n - 1] - xx[0]) / numD * jj;
                 // System.out.println("X: "+xc[j]);
-               // yc[jj] = Interpolate2(xc[jj]);
+                yc[jj] = Interpolate2(xc[jj]);
             }
         }
     }
 
-    public void initXXYY() {//инициализация интерполяционных точек//sin{x)
+    //инициализация интерполяционных точек//sin{x)
+    public void initXXYY() {
         xx[0] = -4;
         yy[0] = 0.7;
         xx[1] = 0.87;
@@ -246,9 +248,9 @@ public class L9Graphics extends Application {
         seriesInt.setName("Точки интерполяции");
 
 
-        mainN();
+        countAll();
         XYChart.Series seriesTrig = new XYChart.Series();
-        for (int i = 0; i < numD; i++) {
+        for (int i = 0; i < numD * 0.55; i++) {
             seriesTrig.getData().add(new XYChart.Data(xc[i], yc[i]));
         }
         seriesTrig.setName("Тригонометрическая интерполяция");
