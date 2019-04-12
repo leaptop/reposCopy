@@ -16,7 +16,49 @@ public class L9Graphics extends Application {
     double[] yc = new double[numD];//массив точек для записи координат графиков
     double h;
     double pi = 3.1415926;
-    double a[];
+    double a[] = new double[n];
+    double b[] = new double[n];
+
+    // попробую ка без цикла сделать
+    double Amachinelearning(int m) {
+        return (2 / (2 * (double) n + 1) *
+                (yy[0] * Math.cos(2 * pi * 0 * (double) m / (2 * (double) n + 1))) +
+                yy[1] * Math.cos(2 * pi * 1 * (double) m / (2 * (double) n + 1)) +
+                yy[2] * Math.cos(2 * pi * 2 * (double) m / (2 * (double) n + 1)) +
+                yy[3] * Math.cos(2 * pi * 3 * (double) m / (2 * (double) n + 1)));
+    }
+
+    double Bmachinelearning(int m) {
+        return (2 / (2 * (double) n + 1) *
+                (yy[0] * Math.sin(2 * pi * 0 * (double) m / (2 * (double) n + 1))) +
+                yy[1] * Math.sin(2 * pi * 1 * (double) m / (2 * (double) n + 1)) +
+                yy[2] * Math.sin(2 * pi * 2 * (double) m / (2 * (double) n + 1)) +
+                yy[3] * Math.sin(2 * pi * 3 * (double) m / (2 * (double) n + 1))
+        );
+    }
+
+    void cntCoefs() {
+        for (int i = 0; i < n; i++) {
+            a[i] = Amachinelearning(i);
+            b[i] = Bmachinelearning(i);
+        }
+    }
+
+    double interp(double x) {
+        return (a[0] + a[1] * Math.cos(x) + a[2] * Math.cos(2 * x) + a[3] * Math.cos(3 * x) +
+                b[1] * Math.sin(x) + b[2] * Math.sin(2 * x) + b[3] * Math.sin(3 * x)
+        );
+    }
+
+    void fill() {
+        cntCoefs();
+        double range = xx[3] - xx[0];
+        double h = range / numD;
+        for (int i = 0; i < numD; i++) {
+            xc[i] = xx[0] + i * h;
+            yc[i] = interp(xc[i]);
+        }
+    }
 
     double AA(int j) {
         double S = 0;
@@ -29,16 +71,17 @@ public class L9Graphics extends Application {
         }
         return S / (double) n;
     }
+
     double Interpolate2(double x) {
         double S = 0;
         double ii = 1;
         int c = 0, j = 0;
         while (x > xx[j + 1]) j++;// ищу нужный j
         h = 1 / (double) numD;// считаю шаг
-       // if (j == 0) j = 1;
+        // if (j == 0) j = 1;
         for (double t = (double) n / 2; t > (double) -n / 2; t--) {// пытаюсь реализовать цикл от n/2 до -n/2
             //наверное число в скобках(степень экспоненты д.б. отрицательным)
-            S = S + a[j] * Math.exp(2 * pi * ii * t * (double) j * (x - xx[j]) / ((double) n * h));
+            S = S + a[j] * Math.exp(2 * pi * ii * t * (double) j * (x - xx[0]) / ((double) n * h));
         }
         return S;
     }
@@ -49,7 +92,7 @@ public class L9Graphics extends Application {
             System.out.println(" A :");
             for (int j = 0; j < n; j++) {
                 a[j] = AA(j);
-                System.out.println("a["+j+"] = " + a[j]);
+                System.out.println("a[" + j + "] = " + a[j]);
             }
 
             for (int jj = 0; jj < numD; jj++) {
@@ -78,8 +121,9 @@ public class L9Graphics extends Application {
         yy[3] = -0.4;
 
     }// 5 2
+
     //инициализация интерполяционных точек//ДОМАШКА:
-    public void initXXYYе() {
+    public void initXXYYDom() {
         xx[0] = 2;
         yy[0] = 1;
         xx[1] = 4;
@@ -114,7 +158,7 @@ public class L9Graphics extends Application {
         final LineChart<Number, Number> lineChart = new LineChart<Number, Number>(xAxis, yAxis);
         lineChart.setCreateSymbols(false);//убирает кружочки из узлов
 
-        initXXYY();
+        initXXYYDom();
         XYChart.Series seriesInt = new XYChart.Series();
         for (int i = 0; i < n; i++) {
             seriesInt.getData().add(new XYChart.Data(xx[i], yy[i]));
@@ -122,7 +166,7 @@ public class L9Graphics extends Application {
         seriesInt.setName("Точки интерполяции");
 
 
-        countAll();
+        fill();
         XYChart.Series seriesTrig = new XYChart.Series();
         for (int i = 0; i < numD; i++) {
             seriesTrig.getData().add(new XYChart.Data(xc[i], yc[i]));
@@ -137,9 +181,9 @@ public class L9Graphics extends Application {
         scene.getStylesheets().add(getClass().getResource("Style.css").toExternalForm());
         stage.setScene(scene);
         stage.show();
-        System.out.println("Int2(-2.7): " + Interpolate2(-2.7) + ", must be -0.4266");
-        System.out.println("Int2(-1): " + Interpolate2(-1) + ", must be -0.844");
-        System.out.println("Int2(2): " + Interpolate2(2) + ", must be 0.9");
+        //System.out.println("Int2(-2.7): " + Interpolate2(-2.7) + ", must be -0.4266");
+        //System.out.println("Int2(-1): " + Interpolate2(-1) + ", must be -0.844");
+        //System.out.println("Int2(2): " + Interpolate2(2) + ", must be 0.9");
     }
 
     public static void main(String[] args) {

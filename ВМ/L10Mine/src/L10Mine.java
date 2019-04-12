@@ -64,16 +64,16 @@ public class L10Mine {
     // быстрая функция:
     public static double simpson(double a, double b, double hh, int n) {
         double range = b - a;
-        double nFloat = (double) n;
-        double sum1 = f(a + range / (nFloat * 2.0));
+        double nn = (double) n;// это чтобы не кастовать n к даблу в каждом действии
+        double sum1 = f(a + range / (nn * 2.0)); // нашёл значение функции от (а + 1/2 шага)
         double sum2 = 0.0;
         for (int i = 1; i < n; i++) {
-            double x1 = a + range * ((double) i + 0.5) / nFloat;
+            double x1 = a + range * ((double) i + 0.5) / nn;//пошагово вычисляю зн. икс в серединах между точками разбиения
             sum1 += f(x1);
-            double x2 = a + range * (double) i / nFloat;
+            double x2 = a + range * (double) i / nn;// пошагово вычисляю зн. икс во всех точках разбиения
             sum2 += f(x2);
         }
-        return (f(a) + f(b) + sum1 * 4.0 + sum2 * 2.0) * range / (nFloat * 6.0);
+        return range * (f(a) + f(b) + sum1 * 4.0 + sum2 * 2.0)  / (nn * 6.0);
     }
 
     public static void main(String[] args) {
