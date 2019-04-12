@@ -16,101 +16,109 @@ public class L9Graphics extends Application {
     double[] yc = new double[numD];//массив точек для записи координат графиков
     double h;
     double pi = 3.1415926;
-    double a[] = new double[n];
+    public double a[] = new double[n];
     double b[] = new double[n];
 
-    // попробую ка без цикла сделать
-    double Amachinelearning(int m) {
-        return (2 / (2 * (double) n + 1) *
-                (yy[0] * Math.cos(2 * pi * 0 * (double) m / (2 * (double) n + 1))) +
-                yy[1] * Math.cos(2 * pi * 1 * (double) m / (2 * (double) n + 1)) +
-                yy[2] * Math.cos(2 * pi * 2 * (double) m / (2 * (double) n + 1)) +
-                yy[3] * Math.cos(2 * pi * 3 * (double) m / (2 * (double) n + 1)));
-    }
 
-    double Bmachinelearning(int m) {
-        return (2 / (2 * (double) n + 1) *
-                (yy[0] * Math.sin(2 * pi * 0 * (double) m / (2 * (double) n + 1))) +
-                yy[1] * Math.sin(2 * pi * 1 * (double) m / (2 * (double) n + 1)) +
-                yy[2] * Math.sin(2 * pi * 2 * (double) m / (2 * (double) n + 1)) +
-                yy[3] * Math.sin(2 * pi * 3 * (double) m / (2 * (double) n + 1))
-        );
-    }
 
-    void cntCoefs() {
+
+    public void testA() {
         for (int i = 0; i < n; i++) {
-            a[i] = Amachinelearning(i);
-            b[i] = Bmachinelearning(i);
+            System.out.println("a[" + i + "] = " + a[i]);
+            System.out.println("b[" + i + "] = " + b[i]);
         }
     }
 
-    double interp(double x) {
-        return (a[0] + a[1] * Math.cos(x) + a[2] * Math.cos(2 * x) + a[3] * Math.cos(3 * x) +
-                b[1] * Math.sin(x) + b[2] * Math.sin(2 * x) + b[3] * Math.sin(3 * x)
-        );
+
+    public double A0Krasno() {
+        double sum = 0;
+        for (int i = 0; i < n; i++) {//до N-1 написано. Проверить потом
+            sum += yy[i];
+        }
+        sum = (sum / (double) n);
+        return (sum);
     }
 
-    void fill() {
-        cntCoefs();
-        double range = xx[3] - xx[0];
-        double h = range / numD;
+    public double AkKrasno(int k) { // 1 д.б. -21.25; 2 д.б. -0.76 (до деления на n)// a[1] и a[2] не совпадают с конспектом
+        double sum = 0;
+        for (int i = 0; i < n; i++) {//до N-1 написано. Проверить потом
+            double temp = Math.cos((double) k * xx[i]);
+            System.out.println("a[" + k + "] counting: " + yy[i] + " * " + temp);
+            sum += yy[i] * temp;
+        }
+        System.out.println("sum before division Ak = " + sum);
+        sum = (sum * 2.0 / (double) n);
+        return (sum);
+    }
+
+    double BkKrasno(int k) { // 1 д.б. -2.252; 2 д.б. 2.91 до деления на n//b[1] и b[2] совпадают с конспектом
+        double sum = 0;
+        for (int i = 0; i < n; i++) {//до N-1 написано. Проверить потом
+            double temp = Math.sin((double) k * xx[i]);
+            System.out.println("b[" + k + "] counting: " + yy[i] + " * " + temp);
+            sum += yy[i] * Math.sin((double) k * xx[i]);
+        }
+        System.out.println("sum before division Bk = " + sum);
+        sum = (sum * 2.0 / (double) n);
+        return (sum);
+    }
+
+    public void cntCoefsKrasno() {
+        a[0] = A0Krasno();
+        //b[0] = BkKrasno()// здесь можно запутаться, ведь b имеет специфичные
+        // коээфициенты и в методичке Красно это не совсем понятно пока. Потом ведь...
+        for (int i = 1; i < n; i++) {
+            a[i] = AkKrasno(i);
+            b[i] = BkKrasno(i);
+        }
+    }
+
+    // w = 2*pi/T...// почему в методичке коэффициенты посчитаны только до второго?
+    double PolynomeKrasno(double x) {
+        double sum = 0;
+        for (int k = 0; k < n; k++) {
+            sum += (a[k] * Math.cos((double) k * x));
+        }
+        for (int k = 1; k < n; k++) {
+            sum += (b[k] * Math.sin((double) k * x));
+        }
+        return sum;
+    }
+
+    double PolynomeKrasnoConspect(double x) {
+        double result = -0.12571 - 3.03571 * Math.cos(x) - 0.10857 *
+                Math.sin(x) - 0.32171 * Math.cos(2.0 * x) + 0.41571 * Math.sin(2.0 * x);
+        return result;
+    }
+    public void fillKrasno() {
+        cntCoefsKrasno();
+        double range = xx[n - 1] - xx[0];
+        double h = range / (double) numD;
         for (int i = 0; i < numD; i++) {
-            xc[i] = xx[0] + i * h;
-            yc[i] = interp(xc[i]);
+            xc[i] = xx[0] + (double) i * h;
+            yc[i] = PolynomeKrasno(xc[i]);
         }
     }
 
-    double AA(int j) {
-        double S = 0;
-        double ii = 1;
-        for (int k = 0; k < n - 1; k++) {
-
-            S = S + yy[k] *
-                    Math.exp(-2 * pi * ii * (double) k *
-                            (double) j / (double) n);
-        }
-        return S / (double) n;
-    }
-
-    double Interpolate2(double x) {
-        double S = 0;
-        double ii = 1;
-        int c = 0, j = 0;
-        while (x > xx[j + 1]) j++;// ищу нужный j
-        h = 1 / (double) numD;// считаю шаг
-        // if (j == 0) j = 1;
-        for (double t = (double) n / 2; t > (double) -n / 2; t--) {// пытаюсь реализовать цикл от n/2 до -n/2
-            //наверное число в скобках(степень экспоненты д.б. отрицательным)
-            S = S + a[j] * Math.exp(2 * pi * ii * t * (double) j * (x - xx[0]) / ((double) n * h));
-        }
-        return S;
-    }
-
-    public void countAll() {
-        {
-            a = new double[n];
-            System.out.println(" A :");
-            for (int j = 0; j < n; j++) {
-                a[j] = AA(j);
-                System.out.println("a[" + j + "] = " + a[j]);
-            }
-
-            for (int jj = 0; jj < numD; jj++) {
-                int j = 0;
-                //if (j == 0) { xc[0] = xx[0]; } else
-                // xc[j] = xc[j - 1] + ((xx[n - 1] - xx[0]) / numD);
-                xc[jj] =
-                        xx[0] +
-                                (xx[n - 1] -
-                                        xx[0]) / numD * jj;
-                // System.out.println("X: "+xc[j]);
-                yc[jj] = Interpolate2(xc[jj]);
-            }
-        }
+    public void initXXYYKrasno() {
+        xx[0] = 0;
+        yy[0] = -2;
+        xx[1] = pi / 3;
+        yy[1] = -0.92;
+        xx[2] = 2 * pi / 3;
+        yy[2] = 0.83;
+       /* xx[3] = pi;
+        yy[3] = 2;
+        xx[4] = 4 * pi / 3;
+        yy[4] = 2.32;
+        xx[5] = 5 * pi / 3;
+        yy[5] = -1.11;
+        xx[6] = 2 * pi;
+        yy[6] = -2;*/
     }
 
     //инициализация интерполяционных точек//sin{x):
-    public void initXXYY() {
+    public void initXXYYsin() {
         xx[0] = -4;
         yy[0] = 0.7;
         xx[1] = 0.87;
@@ -119,6 +127,8 @@ public class L9Graphics extends Application {
         yy[2] = 0.17;
         xx[3] = 5.86;
         yy[3] = -0.4;
+        //xx[4] = 7.85;
+        //yy[4] = 1;
 
     }// 5 2
 
@@ -132,19 +142,8 @@ public class L9Graphics extends Application {
         yy[2] = 1;
         xx[3] = 8;
         yy[3] = 4;
-    }// 5 2
-
-    public void initXXYYT() {//инициализация интерполяционных точек
-        xx[0] = 1;
-        yy[0] = 2;
-        xx[1] = 3;
-        yy[1] = 6;
-        xx[2] = 5;
-        yy[2] = 2;
-        xx[3] = 7;
-        yy[3] = -2;
-        xx[4] = 9;
-        yy[4] = 2;
+       // xx[4] = 10;
+        //yy[4] = 7;
     }// 5 2
 
     @Override
@@ -165,12 +164,13 @@ public class L9Graphics extends Application {
         }
         seriesInt.setName("Точки интерполяции");
 
+        fillKrasno();
 
-        fill();
         XYChart.Series seriesTrig = new XYChart.Series();
         for (int i = 0; i < numD; i++) {
             seriesTrig.getData().add(new XYChart.Data(xc[i], yc[i]));
         }
+        //seriesTrig.getData().add(new XYChart.Data(xx[n-1], yy[n-1]));
         seriesTrig.setName("Тригонометрическая интерполяция");
 
         lineChart.setAnimated(false);
@@ -190,6 +190,112 @@ public class L9Graphics extends Application {
         launch(args);
 
     }
+
+    // попробую ка без цикла сделать
+    double AMachinelearning(int m) {
+        return (2 / (2 * (double) n + 1) *
+                (yy[0] * Math.cos(2 * pi * (0) * (double) m / (2 * (double) n + 1))) +
+                yy[1] * Math.cos(2 * pi * (1)) * (double) m / (2 * (double) n + 1) +
+                yy[2] * Math.cos(2 * pi * (2) * (double) m / (2 * (double) n + 1)) +
+                yy[3] * Math.cos(2 * pi * (3) * (double) m / (2 * (double) n + 1))
+                //yy[4] * Math.cos(2 * pi * (  4 ) * (double) m / (2 * (double) n + 1))
+        );
+    }
+
+    double BMachinelearning(int m) {
+        return (2 / (2 * (double) n + 1) *
+                (yy[0] * Math.sin(2 * pi * (0) * (double) m / (2 * (double) n + 1))) +
+                yy[1] * Math.sin(2 * pi * (1) * (double) m / (2 * (double) n + 1)) +
+                yy[2] * Math.sin(2 * pi * (2) * (double) m / (2 * (double) n + 1)) +
+                yy[3] * Math.sin(2 * pi * (3) * (double) m / (2 * (double) n + 1))
+                //yy[4] * Math.sin(2 * pi * (4) * (double) m / (2 * (double) n + 1))
+        );
+    }
+
+    void cntCoefsMachinelearning() {
+        for (int i = 0; i < n; i++) {
+            a[i] = AMachinelearning(i);
+            b[i] = BMachinelearning(i);
+        }
+    }
+
+    double interpMachineLearning(double x) {
+        return (a[0] + a[1] * Math.cos(x) + a[2] * Math.cos(2 * x) + a[3] * Math.cos(3 * x) + //a[4] * Math.cos(4*x)
+                +b[1] * Math.sin(x) + b[2] * Math.sin(2 * x) + b[3] * Math.sin(3 * x)//+ b[4] * Math.sin(4*x)
+        );
+    }
+
+    void fillMachineLearning() {
+        cntCoefsMachinelearning();
+        double range = xx[3] - xx[0];
+        double h = range / numD;
+        for (int i = 0; i < numD; i++) {
+            xc[i] = xx[0] + i * h;
+            yc[i] = interpMachineLearning(xc[i]);
+        }
+    }
+
+    double AAConspect(int j) {
+        double S = 0;
+        double ii = 1;
+        for (int k = 0; k < n - 1; k++) {
+
+            S = S + yy[k] *
+                    Math.exp(-2 * pi * ii * (double) k *
+                            (double) j / (double) n);
+        }
+        return S / (double) n;
+    }
+
+    double InterpolateConspect(double x) {
+        double S = 0;
+        double ii = 1;
+        int c = 0, j = 0;
+        while (x > xx[j + 1]) j++;// ищу нужный j
+        h = 1 / (double) numD;// считаю шаг
+        // if (j == 0) j = 1;
+        for (double t = (double) n / 2; t > (double) -n / 2; t--) {// пытаюсь реализовать цикл от n/2 до -n/2
+            //наверное число в скобках(степень экспоненты д.б. отрицательным)
+            S = S + a[j] * Math.exp(2 * pi * ii * t * (double) j * (x - xx[0]) / ((double) n * h));
+        }
+        return S;
+    }
+
+    public void countAllConspect() {
+        {
+            a = new double[n];
+            System.out.println(" A :");
+            for (int j = 0; j < n; j++) {
+                a[j] = AAConspect(j);
+                System.out.println("a[" + j + "] = " + a[j]);
+            }
+
+            for (int jj = 0; jj < numD; jj++) {
+                int j = 0;
+                //if (j == 0) { xc[0] = xx[0]; } else
+                // xc[j] = xc[j - 1] + ((xx[n - 1] - xx[0]) / numD);
+                xc[jj] =
+                        xx[0] +
+                                (xx[n - 1] -
+                                        xx[0]) / numD * jj;
+                // System.out.println("X: "+xc[j]);
+                yc[jj] = InterpolateConspect(xc[jj]);
+            }
+        }
+    }
+
+    public void initXXYYT() {//инициализация интерполяционных точек
+        xx[0] = 1;
+        yy[0] = 2;
+        xx[1] = 3;
+        yy[1] = 6;
+        xx[2] = 5;
+        yy[2] = 2;
+        xx[3] = 7;
+        yy[3] = -2;
+        xx[4] = 9;
+        yy[4] = 2;
+    }// 5 2
 }
 
  /* int nn = 20;
