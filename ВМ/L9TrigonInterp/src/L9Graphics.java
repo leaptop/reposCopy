@@ -6,9 +6,11 @@ import javafx.scene.chart.XYChart;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
+import java.io.*;
+
 public class L9Graphics extends Application {
     int n = 4; // n - число точек, по которым интерполируем
-    int numD = 100;// число точек для точного графика( для корня из икс и остальных )
+    int numD = 1000;// число точек для точного графика( для корня из икс и остальных )
     //int n = 30;//количество разбиений единичного отрезка
     double[] xx = new double[n];//точки по которым интерполируем
     double[] yy = new double[n];//точки по которым интерполируем
@@ -20,8 +22,6 @@ public class L9Graphics extends Application {
     double b[] = new double[n];
 
 
-
-
     public void testA() {
         for (int i = 0; i < n; i++) {
             System.out.println("a[" + i + "] = " + a[i]);
@@ -29,7 +29,7 @@ public class L9Graphics extends Application {
         }
     }
 
-
+    //ВЫЧИСЛИТЬ КОЭФФИЦИЕНТЫ ПЕРЕБОРОМ
     public double A0Krasno() {
         double sum = 0;
         for (int i = 0; i < n; i++) {//до N-1 написано. Проверить потом
@@ -39,14 +39,15 @@ public class L9Graphics extends Application {
         return (sum);
     }
 
+    //Можно для какой-нибудь одной точки синусоиды, например
     public double AkKrasno(int k) { // 1 д.б. -21.25; 2 д.б. -0.76 (до деления на n)// a[1] и a[2] не совпадают с конспектом
         double sum = 0;
         for (int i = 0; i < n; i++) {//до N-1 написано. Проверить потом
             double temp = Math.cos((double) k * xx[i]);
-            System.out.println("a[" + k + "] counting: " + yy[i] + " * " + temp);
+            //System.out.println("a[" + k + "] counting: " + yy[i] + " * " + temp);
             sum += yy[i] * temp;
         }
-        System.out.println("sum before division Ak = " + sum);
+        //System.out.println("sum before division Ak = " + sum);
         sum = (sum * 2.0 / (double) n);
         return (sum);
     }
@@ -55,10 +56,10 @@ public class L9Graphics extends Application {
         double sum = 0;
         for (int i = 0; i < n; i++) {//до N-1 написано. Проверить потом
             double temp = Math.sin((double) k * xx[i]);
-            System.out.println("b[" + k + "] counting: " + yy[i] + " * " + temp);
+            //System.out.println("b[" + k + "] counting: " + yy[i] + " * " + temp);
             sum += yy[i] * Math.sin((double) k * xx[i]);
         }
-        System.out.println("sum before division Bk = " + sum);
+        // System.out.println("sum before division Bk = " + sum);
         sum = (sum * 2.0 / (double) n);
         return (sum);
     }
@@ -73,14 +74,73 @@ public class L9Graphics extends Application {
         }
     }
 
+    public double c1 = 0, c2 = 0;
+
+    public void initXXYYsin() {
+        xx[0] = -4;
+        yy[0] = 0.7;
+        xx[1] = 0.87;
+        yy[1] = 0.76;
+        xx[2] = 2.96;
+        yy[2] = 0.17;
+        xx[3] = 5.86;
+        yy[3] = -0.4;
+        //xx[4] = 7.85;
+        //yy[4] = 1;
+
+    }// 5 2
+
+    public void breakTheCode() {
+        double start = -1.0, finish = 2, eps = 0.1;
+        double h = 0.001;
+        for (double c1 = start; c1 < finish; c1 += h) {
+            if ((int) c1 % 2 == 0) System.out.println("step = " + c1);
+            for (double c2 = start; c2 < finish; c2 += h) {
+                double compare0 = PolynomeKrasnoBreaker(xx[0], c1, c2);
+                double compare1 = PolynomeKrasnoBreaker(xx[1], c1, c2);
+                double compare2 = PolynomeKrasnoBreaker(xx[2], c1, c2);
+                double compare3 = PolynomeKrasnoBreaker(xx[3], c1, c2);
+
+                if (compare0 < (yy[0] + eps) && compare0 > (yy[0] - eps)
+                        && compare1 < (yy[1] + eps) && compare1 > (yy[1] - eps)
+                        && compare2 < (yy[2] + eps) && compare2 > (yy[2] - eps)
+                       // && compare3 < (yy[3] + eps) && compare3 > (yy[3] - eps)
+                ) {
+                    this.c1 = c1;
+                    this.c2 = c2;
+                    System.out.println("c1 = " + c1 + ", c2 = " + c2);
+                    return;
+                }
+            }
+
+        }
+
+
+    }
+
     // w = 2*pi/T...// почему в методичке коэффициенты посчитаны только до второго?
+    double PolynomeKrasnoBreaker(double x, double c1, double c2) {
+        double sum = 0;
+        for (int k = 0; k < n; k++) {
+            sum += (a[k] * Math.cos((double) (k - 1) * c1
+                    * x));
+        }
+        for (int k = 1; k < n; k++) {
+            sum += (b[k] * Math.sin((double) (k - 1) * c2
+                    * x));
+        }
+        return sum;
+    }
+
     double PolynomeKrasno(double x) {
         double sum = 0;
         for (int k = 0; k < n; k++) {
-            sum += (a[k] * Math.cos((double) k * x));
+            sum += (a[k] * Math.cos((double) (k - 1)
+                    * x));
         }
         for (int k = 1; k < n; k++) {
-            sum += (b[k] * Math.sin((double) k * x));
+            sum += (b[k] * Math.sin((double) (k - 1)
+                    * x));
         }
         return sum;
     }
@@ -90,13 +150,14 @@ public class L9Graphics extends Application {
                 Math.sin(x) - 0.32171 * Math.cos(2.0 * x) + 0.41571 * Math.sin(2.0 * x);
         return result;
     }
+
     public void fillKrasno() {
         cntCoefsKrasno();
         double range = xx[n - 1] - xx[0];
         double h = range / (double) numD;
         for (int i = 0; i < numD; i++) {
             xc[i] = xx[0] + (double) i * h;
-            yc[i] = PolynomeKrasno(xc[i]);
+            yc[i] = PolynomeKrasnoBreaker(xc[i], c1, c2);
         }
     }
 
@@ -118,19 +179,7 @@ public class L9Graphics extends Application {
     }
 
     //инициализация интерполяционных точек//sin{x):
-    public void initXXYYsin() {
-        xx[0] = -4;
-        yy[0] = 0.7;
-        xx[1] = 0.87;
-        yy[1] = 0.76;
-        xx[2] = 2.96;
-        yy[2] = 0.17;
-        xx[3] = 5.86;
-        yy[3] = -0.4;
-        //xx[4] = 7.85;
-        //yy[4] = 1;
 
-    }// 5 2
 
     //инициализация интерполяционных точек//ДОМАШКА:
     public void initXXYYDom() {
@@ -142,7 +191,7 @@ public class L9Graphics extends Application {
         yy[2] = 1;
         xx[3] = 8;
         yy[3] = 4;
-       // xx[4] = 10;
+        //xx[4] = 10;
         //yy[4] = 7;
     }// 5 2
 
@@ -164,6 +213,11 @@ public class L9Graphics extends Application {
         }
         seriesInt.setName("Точки интерполяции");
 
+        //fillMachineLearning();//ВЫЧИСЛИТЬ КОЭФФИЦИЕНТЫ ПЕРЕБОРОМ
+        //readF();
+        cntCoefsKrasno();
+        breakTheCode();
+        System.out.println("calculating finished");
         fillKrasno();
 
         XYChart.Series seriesTrig = new XYChart.Series();
@@ -194,20 +248,20 @@ public class L9Graphics extends Application {
     // попробую ка без цикла сделать
     double AMachinelearning(int m) {
         return (2 / (2 * (double) n + 1) *
-                (yy[0] * Math.cos(2 * pi * (0) * (double) m / (2 * (double) n + 1))) +
-                yy[1] * Math.cos(2 * pi * (1)) * (double) m / (2 * (double) n + 1) +
-                yy[2] * Math.cos(2 * pi * (2) * (double) m / (2 * (double) n + 1)) +
-                yy[3] * Math.cos(2 * pi * (3) * (double) m / (2 * (double) n + 1))
+                (yy[0] * Math.cos(2 * pi * (-1) * (double) m / (2 * (double) n + 1))) +
+                yy[1] * Math.cos(2 * pi * (0)) * (double) m / (2 * (double) n + 1) +
+                yy[2] * Math.cos(2 * pi * (1) * (double) m / (2 * (double) n + 1)) +
+                yy[3] * Math.cos(2 * pi * (2) * (double) m / (2 * (double) n + 1))
                 //yy[4] * Math.cos(2 * pi * (  4 ) * (double) m / (2 * (double) n + 1))
         );
     }
 
     double BMachinelearning(int m) {
         return (2 / (2 * (double) n + 1) *
-                (yy[0] * Math.sin(2 * pi * (0) * (double) m / (2 * (double) n + 1))) +
-                yy[1] * Math.sin(2 * pi * (1) * (double) m / (2 * (double) n + 1)) +
-                yy[2] * Math.sin(2 * pi * (2) * (double) m / (2 * (double) n + 1)) +
-                yy[3] * Math.sin(2 * pi * (3) * (double) m / (2 * (double) n + 1))
+                (yy[0] * Math.sin(2 * pi * (-1) * (double) m / (2 * (double) n + 1))) +
+                yy[1] * Math.sin(2 * pi * (0) * (double) m / (2 * (double) n + 1)) +
+                yy[2] * Math.sin(2 * pi * (1) * (double) m / (2 * (double) n + 1)) +
+                yy[3] * Math.sin(2 * pi * (2) * (double) m / (2 * (double) n + 1))
                 //yy[4] * Math.sin(2 * pi * (4) * (double) m / (2 * (double) n + 1))
         );
     }
@@ -223,6 +277,22 @@ public class L9Graphics extends Application {
         return (a[0] + a[1] * Math.cos(x) + a[2] * Math.cos(2 * x) + a[3] * Math.cos(3 * x) + //a[4] * Math.cos(4*x)
                 +b[1] * Math.sin(x) + b[2] * Math.sin(2 * x) + b[3] * Math.sin(3 * x)//+ b[4] * Math.sin(4*x)
         );
+    }
+
+    public void readF() {
+        try (FileReader reader = new FileReader("result.txt")) {
+            // читаем посимвольно
+            int c;
+            String str = new String();
+            while ((c = reader.read()) != -1) {
+                str += c;
+                System.out.print((char) c);
+            }
+            System.out.println("after all " + str);
+        } catch (IOException ex) {
+
+            System.out.println(ex.getMessage());
+        }
     }
 
     void fillMachineLearning() {
