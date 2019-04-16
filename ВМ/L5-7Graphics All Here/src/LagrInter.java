@@ -27,11 +27,11 @@ public class LagrInter extends Application {
     // встроенная опция разрывов)
     public void preciseBuild(double x[], double y[], double start, double sh, int n) {
         x[0] = start;
-        y[0] = 1/(x[0]);//подставить любую функцию
+        y[0] = Math.sqrt(x[0]);//подставить любую функцию
         for (int i = 1; i < n; ++i) {
             x[i] = x[i - 1] + sh;
-            if(x[i]>-0.1&&x[i]<0.1)continue;
-            y[i] = Math.floor(1/(x[i]) * 1e4) / 1e4;//подставить любую функцию
+            //if(x[i]>-0.1&&x[i]<0.1)continue;
+            y[i] = Math.sqrt(x[i]);//подставить любую функцию
             //Math.sqrt(x[i]);//округление до 4-го знака
         }
     }

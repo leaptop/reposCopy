@@ -10,13 +10,13 @@ import java.io.*;
 
 public class L9Graphics extends Application {
     int n = 4; // n - число точек, по которым интерполируем
-    int numD = 1000;// число точек для точного графика( для корня из икс и остальных )
+    int numD = 100;// число точек для точного графика( для корня из икс и остальных )
     //int n = 30;//количество разбиений единичного отрезка
     double[] xx = new double[n];//точки по которым интерполируем
     double[] yy = new double[n];//точки по которым интерполируем
     double[] xc = new double[numD];//массив точек для записи координат графиков
     double[] yc = new double[numD];//массив точек для записи координат графиков
-    double h;
+    double h, hh = 1;
     double pi = 3.1415926;
     public double a[] = new double[n];
     double b[] = new double[n];
@@ -76,25 +76,11 @@ public class L9Graphics extends Application {
 
     public double c1 = 0, c2 = 0;
 
-    public void initXXYYsin() {
-        xx[0] = -4;
-        yy[0] = 0.7;
-        xx[1] = 0.87;
-        yy[1] = 0.76;
-        xx[2] = 2.96;
-        yy[2] = 0.17;
-        xx[3] = 5.86;
-        yy[3] = -0.4;
-        //xx[4] = 7.85;
-        //yy[4] = 1;
-
-    }// 5 2
-
     public void breakTheCode() {
-        double start = -1.0, finish = 2, eps = 0.1;
+        double start = -3, finish = 2, eps = 0.1;
         double h = 0.001;
         for (double c1 = start; c1 < finish; c1 += h) {
-            if ((int) c1 % 2 == 0) System.out.println("step = " + c1);
+            if (Math.floor(c1) % 2 == 0) System.out.println("step = " + c1);
             for (double c2 = start; c2 < finish; c2 += h) {
                 double compare0 = PolynomeKrasnoBreaker(xx[0], c1, c2);
                 double compare1 = PolynomeKrasnoBreaker(xx[1], c1, c2);
@@ -102,9 +88,9 @@ public class L9Graphics extends Application {
                 double compare3 = PolynomeKrasnoBreaker(xx[3], c1, c2);
 
                 if (compare0 < (yy[0] + eps) && compare0 > (yy[0] - eps)
-                        && compare1 < (yy[1] + eps) && compare1 > (yy[1] - eps)
-                        && compare2 < (yy[2] + eps) && compare2 > (yy[2] - eps)
-                       // && compare3 < (yy[3] + eps) && compare3 > (yy[3] - eps)
+                    //&& compare1 < (yy[1] + eps) && compare1 > (yy[1] - eps)
+                    // && compare2 < (yy[2] + eps) && compare2 > (yy[2] - eps)
+                    // && compare3 < (yy[3] + eps) && compare3 > (yy[3] - eps)
                 ) {
                     this.c1 = c1;
                     this.c2 = c2;
@@ -161,6 +147,38 @@ public class L9Graphics extends Application {
         }
     }
 
+    //заполнение массивов x, y точными значениями, посчитанными по формуле y = sqrt(x);
+    //x,y - ссылки; sh - шаг изменения x; n - число точек для заполнения; округление до 4-го знака;
+    // здесь можно прописать любую функцию для интерполяции(кроме разрывных, их надо обрабатывать по-особенному,
+    // например для 1/х надо исключить ноль и, похоже делать две серии XYChart.Series, т.к. я не знаю, есть ли
+    // встроенная опция разрывов)
+    public void preciseBuild(double x[], double y[], double start, double sh, int n) {
+        x[0] = start;
+        y[0] = Math.sqrt(x[0]);//подставить любую функцию
+        for (int i = 1; i < n; ++i) {
+            x[i] = x[i - 1] + sh;
+            //if (x[i] > -0.1 && x[i] < 0.1) continue;
+            y[i] = Math.sqrt(x[i]);//подставить любую функцию
+            //Math.sqrt(x[i]);//округление до 4-го знака
+        }
+    }
+
+    //public void initXXYYSqrt(double hh, int n) {  preciseBuild(xx, yy, 0, hh, n);}
+
+    //инициализация интерполяционных точек//sin{x):
+    public void initXXYYsin() {
+        xx[0] = -4;
+        yy[0] = 0.7;
+        xx[1] = 0.87;
+        yy[1] = 0.76;
+        xx[2] = 2.96;
+        yy[2] = 0.17;
+        xx[3] = 5.86;
+        yy[3] = -0.4;
+        //xx[4] = 7.85;
+        //yy[4] = 1;
+    }// 5 2
+
     public void initXXYYKrasno() {
         xx[0] = 0;
         yy[0] = -2;
@@ -177,9 +195,6 @@ public class L9Graphics extends Application {
         xx[6] = 2 * pi;
         yy[6] = -2;*/
     }
-
-    //инициализация интерполяционных точек//sin{x):
-
 
     //инициализация интерполяционных точек//ДОМАШКА:
     public void initXXYYDom() {
@@ -206,19 +221,24 @@ public class L9Graphics extends Application {
         final LineChart<Number, Number> lineChart = new LineChart<Number, Number>(xAxis, yAxis);
         lineChart.setCreateSymbols(false);//убирает кружочки из узлов
 
-        initXXYYDom();
+        preciseBuild(xx, yy, 0, 2, n);
         XYChart.Series seriesInt = new XYChart.Series();
         for (int i = 0; i < n; i++) {
             seriesInt.getData().add(new XYChart.Data(xx[i], yy[i]));
         }
         seriesInt.setName("Точки интерполяции");
 
-        //fillMachineLearning();//ВЫЧИСЛИТЬ КОЭФФИЦИЕНТЫ ПЕРЕБОРОМ
-        //readF();
-        cntCoefsKrasno();
-        breakTheCode();
-        System.out.println("calculating finished");
-        fillKrasno();
+        preciseBuild(xc, yc, 0, 0.05, numD);
+        XYChart.Series seriesSqrt = new XYChart.Series();
+        for (int i = 0; i < numD; i++) {
+            seriesInt.getData().add(new XYChart.Data(xc[i], yc[i]));
+        }
+        seriesSqrt.setName("Корень из икс");
+
+        //cntCoefsKrasno();
+        //breakTheCode();
+        //System.out.println("calculating finished");
+        //fillKrasno();
 
         XYChart.Series seriesTrig = new XYChart.Series();
         for (int i = 0; i < numD; i++) {
@@ -230,7 +250,7 @@ public class L9Graphics extends Application {
         lineChart.setAnimated(false);
         lineChart.setCreateSymbols(true);
 
-        lineChart.getData().addAll(seriesInt, seriesTrig);
+        lineChart.getData().addAll(seriesInt);
         Scene scene = new Scene(lineChart, 800, 600);
         scene.getStylesheets().add(getClass().getResource("Style.css").toExternalForm());
         stage.setScene(scene);
