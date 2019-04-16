@@ -152,11 +152,14 @@ public class L9Graphics extends Application {
     // здесь можно прописать любую функцию для интерполяции(кроме разрывных, их надо обрабатывать по-особенному,
     // например для 1/х надо исключить ноль и, похоже делать две серии XYChart.Series, т.к. я не знаю, есть ли
     // встроенная опция разрывов)
-    public void preciseBuild(double x[], double y[], double start, double sh, int n) {
-        x[0] = start;
+    public void preciseBuild(double x[], double y[], double start, double end, int nn) {
+        xx[0] = start;
+        double range = end - start;
+        double h = (range / (double) nn);
+        x[0] = xx[0];
         y[0] = Math.sqrt(x[0]);//подставить любую функцию
-        for (int i = 1; i < n; ++i) {
-            x[i] = x[i - 1] + sh;
+        for (int i = 1; i < nn; ++i) {
+            x[i] = x[i - 1] + h;
             //if (x[i] > -0.1 && x[i] < 0.1) continue;
             y[i] = Math.sqrt(x[i]);//подставить любую функцию
             //Math.sqrt(x[i]);//округление до 4-го знака
@@ -221,17 +224,17 @@ public class L9Graphics extends Application {
         final LineChart<Number, Number> lineChart = new LineChart<Number, Number>(xAxis, yAxis);
         lineChart.setCreateSymbols(false);//убирает кружочки из узлов
 
-        preciseBuild(xx, yy, 0, 2, n);
+        preciseBuild(xx, yy, 0, 10, n);
         XYChart.Series seriesInt = new XYChart.Series();
         for (int i = 0; i < n; i++) {
             seriesInt.getData().add(new XYChart.Data(xx[i], yy[i]));
         }
         seriesInt.setName("Точки интерполяции");
 
-        preciseBuild(xc, yc, 0, 0.05, numD);
+        preciseBuild(xc, yc, 0, 10, numD);
         XYChart.Series seriesSqrt = new XYChart.Series();
         for (int i = 0; i < numD; i++) {
-            seriesInt.getData().add(new XYChart.Data(xc[i], yc[i]));
+            seriesSqrt.getData().add(new XYChart.Data(xc[i], yc[i]));
         }
         seriesSqrt.setName("Корень из икс");
 
@@ -250,7 +253,7 @@ public class L9Graphics extends Application {
         lineChart.setAnimated(false);
         lineChart.setCreateSymbols(true);
 
-        lineChart.getData().addAll(seriesInt);
+        lineChart.getData().addAll(seriesInt, seriesSqrt);
         Scene scene = new Scene(lineChart, 800, 600);
         scene.getStylesheets().add(getClass().getResource("Style.css").toExternalForm());
         stage.setScene(scene);
@@ -387,46 +390,3 @@ public class L9Graphics extends Application {
         yy[4] = 2;
     }// 5 2
 }
-
- /* int nn = 20;
-
-        dbx[0]=-3.14159;
-        dbx[1] = -2.51327;
-        dbx[2] = -1.88496;
-        dbx[3] = -1.25664;
-        dbx[4] = -0.628319;
-        dbx[5] = 0;
-        dbx[6] = 0.628319;
-        dbx[7] = 1.25664;
-        dbx[8] = 1.88496;
-        dbx[9] = 2.51327;
-        dbx[10] = 3.14159;
-        dbx[11] = 3.76991;
-        dbx[12] = 4.39823;
-        dbx[13] = 5.02655;
-        dbx[14] = 5.65487;
-        dbx[15] = 6.28319;
-        dbx[16] = 6.9115;
-        dbx[17] = 7.53982;
-        dbx[18] = 8.16814;
-        dbx[19] = 8.79646;
-        dby[0]=-0.663224;
-        dby[1] = 0.20168;
-        dby[2] = -0.168674;
-        dby[3] = -0.0683768;
-        dby[4] = 0.0467905;
-        dby[5] = -0.02415;
-        dby[6] = -0.0117098;
-        dby[7] = 0.0779424;
-        dby[8] = 0.259817;
-        dby[9] = -0.224096;
-        dby[10] = 0.669775;
-        dby[11] = 1.53468;
-        dby[12] = 1.16433;
-        dby[13] = 0.764623;
-        dby[14] = 0.879791;
-        dby[15] = 0.80885;
-        dby[16] = 0.82129;
-        dby[17] = 0.910942;
-        dby[18] = 0.259818;
-        dby[19] = -0.224096;*/
