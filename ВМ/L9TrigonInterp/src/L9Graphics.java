@@ -10,7 +10,7 @@ import java.io.*;
 
 public class L9Graphics extends Application {
     int n = 4; // n - число точек, по которым интерполируем
-    int numD = 100;// число точек для точного графика( для корня из икс и остальных )
+    int numD = 300;// число точек для точного графика( для корня из икс и остальных )
     //int n = 30;//количество разбиений единичного отрезка
     double[] xx = new double[n];//точки по которым интерполируем
     double[] yy = new double[n];//точки по которым интерполируем
@@ -76,43 +76,54 @@ public class L9Graphics extends Application {
 
     public double c1 = 0, c2 = 0;
 
-    public void breakTheCode() {
-        double start = -3, finish = 2, eps = 0.1;
-        double h = 0.001;
-        for (double c1 = start; c1 < finish; c1 += h) {
-            if (Math.floor(c1) % 2 == 0) System.out.println("step = " + c1);
-            for (double c2 = start; c2 < finish; c2 += h) {
-                double compare0 = PolynomeKrasnoBreaker(xx[0], c1, c2);
-                double compare1 = PolynomeKrasnoBreaker(xx[1], c1, c2);
-                double compare2 = PolynomeKrasnoBreaker(xx[2], c1, c2);
-                double compare3 = PolynomeKrasnoBreaker(xx[3], c1, c2);
+    public void breakTheCode() {// просто находить эти значения и домножать
+        // соответственные коэффициенты а и b на них, идти дальше. Собрать график в конце
+        // Так с коэффициентами не получится. Это не Лагрнаж. Надо считать и сразу записывать в xc, yc
+        double start = -1, finish = 1, eps = 0.1;
+        double h = 0.1;
+        boolean coefChanged = false;
+        for (int d = 0; d < n - 1; d++) {
+            for (double c1 = start; c1 < finish; c1 += h) {
+                //System.out.println("step = " + c1);
+                for (double c2 = start; c2 < finish; c2 += h) {
+                    double compare0 = PolynomeKrasnoBreaker(xx[d], c1, c2);
+                    double compare1 = PolynomeKrasnoBreaker(xx[d + 1], c1, c2);
+                    //double compare2 = PolynomeKrasnoBreaker(xx[2], c1, c2);
+                    //double compare3 = PolynomeKrasnoBreaker(xx[3], c1, c2);
 
-                if (compare0 < (yy[0] + eps) && compare0 > (yy[0] - eps)
-                    //&& compare1 < (yy[1] + eps) && compare1 > (yy[1] - eps)
-                    // && compare2 < (yy[2] + eps) && compare2 > (yy[2] - eps)
-                    // && compare3 < (yy[3] + eps) && compare3 > (yy[3] - eps)
-                ) {
-                    this.c1 = c1;
-                    this.c2 = c2;
-                    System.out.println("c1 = " + c1 + ", c2 = " + c2);
-                    return;
+                    if (compare0 < (yy[d] + eps) && compare0 > (yy[d] - eps)
+                            && compare1 < (yy[d + 1] + eps) && compare1 > (yy[d + 1] - eps)
+                    ) {
+                        System.out.println("if works");
+                        // this.c1 = c1;
+                        //this.c2 = c2;
+                        System.out.println("For a[" + d + "] c1 = " + c1 + "for b[" + d + "] c2 = " + c2);
+                        //return;
+                        System.out.println("a before: " + a[d] + ", b before: " + b[d]);
+                        a[d] *= c1;
+                        b[d] *= c2;
+                        System.out.println("a after: " + a[d] + ", b after: " + b[d]);
+                        coefChanged = true;
+                        break;
+                    }
+                }
+                if (coefChanged) {
+                    coefChanged = false;
+                    break;
                 }
             }
-
         }
-
-
     }
 
     // w = 2*pi/T...// почему в методичке коэффициенты посчитаны только до второго?
     double PolynomeKrasnoBreaker(double x, double c1, double c2) {
         double sum = 0;
         for (int k = 0; k < n; k++) {
-            sum += (a[k] * Math.cos((double) (k - 1) * c1
+            sum += (a[k] * Math.cos((double) (k) //* c1
                     * x));
         }
         for (int k = 1; k < n; k++) {
-            sum += (b[k] * Math.sin((double) (k - 1) * c2
+            sum += (b[k] * Math.sin((double) (k) //* c2
                     * x));
         }
         return sum;
@@ -137,8 +148,17 @@ public class L9Graphics extends Application {
         return result;
     }
 
+    public void fillKrasnoBreaker(int begin, int end) {
+        double range = xx[end] - xx[begin];
+        double h = range / (double) numD;
+        for (int i = 0; i < numD; i++) {
+            xc[i] = xx[0] + (double) i * h;
+            yc[i] = PolynomeKrasnoBreaker(xc[i], c1, c2);
+        }
+    }
+
     public void fillKrasno() {
-        cntCoefsKrasno();
+        //cntCoefsKrasno();
         double range = xx[n - 1] - xx[0];
         double h = range / (double) numD;
         for (int i = 0; i < numD; i++) {
@@ -152,11 +172,13 @@ public class L9Graphics extends Application {
     // здесь можно прописать любую функцию для интерполяции(кроме разрывных, их надо обрабатывать по-особенному,
     // например для 1/х надо исключить ноль и, похоже делать две серии XYChart.Series, т.к. я не знаю, есть ли
     // встроенная опция разрывов)
-    public void preciseBuild(double x[], double y[], double start, double end, int nn) {
-        xx[0] = start;
-        double range = end - start;
+    public void preciseBuild(double x[], double y[], double start, double end, int nn, boolean isnumD) {
+        if (isnumD) {//если строим уже точный график, то начинаем со start
+            x[0] = start;//иначе строим точки интерполяции, начиная с заданной для этого точки... тоже start
+        } else x[0] = xx[0] = start;//это излишне, ведь ссылки то на один и тот же объект
+        double range = end - start;//чего я хотел избежать, так это переопределения xx[]...
         double h = (range / (double) nn);
-        x[0] = xx[0];
+        // x[0] = xx[0];
         y[0] = Math.sqrt(x[0]);//подставить любую функцию
         for (int i = 1; i < nn; ++i) {
             x[i] = x[i - 1] + h;
@@ -224,24 +246,24 @@ public class L9Graphics extends Application {
         final LineChart<Number, Number> lineChart = new LineChart<Number, Number>(xAxis, yAxis);
         lineChart.setCreateSymbols(false);//убирает кружочки из узлов
 
-        preciseBuild(xx, yy, 0, 10, n);
+        preciseBuild(xx, yy, 2, 8, n, false);
         XYChart.Series seriesInt = new XYChart.Series();
         for (int i = 0; i < n; i++) {
             seriesInt.getData().add(new XYChart.Data(xx[i], yy[i]));
         }
         seriesInt.setName("Точки интерполяции");
 
-        preciseBuild(xc, yc, 0, 10, numD);
+        preciseBuild(xc, yc, 0, 10, numD, true);
         XYChart.Series seriesSqrt = new XYChart.Series();
         for (int i = 0; i < numD; i++) {
             seriesSqrt.getData().add(new XYChart.Data(xc[i], yc[i]));
         }
         seriesSqrt.setName("Корень из икс");
 
-        //cntCoefsKrasno();
+        cntCoefsKrasno();
         //breakTheCode();
         //System.out.println("calculating finished");
-        //fillKrasno();
+        fillKrasno();
 
         XYChart.Series seriesTrig = new XYChart.Series();
         for (int i = 0; i < numD; i++) {
@@ -253,7 +275,7 @@ public class L9Graphics extends Application {
         lineChart.setAnimated(false);
         lineChart.setCreateSymbols(true);
 
-        lineChart.getData().addAll(seriesInt, seriesSqrt);
+        lineChart.getData().addAll(seriesInt, seriesSqrt, seriesTrig);
         Scene scene = new Scene(lineChart, 800, 600);
         scene.getStylesheets().add(getClass().getResource("Style.css").toExternalForm());
         stage.setScene(scene);
