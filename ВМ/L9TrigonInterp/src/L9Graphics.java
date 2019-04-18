@@ -11,12 +11,12 @@ import java.io.*;
 public class L9Graphics extends Application {
     int n = 4; // n - число точек, по которым интерполируем
     int numD = 300;// число точек для точного графика( для корня из икс и остальных )
-    //int n = 30;//количество разбиений единичного отрезка
     double[] xx = new double[n];//точки по которым интерполируем
     double[] yy = new double[n];//точки по которым интерполируем
     double[] xc = new double[numD];//массив точек для записи координат графиков
     double[] yc = new double[numD];//массив точек для записи координат графиков
-    double h, hh = 1;
+    //double h = 1 / (double) n, hh = 1;
+    double h = Math.PI/6;
     double pi = 3.1415926;
     public double a[] = new double[n];
     double b[] = new double[n];
@@ -55,7 +55,7 @@ public class L9Graphics extends Application {
     double BkKrasno(int k) { // 1 д.б. -2.252; 2 д.б. 2.91 до деления на n//b[1] и b[2] совпадают с конспектом
         double sum = 0;
         for (int i = 0; i < n; i++) {//до N-1 написано. Проверить потом
-            double temp = Math.sin((double) k * xx[i]);
+            //double temp = Math.sin(1/(double) k * xx[i]);
             //System.out.println("b[" + k + "] counting: " + yy[i] + " * " + temp);
             sum += yy[i] * Math.sin((double) k * xx[i]);
         }
@@ -117,8 +117,8 @@ public class L9Graphics extends Application {
 
     // w = 2*pi/T...// почему в методичке коэффициенты посчитаны только до второго?
     double PolynomeKrasnoBreaker(double x, double c1, double c2) {
-        double sum = 0;
-        for (int k = 0; k < n; k++) {
+        double sum = a[0];
+        for (int k = 1; k < n; k++) {
             sum += (a[k] * Math.cos((double) (k) //* c1
                     * x));
         }
@@ -167,6 +167,17 @@ public class L9Graphics extends Application {
         }
     }
 
+    public void fillKrasno2() {
+        //cntCoefsKrasno();
+        double range = 10;
+        double h = range / (double) numD;
+        for (int i = 0; i < numD; i++) {
+            //xc[i] = 0 + (double) i * h;// для корня из икс это раскоментить
+            xc[i] = xx[0] + (double) i * h;
+            yc[i] = PolynomeKrasnoBreaker(xc[i], c1, c2);
+        }
+    }
+
     //заполнение массивов x, y точными значениями, посчитанными по формуле y = sqrt(x);
     //x,y - ссылки; sh - шаг изменения x; n - число точек для заполнения; округление до 4-го знака;
     // здесь можно прописать любую функцию для интерполяции(кроме разрывных, их надо обрабатывать по-особенному,
@@ -204,22 +215,25 @@ public class L9Graphics extends Application {
         //yy[4] = 1;
     }// 5 2
 
-    public void initXXYYKrasno() {
-        xx[0] = 0;
-        yy[0] = -2;
-        xx[1] = pi / 3;
-        yy[1] = -0.92;
-        xx[2] = 2 * pi / 3;
-        yy[2] = 0.83;
-       /* xx[3] = pi;
-        yy[3] = 2;
-        xx[4] = 4 * pi / 3;
-        yy[4] = 2.32;
-        xx[5] = 5 * pi / 3;
-        yy[5] = -1.11;
-        xx[6] = 2 * pi;
-        yy[6] = -2;*/
+    public void initXXYYsin2() {
+        xx[0] = Math.PI / 6;
+        yy[0] = 0.5;
+        xx[1] = 2 * Math.PI / 6;
+        yy[1] = Math.sqrt(3) / 2;
+        xx[2] = Math.PI / 2;
+        yy[2] = 1;
+        xx[3] = 4 * Math.PI / 6;
+        yy[3] = Math.sqrt(3) / 2;
+       /* xx[4] = 5 * Math.PI / 6;
+        yy[4] = 0.5;
+        xx[5] = Math.PI;
+        yy[5] = 0;
+        xx[6] = 7 * Math.PI / 6;
+        yy[6] = -0.5;
+        xx[7] = 8 * Math.PI / 6;
+        yy[7] = -Math.sqrt(3) / 2;*/
     }
+
 
     //инициализация интерполяционных точек//ДОМАШКА:
     public void initXXYYDom() {
@@ -231,10 +245,107 @@ public class L9Graphics extends Application {
         yy[2] = 1;
         xx[3] = 8;
         yy[3] = 4;
-        //xx[4] = 10;
-        //yy[4] = 7;
-    }// 5 2
+    }
 
+    double AAConspect(double j) {
+        double S = 0;
+        for (int k = 0; k < n; k++) {
+
+            S = S + yy[k] * Math.exp(-2 * Math.PI * (double) k *
+                    (double) j / (double) n);
+        }
+        S /= (double) n;
+        return S;
+    }
+
+    double interpolateConspectManually(double x) {
+        double S = 0;
+        //for (int j = -n / 2 - 1; j <= n / 2; j++) {     }
+        S += a[0] * Math.exp(2 * Math.PI * (-1) * (x - xx[0]) / (n * h));
+        System.out.println("1 показатель степени = " + (x - xx[0]) / (n * h));
+        S += a[1] * Math.exp(2 * Math.PI * (0) * (x - xx[1]) / (n * h));
+        System.out.println("2 показатель степени = " + (x - xx[1]) / (n * h));
+        S += a[2] * Math.exp(2 * Math.PI * (1) * (x - xx[2]) / (n * h));
+        System.out.println("3 показатель степени = " + (x - xx[2]) / (n * h));
+        S += a[3] * Math.exp(2 * Math.PI * (2) * (x - xx[3]) / (n * h));
+        System.out.println("4 показатель степени = " + (x - xx[3]) / (n * h));
+        return S;
+    }
+
+    void countCfsConspectManually() {
+        a = new double[n];
+        //System.out.println(" A :");
+        for (int j = 0; j < n; j++) {// попробовать здесь тоже от -1 до 2 пропихнуть j
+            a[j] = AAConspect(j);
+            System.out.println("a[" + j + "] = " + a[j]);
+        }
+    }
+
+    public void fillConspectManually(double start, double finish) {
+        xc[0] = start;
+        xc[0] = interpolateConspectManually(xc[0]);
+        double range = finish - start;
+        double h = range / numD;
+        for (int i = 1; i < numD; i++) {
+            xc[i] += i * h;
+            yc[i] = interpolateConspectManually(xc[i]);
+        }
+    }
+
+    double InterpolateConspect(double x) {
+        double S = 0;
+        int c = 0, j = 0;
+        while (x > xx[j + 1]) j++;// ищу нужный j
+        h = 1 / (double) numD;// считаю шаг
+        // if (j == 0) j = 1;
+        for (double t = (double) n / 2; t > (double) -n / 2; t--) {// пытаюсь реализовать цикл от n/2 до -n/2
+            //наверное число в скобках(степень экспоненты д.б. отрицательным)
+            S = S + a[j] * Math.exp(2 * pi * t * (double) j * (x - xx[0]) / ((double) n * h));
+        }
+        return S;
+    }
+
+    public void launchConspectManually() {
+        countCfsConspectManually();
+        fillConspectManually(0, 5);
+    }
+    public void launchKrasno(){
+        cntCoefsKrasno();
+        fillKrasno();
+    }
+    public void launchKrasno2(){
+        cntCoefsKrasno();
+        fillKrasno2();
+    }
+    public void launchMachineLearning(){
+        cntCoefsMachinelearning();
+        fillMachineLearning();
+    }
+
+    public void countAllConspect() {
+        {
+            a = new double[n];
+            //System.out.println(" A :");
+            for (int j = 0; j < n; j++) {
+                a[j] = AAConspect(j);
+                System.out.println("a[" + j + "] = " + a[j]);
+            }
+
+            for (int jj = 0; jj < numD; jj++) {
+                int j = 0;
+                //if (j == 0) { xc[0] = xx[0]; } else
+                // xc[j] = xc[j - 1] + ((xx[n - 1] - xx[0]) / numD);
+                xc[jj] =
+                        xx[0] +
+                                (xx[n - 1] -
+                                        xx[0]) / numD * jj;
+                // System.out.println("X: "+xc[j]);
+                yc[jj] = InterpolateConspect(xc[jj]);
+            }
+        }
+    }
+
+    //В конспекте написано, что точки д.б. равноотстоящими
     @Override
     public void start(Stage stage) {
 
@@ -246,7 +357,8 @@ public class L9Graphics extends Application {
         final LineChart<Number, Number> lineChart = new LineChart<Number, Number>(xAxis, yAxis);
         lineChart.setCreateSymbols(false);//убирает кружочки из узлов
 
-        preciseBuild(xx, yy, 2, 8, n, false);
+        initXXYYsin2();
+        //preciseBuild(xx, yy, 2, 8, n, false);
         XYChart.Series seriesInt = new XYChart.Series();
         for (int i = 0; i < n; i++) {
             seriesInt.getData().add(new XYChart.Data(xx[i], yy[i]));
@@ -260,22 +372,52 @@ public class L9Graphics extends Application {
         }
         seriesSqrt.setName("Корень из икс");
 
-        cntCoefsKrasno();
+        //cntCoefsKrasno();
         //breakTheCode();
         //System.out.println("calculating finished");
-        fillKrasno();
+        //fillKrasno2();
+        //conspectLauncManually();
+        launchKrasno();
 
         XYChart.Series seriesTrig = new XYChart.Series();
         for (int i = 0; i < numD; i++) {
             seriesTrig.getData().add(new XYChart.Data(xc[i], yc[i]));
         }
         //seriesTrig.getData().add(new XYChart.Data(xx[n-1], yy[n-1]));
-        seriesTrig.setName("Тригонометрическая интерполяция");
+        seriesTrig.setName("Krasno");
+
+        launchConspectManually();
+        XYChart.Series seriesConspectManually = new XYChart.Series();
+        for (int i = 0; i < numD; i++) {
+            seriesConspectManually.getData().add(new XYChart.Data(xc[i], yc[i]));
+        }
+        //seriesTrig.getData().add(new XYChart.Data(xx[n-1], yy[n-1]));
+        seriesConspectManually.setName("ConspectManually");
+
+        launchKrasno2();
+        XYChart.Series seriesKrasno2 = new XYChart.Series();
+        for (int i = 0; i < numD; i++) {
+            seriesKrasno2.getData().add(new XYChart.Data(xc[i], yc[i]));
+        }
+        //seriesTrig.getData().add(new XYChart.Data(xx[n-1], yy[n-1]));
+        seriesKrasno2.setName("Krasno2");
+
+        launchMachineLearning();
+        XYChart.Series seriesMachineLearning = new XYChart.Series();
+        for (int i = 0; i < numD; i++) {
+            seriesMachineLearning.getData().add(new XYChart.Data(xc[i], yc[i]));
+        }
+        //seriesTrig.getData().add(new XYChart.Data(xx[n-1], yy[n-1]));
+        seriesMachineLearning.setName("MachineLearning");
+
 
         lineChart.setAnimated(false);
         lineChart.setCreateSymbols(true);
 
-        lineChart.getData().addAll(seriesInt, seriesSqrt, seriesTrig);
+        lineChart.getData().addAll(seriesInt, seriesSqrt, seriesTrig,
+                //seriesConspectManually,
+                //seriesKrasno2,
+                seriesMachineLearning);
         Scene scene = new Scene(lineChart, 800, 600);
         scene.getStylesheets().add(getClass().getResource("Style.css").toExternalForm());
         stage.setScene(scene);
@@ -324,6 +466,15 @@ public class L9Graphics extends Application {
         );
     }
 
+    void fillMachineLearning() {
+        cntCoefsMachinelearning();
+        double range = xx[3] - xx[0];
+        double h = range / numD;
+        for (int i = 0; i < numD; i++) {
+            xc[i] = xx[0] + i * h;
+            yc[i] = interpMachineLearning(xc[i]);
+        }
+    }
     public void readF() {
         try (FileReader reader = new FileReader("result.txt")) {
             // читаем посимвольно
@@ -340,63 +491,21 @@ public class L9Graphics extends Application {
         }
     }
 
-    void fillMachineLearning() {
-        cntCoefsMachinelearning();
-        double range = xx[3] - xx[0];
-        double h = range / numD;
-        for (int i = 0; i < numD; i++) {
-            xc[i] = xx[0] + i * h;
-            yc[i] = interpMachineLearning(xc[i]);
-        }
-    }
-
-    double AAConspect(int j) {
-        double S = 0;
-        double ii = 1;
-        for (int k = 0; k < n - 1; k++) {
-
-            S = S + yy[k] *
-                    Math.exp(-2 * pi * ii * (double) k *
-                            (double) j / (double) n);
-        }
-        return S / (double) n;
-    }
-
-    double InterpolateConspect(double x) {
-        double S = 0;
-        double ii = 1;
-        int c = 0, j = 0;
-        while (x > xx[j + 1]) j++;// ищу нужный j
-        h = 1 / (double) numD;// считаю шаг
-        // if (j == 0) j = 1;
-        for (double t = (double) n / 2; t > (double) -n / 2; t--) {// пытаюсь реализовать цикл от n/2 до -n/2
-            //наверное число в скобках(степень экспоненты д.б. отрицательным)
-            S = S + a[j] * Math.exp(2 * pi * ii * t * (double) j * (x - xx[0]) / ((double) n * h));
-        }
-        return S;
-    }
-
-    public void countAllConspect() {
-        {
-            a = new double[n];
-            System.out.println(" A :");
-            for (int j = 0; j < n; j++) {
-                a[j] = AAConspect(j);
-                System.out.println("a[" + j + "] = " + a[j]);
-            }
-
-            for (int jj = 0; jj < numD; jj++) {
-                int j = 0;
-                //if (j == 0) { xc[0] = xx[0]; } else
-                // xc[j] = xc[j - 1] + ((xx[n - 1] - xx[0]) / numD);
-                xc[jj] =
-                        xx[0] +
-                                (xx[n - 1] -
-                                        xx[0]) / numD * jj;
-                // System.out.println("X: "+xc[j]);
-                yc[jj] = InterpolateConspect(xc[jj]);
-            }
-        }
+    public void initXXYYKrasno() {
+        xx[0] = 0;
+        yy[0] = -2;
+        xx[1] = pi / 3;
+        yy[1] = -0.92;
+        xx[2] = 2 * pi / 3;
+        yy[2] = 0.83;
+       /* xx[3] = pi;
+        yy[3] = 2;
+        xx[4] = 4 * pi / 3;
+        yy[4] = 2.32;
+        xx[5] = 5 * pi / 3;
+        yy[5] = -1.11;
+        xx[6] = 2 * pi;
+        yy[6] = -2;*/
     }
 
     public void initXXYYT() {//инициализация интерполяционных точек
