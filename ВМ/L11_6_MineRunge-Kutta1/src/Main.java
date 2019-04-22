@@ -1,7 +1,8 @@
 import javafx.application.Application;
 import javafx.stage.Stage;
-
+// метод Эйлера с пересчетом - то же, что метод Рунге-Кутта 2-го порядка
 public class Main extends Application {
+    //взято с http://www.simumath.net/library/book.html?code=Dif_Ur_example
     //Вычислить методом Рунге-Кутта интеграл дифференциального уравнения y' = x + y при начальном
     // условии y(0) = 1  на отрезке [0, 0.5] с шагом интегрирования h = 0.1
     //производная первого порядка:
@@ -20,7 +21,7 @@ public class Main extends Application {
 
     double xx[] = new double[range];
 
-    public double integrate() {
+    public double integrateRK4OrderClassical()  {
         System.out.println("range = " + range);
         yy[0] = y0;
         xx[0] = x0;
@@ -40,7 +41,7 @@ public class Main extends Application {
             yy[i + 1] = yy[i] + delta_y0;
 
         }
-
+        System.out.println("yy[" + range + "] = y("+(xx[range-1]+h)+") = " + yy[range]);
         return yy[range];
     }
 
@@ -53,8 +54,8 @@ public class Main extends Application {
 
         delta_y0 = h / 6 * (k1 + 2 * k2 + 2 * k3 + k4);
         y1 = y0 + delta_y0;*/
-        integrate();
-        System.out.println("yy[" + range + "] = " + yy[range]);
+        integrateRK4OrderClassical();
+
 
     }
 
