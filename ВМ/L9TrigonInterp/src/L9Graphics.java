@@ -123,7 +123,7 @@ public class L9Graphics extends Application {
                     * x));
         }
         for (int k = 1; k < n; k++) {
-            sum += (b[k] * Math.sin((double) (k) //* c2
+            sum += (b[k] * Math.sin(((double) k - 1) //* c2
                     * x));
         }
         return sum;
@@ -158,7 +158,6 @@ public class L9Graphics extends Application {
     }
 
     public void fillKrasno() {
-        //cntCoefsKrasno();
         double range = xx[n - 1] - xx[0];
         double h = range / (double) numD;
         for (int i = 0; i < numD; i++) {
@@ -168,7 +167,6 @@ public class L9Graphics extends Application {
     }
 
     public void fillKrasno2() {
-        //cntCoefsKrasno();
         double range = 10;
         double h = range / (double) numD;
         for (int i = 0; i < numD; i++) {
