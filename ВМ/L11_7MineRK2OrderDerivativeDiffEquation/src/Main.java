@@ -83,40 +83,41 @@ public class Main extends Application {
     }
 
     public void Euhler() {
-
+        double yc = y0;
+        for (double xc = x0; xc < xn; xc += h){
+            y1 = y0 + h * f(xc, yc);
+        }
     }
 
     public void RK4() {
         int i = 0;
-        for (; x0 < xn; x0 += h) {
-//здесь каждый раз считается конечное значение у в точке х. Т.о. это подсчёт 10 значений функции.
-// Рунге-Кутта так работает(достаточно одного создания к1 и остальных
+        double yc = y0;
+        for (double xc = x0; xc < xn; xc += h) {
+            xx[i] = xc;
+            k1 = h * f(xc, yc, z0);
+            q1 = h * g(xc, yc, z0);
 
-            xx[i] = x0;
-            k1 = h * f(x0, y0, z0);
-            q1 = h * g(x0, y0, z0);
+            k2 = h * f(xc + h / 2.0, yc + q1 / 2.0, z0 + k1 / 2.0);
+            q2 = h * g(xc + h / 2.0, yc + q1 / 2.0, z0 + k1 / 2.0);
 
-            k2 = h * f(x0 + h / 2.0, y0 + q1 / 2.0, z0 + k1 / 2.0);
-            q2 = h * g(x0 + h / 2.0, y0 + q1 / 2.0, z0 + k1 / 2.0);
+            k3 = h * f(xc + h / 2.0, yc + q2 / 2.0, z0 + k2 / 2.0);
+            q3 = h * g(xc + h / 2.0, yc + q2 / 2.0, z0 + k2 / 2.0);
 
-            k3 = h * f(x0 + h / 2.0, y0 + q2 / 2.0, z0 + k2 / 2.0);
-            q3 = h * g(x0 + h / 2.0, y0 + q2 / 2.0, z0 + k2 / 2.0);
-
-            k4 = h * f(x0 + h, y0 + q3, z0 + k3);
-            q4 = h * g(x0 + h, y0 + q3, z0 + k3);
+            k4 = h * f(xc + h, yc + q3, z0 + k3);
+            q4 = h * g(xc + h, yc + q3, z0 + k3);
 
             z1 = z0 + (k1 + 2.0 * k2 + 2.0 * k3 + k4) / 6.0;
-            y1 = y0 + (q1 + 2.0 * q2 + 2.0 * q3 + q4) / 6.0;
+            y1 = yc + (q1 + 2.0 * q2 + 2.0 * q3 + q4) / 6.0;
             //System.out.println("\t" + r(x0 + h, k) + "\t\t" + r(y1 ,k) + "\t\t" + r(z1 ,k));
 
-            String x00 = new DecimalFormat("#0.000000000").format(x0);
+            String x00 = new DecimalFormat("#0.000000000").format(xc);
             String y11 = new DecimalFormat("#0.000000000").format(y1);
             String z11 = new DecimalFormat("#0.0000000").format(z1);
 
             System.out.println(x00 + "\t" + y11 + "\t" + z11);
-            y0 = y1;
+            yc = y1;
             z0 = z1;
-            yy[i++] = y0;
+            yy[i++] = yc;
         }
 
 
