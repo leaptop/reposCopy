@@ -1,6 +1,6 @@
 import javafx.application.Application;
 import javafx.stage.Stage;
-// метод Эйлера с пересчетом - то же, что метод Рунге-Кутта 2-го порядка
+// метод Эйлера с пересчетом - то же, что метод Рунге-Кутта 2-го порядка(имеется ввиду порядок точности)
 public class Main extends Application {
     //взято с http://www.simumath.net/library/book.html?code=Dif_Ur_example
     //Вычислить методом Рунге-Кутта интеграл дифференциального уравнения y' = x + y при начальном
@@ -9,7 +9,6 @@ public class Main extends Application {
     public double fDer(double x, double y) {
         return x + y;
     }
-
     double h = 0.1;
     double x0 = 0.0;
     double xn = 0.5;
