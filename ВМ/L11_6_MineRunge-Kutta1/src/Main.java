@@ -28,30 +28,30 @@ public class Main extends Application {
     double xx[] = new double[range];
 
     public void Euhler() {
-        System.out.println("Euhler ");
         yy[0] = y0;
         xx[0] = x0;
-        int i = 1;
-        double yc = y0;
-        for (double xc = x0; i < range; xc += h) {
-            xx[i] = xc;
+        double yc = y0, xc = x0;
+        //for (double xc = x0; i<range; xc += h) {
+        for (int i = 0; i < range; i++) {
+            if (i > 0) xc = xx[i] = xx[i - 1] + h;
+            //xx[i] = xc;
+
             yy[i] = y1 = y0 + h * fDer(xc, yc);
-            y0 = y1;
+            y0 = yy[i];
+            System.out.println("xx[" + i + "] = " + xx[i]);
             System.out.println("yy[" + i + "] = " + yy[i]);
-            System.out.println("xx[" + i + "] = " + xx[i++]);
         }
     }
-
     //здесь каждый раз считается конечное значение у в точке х. Т.о. это подсчёт 10 значений функции.
 // Рунге-Кутта так работает(достаточно одного создания к1 и остальных
     public double integrateRK4OrderClassical() {
-        System.out.println("integrateRK4OrderClassical ");
+        System.out.println("range = " + range);
         yy[0] = y0;
         xx[0] = x0;
         for (int i = 0; i < range; i++) {
             if (i > 0) xx[i] = xx[i - 1] + h;
-            System.out.println("yy[" + i + "] = " + yy[i]);
             System.out.println("xx[" + i + "] = " + xx[i]);
+            System.out.println("yy[" + i + "] = " + yy[i]);
             k1 = fDer(xx[i], yy[i]);
             k2 = fDer(xx[i] + h / 2, yy[i] + h / 2 * k1);
             k3 = fDer(xx[i] + h / 2, yy[i] + h / 2 * k2);
