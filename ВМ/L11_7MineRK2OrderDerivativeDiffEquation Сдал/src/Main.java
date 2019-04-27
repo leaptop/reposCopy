@@ -124,7 +124,8 @@ public class Main extends Application {
             k4 = h * f(xc + h, yc + k33, z0 + k3);
             k44 = h * g(xc + h, yc + k33, z0 + k3);
 
-            z1 = z0 + (k1 + 2.0 * k2 + 2.0 * k3 + k4) / 6.0;
+            z1 = z0 + (k1 + 2.0 * k2 + 2.0 * k3 + k4) / 6.0;//первые коэффициенты (k1, k2, k3, k4) - это именно для
+            //подсчета значения первой производной
             yy[i] = y1 = yc + (k11 + 2.0 * k22 + 2.0 * k33 + k44) / 6.0;
             //System.out.println("\t" + r(x0 + h, k) + "\t\t" + r(y1 ,k) + "\t\t" + r(z1 ,k));
 
