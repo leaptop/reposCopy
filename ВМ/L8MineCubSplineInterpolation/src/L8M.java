@@ -7,33 +7,33 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 public class L8M extends Application {
-    int n = 5; // n - число точек, по которым интерполируем
-    int numD = 100;// число точек для точного графика( для корня из икс и остальных )
-    double[] x= new double[n];//точки по которым интерполируем
-    double[] y= new double[n];//точки по которым интерполируем
-    double[] h= new double[n];//расстояния между иксами (только по икс)
-    double[] l= new double[n];// l[k] = (y[k] - y[k-1])/h[k]
-    double[] delta= new double[n];//прогоночные коэффициенты
-    double[] lambda= new double[n];//прогоночные коэффициенты
-    double[] c= new double[n];//коэффициенты в уравнениях для сплайнов
-    double[] d= new double[n];//коэффициенты в уравнениях для сплайнов
-    double[] b= new double[n];//коэффициенты в уравнениях для сплайнов
-    double[] xc= new double[numD];//массив точек для записи координат графиков
-    double[] yc= new double[numD];//массив точек для записи координат графиков
+    int n = 3; // n - число точек, по которым интерполируем
+    int numD = 1;// число точек для точного графика( для корня из икс и остальных )
+    double[] x = new double[n];//точки по которым интерполируем
+    double[] y = new double[n];//точки по которым интерполируем
+    double[] h = new double[n];//расстояния между иксами (только по икс)
+    double[] l = new double[n];// l[k] = (y[k] - y[k-1])/h[k]
+    double[] delta = new double[n];//прогоночные коэффициенты
+    double[] lambda = new double[n];//прогоночные коэффициенты
+    double[] c = new double[n];//коэффициенты в уравнениях для сплайнов
+    double[] d = new double[n];//коэффициенты в уравнениях для сплайнов
+    double[] b = new double[n];//коэффициенты в уравнениях для сплайнов
+    double[] xc = new double[numD];//массив точек для записи координат графиков
+    double[] yc = new double[numD];//массив точек для записи координат графиков
 
     public void initXXYY() {//инициализация интерполяционных точек
-        x[0] = 1;
-        y[0] = 2;
-        x[1] = 3;
+        x[0] = 4;
+        y[0] = 3;
+        x[1] = 6;
         y[1] = 6;
-        x[2] = 5;
-        y[2] = 2;
-        x[3] = 7;
-        y[3] = -2;
-        x[4] = 9;
-        y[4] = 2;
+        x[2] = 8;
+        y[2] = 6;
+        //x[3] = 7;
+        //y[3] = -2;
+        //x[4] = 9;
+        // y[4] = 2;
     }// 5 2
-
+//просто выводит коэффициенты
     public void coefficients() {
         int k = 0;
         System.out.printf("\na[k]\t\tb[k]\t\tc[k]\t\td[k]\n");
@@ -41,10 +41,28 @@ public class L8M extends Application {
             System.out.printf("%f\t%f\t%f\t%f\n", y[k], b[k], c[k], d[k]);
         }
     }
+    public void interpBuildCubSplFor1Point() {//заполняю массивы интерполированными точками
+        double  s  = 5;
+        //double end = x[n - 1];
+        //double step = (end - start) / numD;
+        int i = 0;
+       // for (double s = start; s <= end; s += step) {
+          //  int k;
+           // for (k = 1; k < n; k++) {
+            //    if (s >= x[k - 1] && s <= x[k]) {
+             //       break;//перескакиваем на нужное k
+             //   }
+         //   }
+          double yP  = y[1] + b[1] * (5 - x[1]) + c[1] * Math.pow(5 - x[1], 2) + d[1] * Math.pow(5 - x[1], 3);//считаем значения функции с помощью сплайнов
+            //xc[i] = s;
+            System.out.printf("s = %f\t F = %f\n", s, yP);
+            i++;
+       // }
 
+    }
     public void interpBuildCubSpl() {//заполняю массивы интерполированными точками
         double start = x[0];
-        double end = x[n-1];
+        double end = x[n - 1];
         double step = (end - start) / numD;
         int i = 0;
         for (double s = start; s <= end; s += step) {
@@ -77,8 +95,8 @@ public class L8M extends Application {
                     (2 * h[k - 1] + 2 * h[k] + h[k - 1] * delta[k - 2]);//прогоночные коэффициенты
         }
         c[0] = 0;
-        c[n-1] = 0;
-        for (k = n-1; k >= 2; k--) {
+        c[n - 1] = 0;
+        for (k = n - 1; k >= 2; k--) {
             c[k - 1] = delta[k - 1] * c[k] + lambda[k - 1];//находим коэффициенты с[k] по формулам обратной прогонки
         }
         for (k = 1; k < n; k++) {
@@ -106,21 +124,23 @@ public class L8M extends Application {
 
         interpolate();
         coefficients();
-        interpBuildCubSpl();
+       // interpBuildCubSpl();
+        interpBuildCubSplFor1Point();
         XYChart.Series seriesSpline = new XYChart.Series();
-        for (int i = 0; i < numD ; i++) {
+        for (int i = 0; i < numD; i++) {
             seriesSpline.getData().add(new XYChart.Data(xc[i], yc[i]));
-        }seriesSpline.getData().add(new XYChart.Data(x[n-1], y[n-1]));
+        }
+        seriesSpline.getData().add(new XYChart.Data(x[n - 1], y[n - 1]));
         seriesSpline.setName("Интерполяция кубическими сплайнами");
 
         lineChart.setAnimated(false);
         lineChart.setCreateSymbols(true);
 
-        lineChart.getData().addAll(seriesInt, seriesSpline);
+        lineChart.getData().addAll();
         Scene scene = new Scene(lineChart, 800, 600);
         scene.getStylesheets().add(getClass().getResource("Style.css").toExternalForm());
         stage.setScene(scene);
-        stage.show();
+        //stage.show();
     }
 
     public static void main(String[] args) {
