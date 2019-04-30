@@ -57,7 +57,7 @@ public class Main extends Application {
 
             System.out.print("\nПересчитали M =" + m3);
             z0 = m3;//посчитали по формулке м3, запустили shoot с м3, как z0, р задали нулём на этот раз
-            hitAvg = shoot(x0, y0, z0, xn, h, p = 0);
+            hitAvg = shoot(x0, y0, z0, xn, h, p = 0);//В итоге hitAvg - зн-ие ф-ции в точке с производной m3
         }
         if (Math.abs(hitAvg - precY) < eps) {
             System.out.print("\nРешение :");
