@@ -6,7 +6,7 @@ import java.text.DecimalFormat;
 public class Main extends Application {
     public void start(Stage stage) {
         System.out.print("X\t\t\t\tY\t\t\t\tY'");
-        double eps = 10E-4;
+        double eps = 10E-12;
         double x0 = 0;
         double y0 = 1;
         double h = 0.2;
@@ -22,35 +22,38 @@ public class Main extends Application {
         double hit2;
         double hitAvg;
         int p = 0;
-        //System.out.print("\n  Введите x0,y0,xn,yn,h:");//тут мы угадываем значение первой производной  иподставляем в РК4
-        m1 = 1;// потом это подставляется как z0 в формулу РК4, т.е. как значение первой производной
+        //System.out.print("\n  Введите x0,y0,xn,yn,h:");//тут мы угадываем значение первой производной  и подставляем в РК4
+        // т.о. мы прикидываем y'(x) = m1, а это то,что было дано при решении РК4 первого порядка
+        m1 = 0.7;// потом это подставляется как z0 в формулу РК4, т.е. как значение первой производной
         //при задании этой производной и происходит "выстрел"( рисуется график в сторону yn )
         //System.out.print("\n  Введите M1: " + m1);
-        precY = yn;
+        precY = yn;//Задаю сюда известное значение функции(заданное)
         z0 = m1;
         hit1 = shoot(x0, y0, z0, xn, h, p = 1);//типа первый игрек, найденный с помощью РК4(м1 вроде... хз... короче это
         //игрек для икс равного 1
-        System.out.print("\nhit1 : " + hit1);
-        if (Math.abs(hit1 - precY) < eps) {
-            System.out.print("\n  Значения x и соответствующего z :\n");
+        System.out.print("\n hit1 : " + hit1);
+        if (Math.abs(hit1 - precY) < eps) {//сравниваю, отличается ли значение  игрека от известного на эпсилон
+            System.out.print("\n  Значения x и соответствующего z :\n");//если попал случайно, значит это и сеть ответ
             shoot(x0, y0, z0, xn, h, p = 1);
             return;
-        } else {
+        } else {//иначе стреляю ещё раз(прикидываю значение первой производной
             m2 = 1.2;
-           // System.out.print("\nEnter the value of M2: " + m2);
+            // System.out.print("\nEnter the value of M2: " + m2);
             z0 = m2;
             hit2 = shoot(x0, y0, z0, xn, h, p = 1);//м2 передаётся в shoot как z0 ... хз чё это... xn нигде не меняется
             System.out.print("\nhit2 : " + hit2);
         }
-        if (Math.abs(hit2 - precY) < eps) {
+        if (Math.abs(hit2 - precY) < eps) {//опять проверка "а вдруг попал"
             System.out.print("\n  Значения x и соответствующего z :\n");
             shoot(x0, y0, z0, xn, h, p = 1);
             return;
-        } else {
-            System.out.print("\nM2=" + m2 + "\t" + "M1=" + m1);
-            m3 = m2 + (((m2 - m1) * (precY - hit2)) / ((hit2 - hit1)));//precY здесь с тем значением, которое я прописал в yn
+        } else {//иначе используем спец формулу для подсчета первой производной
+            System.out.print("\nM2=" + m2 + "\t" + "M1=" + m1);//суть нижнего равенства в том, что три вектора коллинеарны,
+            // а из этого вытекает, что их координаты пропорциональны
+            m3 = m2 + (((m2 - m1) * (precY - hit2)) / (hit2 - hit1));//precY здесь с тем значением, которое я прописал в yn
             if (hit1 - hit2 == 0)//разобраться с формулой выше: оригинал    m3=m2+(((m2-m1)*(b-b2))/(1.0*(b2-b1)));
-                System.exit(0);
+                System.exit(0);//дело в том, что векторы (m1, hit1), (m2, hit2), (m3, y0) должны быть коллинеарны
+            //а у коллинеарных векторов координаты пропорциональны
 
             System.out.print("\nПересчитали M =" + m3);
             z0 = m3;//посчитали по формулке м3, запустили shoot с м3, как z0, р задали нулём на этот раз
@@ -66,11 +69,11 @@ public class Main extends Application {
             m2 = m3;
             hit1 = hit2;
             hit2 = hitAvg;
-            m3 = m2 + (((m2 - m1) * (precY - hit2)) / (1.0 * (hit2 - hit1)));
+            m3 = m2 + (((m2 - m1) * (precY - hit2)) / (hit2 - hit1));
             z0 = m3;
             hitAvg = shoot(x0, y0, z0, xn, h, p = 0);
 
-        } while (Math.abs(hitAvg - precY) < 0.0005);
+        } while (Math.abs(hitAvg - precY) < eps);
         z0 = m3;
         shoot(x0, y0, z0, xn, h, p = 1);
         return;

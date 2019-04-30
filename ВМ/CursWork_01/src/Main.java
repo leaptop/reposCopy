@@ -12,7 +12,6 @@ public class Main extends Application {
         double h = 0.2;
         double xn = 1;
         double yn = 2.718281828;
-        //double yn = 3;
         double z0;
         double m1;
         double m2;
@@ -22,38 +21,35 @@ public class Main extends Application {
         double hit2;
         double hitAvg;
         int p = 0;
-        //System.out.print("\n  Введите x0,y0,xn,yn,h:");
-        m1 = 0.8;// потом это подставляется как z0 в формулу РК4, т.е. как значение первой производной
-        //при задании этой производной и происходит "выстрел"( рисуется график в сторону yn )
-        //System.out.print("\n  Введите M1: " + m1);
+        m1 = 0.7;
         precY = yn;
         z0 = m1;
-        hit1 = shoot(x0, y0, z0, xn, h, p = 1);//типа первый игрек, найденный с помощью РК4(м1 вроде... хз... короче это
-        //игрек для икс равного 1
-        System.out.print("\nhit1 : " + hit1);
-        if (Math.abs(hit1 - precY) < eps) {
-            System.out.print("\n  Значения x и соответствующего z :\n");
+        hit1 = shoot(x0, y0, z0, xn, h, p = 1);// первый игрек, найденный с помощью РК4
+        System.out.print("\n hit1 : " + hit1);
+        if (Math.abs(hit1 - precY) < eps) {//сравниваю, отличается ли значение  игрека от известного нам эпсилон
+            System.out.print("\n  Значения x и соответствующего z :\n");//если попал случайно, значит это и сеть ответ
             shoot(x0, y0, z0, xn, h, p = 1);
             return;
-        } else {
-            m2 = -1;
+        } else {//иначе стреляю ещё раз(прикидываю значение первой производной
+            m2 = 1.2;
             // System.out.print("\nEnter the value of M2: " + m2);
             z0 = m2;
-            hit2 = shoot(x0, y0, z0, xn, h, p = 1);//м2 передаётся в shoot как z0 ... хз чё это... xn нигде не меняется
+            hit2 = shoot(x0, y0, z0, xn, h, p = 1);//м2 передаётся в shoot как z0
             System.out.print("\nhit2 : " + hit2);
         }
-        if (Math.abs(hit2 - precY) < eps) {
+        if (Math.abs(hit2 - precY) < eps) {//опять проверка "а вдруг попал"
             System.out.print("\n  Значения x и соответствующего z :\n");
             shoot(x0, y0, z0, xn, h, p = 1);
             return;
-        } else {
+        } else {//иначе используем спец формулу для подсчета первой производной
             System.out.print("\nM2=" + m2 + "\t" + "M1=" + m1);
-            m3 = m2 + (((m2 - m1) * (precY - hit2)) / (1.0 * (hit2 - hit1)));//precY здесь с тем значением, которое я прописал в yn
-            if (hit1 - hit2 == 0)//разобраться с формулой выше
-                System.exit(0);
+            m3 = m2 + (((m2 - m1) * (precY - hit2)) / ((hit2 - hit1)));
+            if (hit1 - hit2 == 0)
+                System.exit(0);//дело в том, что векторы (m1, hit1), (m2, hit2), (m3, y0) должны быть коллинеарны
+
 
             System.out.print("\nПересчитали M =" + m3);
-            z0 = m3;//посчитали по формулке м3, запустили shoot с м3, как z0, р задали нулём на этот раз
+            z0 = m3;
             hitAvg = shoot(x0, y0, z0, xn, h, p = 0);
         }
         if (Math.abs(hitAvg - precY) < eps) {
@@ -66,11 +62,11 @@ public class Main extends Application {
             m2 = m3;
             hit1 = hit2;
             hit2 = hitAvg;
-            m3 = m2 + (((m2 - m1) * (precY - hit2)) / (1.0 * (hit2 - hit1)));
+            m3 = m2 + (((m2 - m1) * (precY - hit2)) / ((hit2 - hit1)));
             z0 = m3;
             hitAvg = shoot(x0, y0, z0, xn, h, p = 0);
 
-        } while (Math.abs(hitAvg - precY) < 0.0005);
+        } while (Math.abs(hitAvg - precY) < eps);
         z0 = m3;
         shoot(x0, y0, z0, xn, h, p = 1);
         return;
@@ -82,7 +78,6 @@ public class Main extends Application {
 
     double f2(double x, double y, double z) {
         return (Math.exp(x) + y) / 2;
-        //return(x+y);//(initial task with 0 1 3 4 0.5, M1 = 0, M2 = 1) from https://www.codewithc.com/c-program-for-shooting-method/
     }
 
     double shoot(double x0, double y0, double z0, double xn, double h, int p) {
@@ -116,13 +111,12 @@ public class Main extends Application {
             l4 = h * f2(x + h, y + k3, z + l3);
             l = 1 / 6.0 * (l1 + 2 * l2 + 2 * l3 + l4);
             k = 1 / 6.0 * (k1 + 2 * k2 + 2 * k3 + k4);
-            y1 = y + k;//подсчёт игрека по РК4
-            x1 = x + h;//инкремент икса
-            z1 = z + l;//инкремент доп ф-ции?
+            y1 = y + k;
+            x1 = x + h;
+            z1 = z + l;
             x = x1;
             y = y1;
             z = z1;
-
             if (p == 1) {
                 String x00 = new DecimalFormat("#0.000").format(x1);
                 String y11 = new DecimalFormat("#0.0000000000000").format(y1);
@@ -132,7 +126,6 @@ public class Main extends Application {
         } while (x < xn);
         return (y);
     }
-
     public static void main(String args) {
         launch(args);
     }
