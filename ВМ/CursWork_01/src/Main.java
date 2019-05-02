@@ -100,6 +100,12 @@ public class Main extends Application {
         x = x0;
         y = y0;
         z = z0;
+        if (p == 1) {
+            String x00 = new DecimalFormat("#0.000").format(x);
+            String y11 = new DecimalFormat("#0.0000000000000").format(y);
+            String z11 = new DecimalFormat("#0.0000000000000").format(z);
+            System.out.print("\n" + x00 + "\t" + y11 + "\t\t" + z11);
+        }
         do {
             k1 = h * f1(x, y, z);
             l1 = h * f2(x, y, z);

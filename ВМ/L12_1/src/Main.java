@@ -81,14 +81,14 @@ public class Main extends Application {
                 {xxS, n}
         };
         double[] B = {xyS, yyS};
-        double[] x = lsolve(A, B);
-        a = x[0];//с пом. м. Гаусса нашёл  корни системы
+        double[] x = lsolve(A, B);//с пом. м. Гаусса нашёл  корни системы
+        a = x[0];
         b = x[1];
 
-            System.out.println("a = "+x[0]);
-        System.out.println("b = "+x[1]);
+        System.out.println("a = " + x[0]);
+        System.out.println("b = " + x[1]);
 
-        primaryStage.setTitle("Линейная аппроксимация");
+        primaryStage.setTitle("Метод Наименьших квадратов");
         final NumberAxis xAxis = new NumberAxis();
         final NumberAxis yAxis = new NumberAxis();
         xAxis.setLabel("X");
