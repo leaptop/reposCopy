@@ -7,7 +7,7 @@ public class Main extends Application {
     public void start(Stage stage) {
         System.out.print("X\t\t\t\tY\t\t\t\tY'");
         double eps = 10E-8, x0 = 0, y0 = 1, h = 0.2, xn = 1, yn = 2.718281828, precY = yn, m1 = 0.7, z0 = m1,
-                m2, m3,  hit1, hit2, hitAvg;
+                m2 = 1.2, m3,  hit1, hit2, hitAvg;
         int p = 0;
         hit1 = shoot(x0, y0, z0, xn, h, p = 1);// первый игрек, найденный с помощью РК4
         System.out.print("\n hit1 : " + hit1);
@@ -16,7 +16,6 @@ public class Main extends Application {
             shoot(x0, y0, z0, xn, h, p = 1);
             return;
         } else {//иначе стреляю ещё раз(прикидываю значение первой производной
-            m2 = 1.2;
             // System.out.print("\nEnter the value of M2: " + m2);
             z0 = m2;
             hit2 = shoot(x0, y0, z0, xn, h, p = 1);//м2 передаётся в shoot как z0
@@ -62,7 +61,7 @@ public class Main extends Application {
     double f2(double x, double y, double z) {
         return (Math.exp(x) + y) / 2;
     }
-
+// получается shoot это и есть метод Рунге-кутты4 здесь
     double shoot(double x0, double y0, double z0, double xn, double h, int p) {
         double x = x0, y = y0, z = z0, k1, k2, k3, k4, l1, l2, l3, l4, k, l, x1, y1, z1;
 
