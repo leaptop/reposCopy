@@ -6,24 +6,9 @@ import java.text.DecimalFormat;
 public class Main extends Application {
     public void start(Stage stage) {
         System.out.print("X\t\t\t\tY\t\t\t\tY'");
-        double eps = 10E-8;
-        double x0 = 0;
-        double y0 = 1;
-        double h = 0.2;
-        double xn = 1;
-        double yn = 2.718281828;
-        double z0;
-        double m1;
-        double m2;
-        double m3;
-        double precY;
-        double hit1;
-        double hit2;
-        double hitAvg;
+        double eps = 10E-8, x0 = 0, y0 = 1, h = 0.2, xn = 1, yn = 2.718281828, precY = yn, m1 = 0.7, z0 = m1,
+                m2, m3,  hit1, hit2, hitAvg;
         int p = 0;
-        m1 = 0.7;
-        precY = yn;
-        z0 = m1;
         hit1 = shoot(x0, y0, z0, xn, h, p = 1);// первый игрек, найденный с помощью РК4
         System.out.print("\n hit1 : " + hit1);
         if (Math.abs(hit1 - precY) < eps) {//сравниваю, отличается ли значение  игрека от известного нам эпсилон
@@ -46,8 +31,6 @@ public class Main extends Application {
             m3 = m2 + (((m2 - m1) * (precY - hit2)) / ((hit2 - hit1)));
             if (hit1 - hit2 == 0)
                 System.exit(0);//дело в том, что векторы (m1, hit1), (m2, hit2), (m3, y0) должны быть коллинеарны
-
-
             System.out.print("\nПересчитали M =" + m3);
             z0 = m3;
             hitAvg = shoot(x0, y0, z0, xn, h, p = 0);
@@ -81,25 +64,8 @@ public class Main extends Application {
     }
 
     double shoot(double x0, double y0, double z0, double xn, double h, int p) {
-        double x;
-        double y;
-        double z;
-        double k1;
-        double k2;
-        double k3;
-        double k4;
-        double l1;
-        double l2;
-        double l3;
-        double l4;
-        double k;
-        double l;
-        double x1;
-        double y1;
-        double z1;
-        x = x0;
-        y = y0;
-        z = z0;
+        double x = x0, y = y0, z = z0, k1, k2, k3, k4, l1, l2, l3, l4, k, l, x1, y1, z1;
+
         if (p == 1) {
             String x00 = new DecimalFormat("#0.000").format(x);
             String y11 = new DecimalFormat("#0.0000000000000").format(y);
@@ -132,6 +98,7 @@ public class Main extends Application {
         } while (x < xn);
         return (y);
     }
+
     public static void main(String args) {
         launch(args);
     }

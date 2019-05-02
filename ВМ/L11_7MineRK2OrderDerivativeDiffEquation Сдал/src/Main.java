@@ -30,7 +30,7 @@ public class Main extends Application {
     double k1, k2, k4, k3;
     double k11, k22, k44, k33;
 
-    double x0F = 0, y0F = 1, z0F = 1, xnF = 1, hF = 0.2;
+    double x0F = 0, y0F = 1, z0F = 1, xnF = 1, hF = 0.1;
 
     public void start(Stage stage) {
         System.out.println("X\t\t\t\tY\t\t\t\tY'");
