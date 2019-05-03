@@ -4,8 +4,7 @@ import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.stage.Stage;
-//sums - суммы степеней x,y при неизвестных коэффициентах полинома
-//n - число точек, k - степень аппроксимирующего многочлена
+
 public class Main extends Application {
     double a[], b[], x[], y[], sums[][], xc[], yc[];
     int n = 4, k = 2, numD = 50;
