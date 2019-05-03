@@ -5,7 +5,7 @@ import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-
+//прога возможно закоцана в процессе использования для контрольной. Красивые версии можно найти в гите.
 public class L8M extends Application {
     int n = 3; // n - число точек, по которым интерполируем
     int numD = 1;// число точек для точного графика( для корня из икс и остальных )
@@ -42,7 +42,7 @@ public class L8M extends Application {
         }
     }
     public void interpBuildCubSplFor1Point() {//заполняю массивы интерполированными точками
-        double  s  = 5;
+        double  s  = 7;//сюда можно прописать точку икс для интерполяции
         //double end = x[n - 1];
         //double step = (end - start) / numD;
         int i = 0;
@@ -53,7 +53,7 @@ public class L8M extends Application {
              //       break;//перескакиваем на нужное k
              //   }
          //   }
-          double yP  = y[1] + b[1] * (5 - x[1]) + c[1] * Math.pow(5 - x[1], 2) + d[1] * Math.pow(5 - x[1], 3);//считаем значения функции с помощью сплайнов
+          double yP  = y[1] + b[1] * (s - x[1]) + c[1] * Math.pow(s - x[1], 2) + d[1] * Math.pow(s - x[1], 3);//считаем значения функции с помощью сплайнов
             //xc[i] = s;
             System.out.printf("s = %f\t F = %f\n", s, yP);
             i++;
@@ -124,8 +124,8 @@ public class L8M extends Application {
 
         interpolate();
         coefficients();
-       // interpBuildCubSpl();
-        interpBuildCubSplFor1Point();
+        interpBuildCubSpl();
+        //interpBuildCubSplFor1Point();
         XYChart.Series seriesSpline = new XYChart.Series();
         for (int i = 0; i < numD; i++) {
             seriesSpline.getData().add(new XYChart.Data(xc[i], yc[i]));

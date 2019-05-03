@@ -7,12 +7,11 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
     double a[], b[], x[], y[], sums[][], xc[], yc[];
-    int N = 4, K = 2, numD = 50;
-
+    int n = 4, k = 2, numD = 50;
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        mainF();
+        count();
 
         xc = new double[numD];
         yc = new double[numD];
@@ -26,7 +25,7 @@ public class Main extends Application {
         lineChart.setCreateSymbols(false);//убирает кружочки из узлов
 
         XYChart.Series seriesInt = new XYChart.Series();
-        for (int i = 0; i < N; i++) {
+        for (int i = 0; i < n; i++) {
             seriesInt.getData().add(new XYChart.Data(x[i], y[i]));
         }
         seriesInt.setName("Точки аппроксимации");
@@ -52,32 +51,27 @@ public class Main extends Application {
         primaryStage.show();
     }
 
-
-    //N - number of data points
-//K - polinom power
-//K<=N
-    void allocmatrix() {
-        //allocate memory for matrixes
+    void initMatr() {
         int i, j, k;
-        a = new double[K + 1];
-        b = new double[K + 1];
-        x = new double[N];
-        y = new double[N];
-        sums = new double[K + 1][K + 1];
-        for (i = 0; i < K + 1; i++) {
+        a = new double[this.k + 1];
+        b = new double[this.k + 1];
+        x = new double[n];
+        y = new double[n];
+        sums = new double[this.k + 1][this.k + 1];
+        for (i = 0; i < this.k + 1; i++) {
             a[i] = 0;
             b[i] = 0;
-            for (j = 0; j < K + 1; j++) {
+            for (j = 0; j < this.k + 1; j++) {
                 sums[i][j] = 0;
             }
         }
-        for (k = 0; k < N; k++) {
+        for (k = 0; k < n; k++) {
             x[k] = 0;
             y[k] = 0;
         }
     }
 
-    void readmatrix() {
+    void initXY() {
         int i = 0, j = 0, k = 0;
         {
             x[0] = 1;
@@ -89,28 +83,25 @@ public class Main extends Application {
             x[3] = 4;
             y[3] = 16;
         }
-        //init square sums matrix
-        for (i = 0; i < K + 1; i++) {
-            for (j = 0; j < K + 1; j++) {
+        for (i = 0; i < this.k + 1; i++) {
+            for (j = 0; j < this.k + 1; j++) {
                 sums[i][j] = 0;
-                for (k = 0; k < N; k++) {
+                for (k = 0; k < n; k++) {
                     sums[i][j] += Math.pow(x[k], i + j);
                 }
             }
         }
-        //init free coefficients column
-        for (i = 0; i < K + 1; i++) {
-            for (k = 0; k < N; k++) {
+        for (i = 0; i < this.k + 1; i++) {
+            for (k = 0; k < n; k++) {
                 b[i] += Math.pow(x[k], i) * y[k];
             }
         }
     }
 
-    void printresult() {
-        //print polynom parameters
+    void printCoefs() {
         int i = 0;
         System.out.println();
-        for (i = 0; i < K + 1; i++) {
+        for (i = 0; i < k + 1; i++) {
             System.out.printf("a[%d] = %f\n", i, a[i]);
         }
     }
@@ -118,12 +109,12 @@ public class Main extends Application {
     void diagonal() {
         int i, j, k;
         double temp = 0;
-        for (i = 0; i < K + 1; i++) {
+        for (i = 0; i < this.k + 1; i++) {
             if (sums[i][i] == 0) {
-                for (j = 0; j < K + 1; j++) {
+                for (j = 0; j < this.k + 1; j++) {
                     if (j == i) continue;
                     if (sums[j][i] != 0 && sums[i][j] != 0) {
-                        for (k = 0; k < K + 1; k++) {
+                        for (k = 0; k < this.k + 1; k++) {
                             temp = sums[j][k];
                             sums[j][k] = sums[i][k];
                             sums[i][k] = temp;
@@ -138,34 +129,32 @@ public class Main extends Application {
         }
     }
 
-    void mainF() {
+    void count() {
         int i = 0, j = 0, k = 0;
-        allocmatrix();
-        readmatrix();
-        //check if there are 0 on main diagonal and exchange rows in that case
+        initMatr();
+        initXY();
         diagonal();
-        //process rows
-        for (k = 0; k < K + 1; k++) {
-            for (i = k + 1; i < K + 1; i++) {
+        for (k = 0; k < this.k + 1; k++) {
+            for (i = k + 1; i < this.k + 1; i++) {
                 if (sums[k][k] == 0) {
-                    System.out.printf("\nSolution is not exist.\n");
+                    System.out.printf("\nNo solution.\n");
                     return;
                 }
                 double M = sums[i][k] / sums[k][k];
-                for (j = k; j < K + 1; j++) {
+                for (j = k; j < this.k + 1; j++) {
                     sums[i][j] -= M * sums[k][j];
                 }
                 b[i] -= M * b[k];
             }
         }
-        for (i = (K + 1) - 1; i >= 0; i--) {
+        for (i = (this.k + 1) - 1; i >= 0; i--) {
             double s = 0;
-            for (j = i; j < K + 1; j++) {
+            for (j = i; j < this.k + 1; j++) {
                 s = s + sums[i][j] * a[j];
             }
             a[i] = (b[i] - s) / sums[i][i];
         }
-        printresult();
+        printCoefs();
     }
 
     public static void main(String[] args) {
