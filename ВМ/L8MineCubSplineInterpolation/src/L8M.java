@@ -73,7 +73,7 @@ public class L8M extends Application {
         for (double s = start; s <= end; s += step) {
             int k;
             for (k = 1; k < n; k++) {
-                if (s >= x[k - 1] && s <= x[k]) {
+                if (s >= x[k - 1] && s <= x[k])
                     break;//перескакиваем на нужное k
                 }
             }
