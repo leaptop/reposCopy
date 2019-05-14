@@ -5,7 +5,7 @@ import java.text.DecimalFormat;
 
 public class Main extends Application {
 
-    double x0 = 0, xn = 1, y0 = 1, z0 = 0.7, precY = 2.7182818284590, yn = precY,
+    double x0 = 0, xn = 1, y0 = 0, z0 = 0.7, precY = 2.718281828, yn = precY,
             m1 = z0, m2 = 1.2, m3, z1, h = 0.1, H = 2 * h,
             yy[], YY[], hit1, hit2, hitAvg, eps = 10E-10;
     int range, RANGE;
@@ -89,7 +89,7 @@ public class Main extends Application {
     }
 
     public double f(double x, double y, double z) {//сюда получается уже должна производная быть введена как y
-        double result = (Math.exp(x) + y) / 2;//игрек заменить на игрек штрих(производную)
+        double result = (3*Math.exp(x) + y + z) / 2;//игрек заменить на игрек штрих(производную)
         return result;  //return Math.pow(x, 4) / 7;
     }
 
