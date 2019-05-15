@@ -36,21 +36,17 @@
             this.movieIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.moviesBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.base1DataSet = new RGR05.Base1DataSet();
-            this.moviesTableAdapter = new RGR05.Base1DataSetTableAdapters.MoviesTableAdapter();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
             this.кодDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.userDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.movieDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.moviesUsersBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.moviesMoviesUsersBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.moviesUsersTableAdapter = new RGR05.Base1DataSetTableAdapters.MoviesUsersTableAdapter();
+            this.moviesUsersBindingSource3 = new System.Windows.Forms.BindingSource(this.components);
             this.dataGridView3 = new System.Windows.Forms.DataGridView();
             this.фамилияDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.имяDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.телефонDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.userIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.пользователиBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.пользователиTableAdapter = new RGR05.Base1DataSetTableAdapters.ПользователиTableAdapter();
             this.button1 = new System.Windows.Forms.Button();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.textBox3 = new System.Windows.Forms.TextBox();
@@ -58,18 +54,36 @@
             this.label3 = new System.Windows.Forms.Label();
             this.button2 = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
+            this.moviesUsersBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.moviesUsersTableAdapter = new RGR05.Base1DataSetTableAdapters.MoviesUsersTableAdapter();
+            this.moviesTableAdapter = new RGR05.Base1DataSetTableAdapters.MoviesTableAdapter();
             this.moviesUsersBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.пользователиTableAdapter = new RGR05.Base1DataSetTableAdapters.ПользователиTableAdapter();
             this.moviesUsersBindingSource2 = new System.Windows.Forms.BindingSource(this.components);
+            this.button3 = new System.Windows.Forms.Button();
+            this.reportViewer1 = new Microsoft.Reporting.WinForms.ReportViewer();
+            this.base1DataSet2 = new RGR05.Base1DataSet2();
+            this.moviesUsersBindingSource4 = new System.Windows.Forms.BindingSource(this.components);
+            this.moviesUsersTableAdapter1 = new RGR05.Base1DataSet2TableAdapters.MoviesUsersTableAdapter();
+            this.button4 = new System.Windows.Forms.Button();
+            this.button5 = new System.Windows.Forms.Button();
+            this.button6 = new System.Windows.Forms.Button();
+            this.moviesMoviesUsersBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.moviesMoviesUsersBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.moviesBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.base1DataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.moviesUsersBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.moviesMoviesUsersBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.moviesUsersBindingSource3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.пользователиBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.moviesUsersBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.moviesUsersBindingSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.moviesUsersBindingSource2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.base1DataSet2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.moviesUsersBindingSource4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.moviesMoviesUsersBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.moviesMoviesUsersBindingSource1)).BeginInit();
             this.SuspendLayout();
             // 
             // dataGridView1
@@ -121,10 +135,6 @@
             this.base1DataSet.DataSetName = "Base1DataSet";
             this.base1DataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
-            // moviesTableAdapter
-            // 
-            this.moviesTableAdapter.ClearBeforeFill = true;
-            // 
             // dataGridView2
             // 
             this.dataGridView2.AutoGenerateColumns = false;
@@ -133,7 +143,7 @@
             this.кодDataGridViewTextBoxColumn,
             this.userDataGridViewTextBoxColumn,
             this.movieDataGridViewTextBoxColumn});
-            this.dataGridView2.DataSource = this.moviesUsersBindingSource2;
+            this.dataGridView2.DataSource = this.moviesUsersBindingSource3;
             this.dataGridView2.Location = new System.Drawing.Point(469, 13);
             this.dataGridView2.Name = "dataGridView2";
             this.dataGridView2.Size = new System.Drawing.Size(453, 150);
@@ -157,19 +167,10 @@
             this.movieDataGridViewTextBoxColumn.HeaderText = "Movie";
             this.movieDataGridViewTextBoxColumn.Name = "movieDataGridViewTextBoxColumn";
             // 
-            // moviesUsersBindingSource
+            // moviesUsersBindingSource3
             // 
-            this.moviesUsersBindingSource.DataMember = "MoviesUsers";
-            this.moviesUsersBindingSource.DataSource = this.base1DataSet;
-            // 
-            // moviesMoviesUsersBindingSource
-            // 
-            this.moviesMoviesUsersBindingSource.DataMember = "MoviesMoviesUsers";
-            this.moviesMoviesUsersBindingSource.DataSource = this.moviesBindingSource;
-            // 
-            // moviesUsersTableAdapter
-            // 
-            this.moviesUsersTableAdapter.ClearBeforeFill = true;
+            this.moviesUsersBindingSource3.DataMember = "MoviesUsers";
+            this.moviesUsersBindingSource3.DataSource = this.base1DataSet;
             // 
             // dataGridView3
             // 
@@ -215,19 +216,15 @@
             this.пользователиBindingSource.DataMember = "Пользователи";
             this.пользователиBindingSource.DataSource = this.base1DataSet;
             // 
-            // пользователиTableAdapter
-            // 
-            this.пользователиTableAdapter.ClearBeforeFill = true;
-            // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(505, 297);
+            this.button1.Location = new System.Drawing.Point(606, 243);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 3;
             this.button1.Text = "Add";
             this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.button1.Click += new System.EventHandler(this.button1_MoviesUsers);
             // 
             // textBox2
             // 
@@ -246,7 +243,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(519, 194);
+            this.label2.Location = new System.Drawing.Point(545, 191);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(40, 13);
             this.label2.TabIndex = 8;
@@ -255,7 +252,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(519, 220);
+            this.label3.Location = new System.Drawing.Point(545, 217);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(47, 13);
             this.label3.TabIndex = 9;
@@ -263,13 +260,13 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(505, 327);
+            this.button2.Location = new System.Drawing.Point(468, 329);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 10;
-            this.button2.Text = "Составить письмо";
+            this.button2.Text = "Message";
             this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.button2.Click += new System.EventHandler(this.button2_Sostavit);
             // 
             // textBox1
             // 
@@ -279,21 +276,114 @@
             this.textBox1.Size = new System.Drawing.Size(449, 208);
             this.textBox1.TabIndex = 11;
             // 
+            // moviesUsersBindingSource
+            // 
+            this.moviesUsersBindingSource.DataMember = "MoviesUsers";
+            this.moviesUsersBindingSource.DataSource = this.base1DataSet;
+            // 
+            // moviesUsersTableAdapter
+            // 
+            this.moviesUsersTableAdapter.ClearBeforeFill = true;
+            // 
+            // moviesTableAdapter
+            // 
+            this.moviesTableAdapter.ClearBeforeFill = true;
+            // 
             // moviesUsersBindingSource1
             // 
             this.moviesUsersBindingSource1.DataMember = "MoviesUsers";
             this.moviesUsersBindingSource1.DataSource = this.base1DataSet;
+            // 
+            // пользователиTableAdapter
+            // 
+            this.пользователиTableAdapter.ClearBeforeFill = true;
             // 
             // moviesUsersBindingSource2
             // 
             this.moviesUsersBindingSource2.DataMember = "MoviesUsers";
             this.moviesUsersBindingSource2.DataSource = this.base1DataSet;
             // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(606, 272);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(75, 23);
+            this.button3.TabIndex = 12;
+            this.button3.Text = "Renew";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Renew);
+            // 
+            // reportViewer1
+            // 
+            this.reportViewer1.Location = new System.Drawing.Point(505, 368);
+            this.reportViewer1.Name = "reportViewer1";
+            this.reportViewer1.Size = new System.Drawing.Size(396, 246);
+            this.reportViewer1.TabIndex = 13;
+            // 
+            // base1DataSet2
+            // 
+            this.base1DataSet2.DataSetName = "Base1DataSet2";
+            this.base1DataSet2.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // moviesUsersBindingSource4
+            // 
+            this.moviesUsersBindingSource4.DataMember = "MoviesUsers";
+            this.moviesUsersBindingSource4.DataSource = this.base1DataSet2;
+            // 
+            // moviesUsersTableAdapter1
+            // 
+            this.moviesUsersTableAdapter1.ClearBeforeFill = true;
+            // 
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(796, 189);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(75, 23);
+            this.button4.TabIndex = 14;
+            this.button4.Text = "newMovie";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_NewMovie);
+            // 
+            // button5
+            // 
+            this.button5.Location = new System.Drawing.Point(549, 329);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(75, 23);
+            this.button5.TabIndex = 15;
+            this.button5.Text = "UsersDolg";
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_UsersDolg);
+            // 
+            // button6
+            // 
+            this.button6.Location = new System.Drawing.Point(646, 329);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(75, 23);
+            this.button6.TabIndex = 16;
+            this.button6.Text = "report2";
+            this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
+            // 
+            // moviesMoviesUsersBindingSource
+            // 
+            this.moviesMoviesUsersBindingSource.DataMember = "MoviesMoviesUsers";
+            this.moviesMoviesUsersBindingSource.DataSource = this.moviesBindingSource;
+            // 
+            // moviesMoviesUsersBindingSource1
+            // 
+            this.moviesMoviesUsersBindingSource1.DataMember = "MoviesMoviesUsers";
+            this.moviesMoviesUsersBindingSource1.DataSource = this.moviesBindingSource;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(934, 565);
+            this.ClientSize = new System.Drawing.Size(954, 728);
+            this.Controls.Add(this.button6);
+            this.Controls.Add(this.button5);
+            this.Controls.Add(this.button4);
+            this.Controls.Add(this.reportViewer1);
+            this.Controls.Add(this.button3);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.label3);
@@ -311,12 +401,16 @@
             ((System.ComponentModel.ISupportInitialize)(this.moviesBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.base1DataSet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.moviesUsersBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.moviesMoviesUsersBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.moviesUsersBindingSource3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.пользователиBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.moviesUsersBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.moviesUsersBindingSource1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.moviesUsersBindingSource2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.base1DataSet2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.moviesUsersBindingSource4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.moviesMoviesUsersBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.moviesMoviesUsersBindingSource1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -325,27 +419,8 @@
         #endregion
 
         private System.Windows.Forms.DataGridView dataGridView1;
-        private Base1DataSet base1DataSet;
-        private System.Windows.Forms.BindingSource moviesBindingSource;
-        private Base1DataSetTableAdapters.MoviesTableAdapter moviesTableAdapter;
-        private System.Windows.Forms.DataGridViewTextBoxColumn названиеФильмаDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn годВыходаDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn длительностьDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn movieIDDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridView dataGridView2;
-        private System.Windows.Forms.BindingSource moviesMoviesUsersBindingSource;
-        private Base1DataSetTableAdapters.MoviesUsersTableAdapter moviesUsersTableAdapter;
-        private System.Windows.Forms.DataGridViewTextBoxColumn кодDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn userDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn movieDataGridViewTextBoxColumn;
-        private System.Windows.Forms.BindingSource moviesUsersBindingSource;
         private System.Windows.Forms.DataGridView dataGridView3;
-        private System.Windows.Forms.BindingSource пользователиBindingSource;
-        private Base1DataSetTableAdapters.ПользователиTableAdapter пользователиTableAdapter;
-        private System.Windows.Forms.DataGridViewTextBoxColumn фамилияDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn имяDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn телефонDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn userIDDataGridViewTextBoxColumn;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.TextBox textBox3;
@@ -353,8 +428,37 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.BindingSource moviesUsersBindingSource2;
+        private Base1DataSet base1DataSet;
+        private System.Windows.Forms.BindingSource moviesUsersBindingSource;
+        private Base1DataSetTableAdapters.MoviesUsersTableAdapter moviesUsersTableAdapter;
+        private System.Windows.Forms.BindingSource moviesBindingSource;
+        private Base1DataSetTableAdapters.MoviesTableAdapter moviesTableAdapter;
+        private System.Windows.Forms.DataGridViewTextBoxColumn названиеФильмаDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn годВыходаDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn длительностьDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn movieIDDataGridViewTextBoxColumn;
         private System.Windows.Forms.BindingSource moviesUsersBindingSource1;
+        private System.Windows.Forms.BindingSource пользователиBindingSource;
+        private Base1DataSetTableAdapters.ПользователиTableAdapter пользователиTableAdapter;
+        private System.Windows.Forms.DataGridViewTextBoxColumn фамилияDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn имяDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn телефонDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn userIDDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn кодDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn userDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn movieDataGridViewTextBoxColumn;
+        private System.Windows.Forms.BindingSource moviesUsersBindingSource2;
+        private System.Windows.Forms.BindingSource moviesMoviesUsersBindingSource;
+        private System.Windows.Forms.BindingSource moviesMoviesUsersBindingSource1;
+        private System.Windows.Forms.BindingSource moviesUsersBindingSource3;
+        private System.Windows.Forms.Button button3;
+        private Microsoft.Reporting.WinForms.ReportViewer reportViewer1;
+        private Base1DataSet2 base1DataSet2;
+        private System.Windows.Forms.BindingSource moviesUsersBindingSource4;
+        private Base1DataSet2TableAdapters.MoviesUsersTableAdapter moviesUsersTableAdapter1;
+        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Button button6;
     }
 }
 
