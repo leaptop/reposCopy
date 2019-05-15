@@ -56,6 +56,10 @@
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
+            this.button2 = new System.Windows.Forms.Button();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.moviesUsersBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.moviesUsersBindingSource2 = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.moviesBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.base1DataSet)).BeginInit();
@@ -64,6 +68,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.moviesMoviesUsersBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.пользователиBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.moviesUsersBindingSource1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.moviesUsersBindingSource2)).BeginInit();
             this.SuspendLayout();
             // 
             // dataGridView1
@@ -127,10 +133,10 @@
             this.кодDataGridViewTextBoxColumn,
             this.userDataGridViewTextBoxColumn,
             this.movieDataGridViewTextBoxColumn});
-            this.dataGridView2.DataSource = this.moviesUsersBindingSource;
+            this.dataGridView2.DataSource = this.moviesUsersBindingSource2;
             this.dataGridView2.Location = new System.Drawing.Point(469, 13);
             this.dataGridView2.Name = "dataGridView2";
-            this.dataGridView2.Size = new System.Drawing.Size(374, 150);
+            this.dataGridView2.Size = new System.Drawing.Size(453, 150);
             this.dataGridView2.TabIndex = 1;
             // 
             // кодDataGridViewTextBoxColumn
@@ -255,11 +261,41 @@
             this.label3.TabIndex = 9;
             this.label3.Text = "MovieID";
             // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(505, 327);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.TabIndex = 10;
+            this.button2.Text = "Составить письмо";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(13, 329);
+            this.textBox1.Multiline = true;
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(449, 208);
+            this.textBox1.TabIndex = 11;
+            // 
+            // moviesUsersBindingSource1
+            // 
+            this.moviesUsersBindingSource1.DataMember = "MoviesUsers";
+            this.moviesUsersBindingSource1.DataSource = this.base1DataSet;
+            // 
+            // moviesUsersBindingSource2
+            // 
+            this.moviesUsersBindingSource2.DataMember = "MoviesUsers";
+            this.moviesUsersBindingSource2.DataSource = this.base1DataSet;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(934, 384);
+            this.ClientSize = new System.Drawing.Size(934, 565);
+            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.button2);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.textBox3);
@@ -279,6 +315,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.moviesMoviesUsersBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.пользователиBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.moviesUsersBindingSource1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.moviesUsersBindingSource2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -313,6 +351,10 @@
         private System.Windows.Forms.TextBox textBox3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.BindingSource moviesUsersBindingSource2;
+        private System.Windows.Forms.BindingSource moviesUsersBindingSource1;
     }
 }
 
