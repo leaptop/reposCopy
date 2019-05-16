@@ -29,21 +29,9 @@ namespace RGR05
             // TODO: This line of code loads data into the 'base1DataSet.Movies' table. You can move, or remove it, as needed.
             this.moviesTableAdapter.Fill(this.base1DataSet.Movies);
             // TODO: This line of code loads data into the 'base1DataSet.MoviesUsers' table. You can move, or remove it, as needed.
-            this.moviesUsersTableAdapter.Fill(this.base1DataSet.MoviesUsers);
-            // TODO: This line of code loads data into the 'base1DataSet.Пользователи' table. You can move, or remove it, as needed.
-            this.пользователиTableAdapter.Fill(this.base1DataSet.Пользователи);
-            // TODO: This line of code loads data into the 'base1DataSet.MoviesUsers' table. You can move, or remove it, as needed.
-            this.moviesUsersTableAdapter.Fill(this.base1DataSet.MoviesUsers);
-            // TODO: This line of code loads data into the 'base1DataSet.Movies' table. You can move, or remove it, as needed.
-            this.moviesTableAdapter.Fill(this.base1DataSet.Movies);
-            // TODO: This line of code loads data into the 'base1DataSet.Пользователи' table. You can move, or remove it, as needed.
-            this.пользователиTableAdapter.Fill(this.base1DataSet.Пользователи);
-            // TODO: This line of code loads data into the 'base1DataSet.MoviesUsers' table. You can move, or remove it, as needed.
-            this.moviesUsersTableAdapter.Fill(this.base1DataSet.MoviesUsers);
-            // TODO: This line of code loads data into the 'base1DataSet.Movies' table. You can move, or remove it, as needed.
-            this.moviesTableAdapter.Fill(this.base1DataSet.Movies);
 
-            this.reportViewer1.RefreshReport();
+
+            // this.reportViewer1.RefreshReport();
         }
 
         public void button1_MoviesUsers(object sender, EventArgs e)
@@ -85,12 +73,12 @@ namespace RGR05
             int usrIdi = Convert.ToInt32(usrIds);
             //int row = dataGridView2.SelectedCells[0].RowIndex;
 
-           /* connection.Open();
-            OleDbCommand command = new OleDbCommand();
-            command.Connection = connection;
-            command.CommandText = "SELECT FROM [MoviesUsers] ([User], [Movie]) VALUES('"
-                + Convert.ToDecimal(textBox2.Text) + "','" + Convert.ToDecimal(textBox3.Text) + "')";
-            command.ExecuteNonQuery();*/
+            /* connection.Open();
+             OleDbCommand command = new OleDbCommand();
+             command.Connection = connection;
+             command.CommandText = "SELECT FROM [MoviesUsers] ([User], [Movie]) VALUES('"
+                 + Convert.ToDecimal(textBox2.Text) + "','" + Convert.ToDecimal(textBox3.Text) + "')";
+             command.ExecuteNonQuery();*/
 
             string film = dataGridView1.Rows[movIdi - 1].Cells[0].Value.ToString();
             string first_name = dataGridView3.Rows[usrIdi - 1].Cells[0].Value.ToString();
@@ -124,12 +112,60 @@ namespace RGR05
             Form3 fr3 = new Form3();
             fr3.ShowDialog();
         }
-        private void button6_Click(object sender, EventArgs e)
-        {
-            Form3 fr3 = new Form3();
-            fr3.ShowDialog();
+        private void button6_Select(object sender, EventArgs e)
+        {            /*Теперь мы хотим увидеть названия (не обязательно уникальные)
+             * всех книг Дэна Брауна, которые были взяты из библиотеки, и 
+             * когда эти книги нужно вернуть:
+
+
+SELECT books.title AS "Title", borrowings.returndate AS "Return Date"
+FROM borrowings JOIN books ON borrowings.bookid=books.bookid
+WHERE books.author='Dan Brown';*/
+            connection.Open();
+            OleDbCommand command = new OleDbCommand();
+            command.Connection = connection;
+            //command.CommandText = "SELECT Movies.[Название фильма] FROM MoviesUsers JOIN Movies ON MoviesUsers.User=Пользователи.User_ID WHERE Пользователи.User_ID=5";
+            command.CommandText = "SELECT * FROM Movies";
+            OleDbDataReader reader = command.ExecuteReader();//for reading(for SELECT)}
+            while (reader.Read())
+            {
+                Console.Write("\nGOTCHA\n");
+                Console.Write(reader.ToString());
+            }
+            connection.Close();
         }
 
-     
+        private void button7_Click(object sender, EventArgs e)
+        {
+            OleDbConnectionStringBuilder sb = new OleDbConnectionStringBuilder();
+            sb.Provider = "Microsoft.ACE.OLEDB.12.0";
+            sb.PersistSecurityInfo = false;
+            sb.Add("Jet OLEDB:Database Password", "");
+
+
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Filter = "Accdb files (*.accdb)|*.accdb";
+            if (ofd.ShowDialog() == DialogResult.OK)
+            {
+                sb.DataSource = ofd.FileName;
+                connection = new OleDbConnection(sb.ConnectionString);
+            }
+
+            DataTable table = new DataTable();
+            if (!String.IsNullOrEmpty(connection.ConnectionString))
+            {
+                table = FillTable("SELECT * FROM Movies");
+            }
+            dataGridView4.DataSource = table;
+        }
+        private DataTable FillTable(String sql)
+        {
+            DataTable table = new DataTable();
+            using (OleDbDataAdapter da = new OleDbDataAdapter(sql, connection))
+            {
+                da.Fill(table);
+            }
+            return table;
+        }
     }
 }
