@@ -71,6 +71,8 @@
             this.moviesMoviesUsersBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.dataGridView4 = new System.Windows.Forms.DataGridView();
             this.button7 = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.textBox4 = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.moviesBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.base1DataSet)).BeginInit();
@@ -222,9 +224,9 @@
             // 
             this.button1.Location = new System.Drawing.Point(606, 243);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.Size = new System.Drawing.Size(100, 23);
             this.button1.TabIndex = 3;
-            this.button1.Text = "Add";
+            this.button1.Text = "Выдать Фильм";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_MoviesUsers);
             // 
@@ -307,7 +309,7 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(606, 272);
+            this.button3.Location = new System.Drawing.Point(853, 169);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(75, 23);
             this.button3.TabIndex = 12;
@@ -331,7 +333,7 @@
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(796, 189);
+            this.button4.Location = new System.Drawing.Point(772, 281);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(75, 23);
             this.button4.TabIndex = 14;
@@ -347,6 +349,7 @@
             this.button5.TabIndex = 15;
             this.button5.Text = "UsersDolg";
             this.button5.UseVisualStyleBackColor = true;
+            this.button5.Visible = false;
             this.button5.Click += new System.EventHandler(this.button5_UsersDolg);
             // 
             // button6
@@ -357,6 +360,7 @@
             this.button6.TabIndex = 16;
             this.button6.Text = "btn6Select";
             this.button6.UseVisualStyleBackColor = true;
+            this.button6.Visible = false;
             this.button6.Click += new System.EventHandler(this.button6_Select);
             // 
             // moviesMoviesUsersBindingSource
@@ -379,19 +383,37 @@
             // 
             // button7
             // 
-            this.button7.Location = new System.Drawing.Point(751, 364);
+            this.button7.Location = new System.Drawing.Point(853, 358);
             this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(75, 23);
+            this.button7.Size = new System.Drawing.Size(89, 23);
             this.button7.TabIndex = 18;
-            this.button7.Text = "button7";
+            this.button7.Text = "ShowMovies";
             this.button7.UseVisualStyleBackColor = true;
             this.button7.Click += new System.EventHandler(this.button7_Click);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(701, 364);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(40, 13);
+            this.label1.TabIndex = 20;
+            this.label1.Text = "UserID";
+            // 
+            // textBox4
+            // 
+            this.textBox4.Location = new System.Drawing.Point(747, 361);
+            this.textBox4.Name = "textBox4";
+            this.textBox4.Size = new System.Drawing.Size(100, 20);
+            this.textBox4.TabIndex = 19;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(954, 728);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.textBox4);
             this.Controls.Add(this.button7);
             this.Controls.Add(this.dataGridView4);
             this.Controls.Add(this.button6);
@@ -475,6 +497,8 @@
         private System.Windows.Forms.Button button6;
         private System.Windows.Forms.DataGridView dataGridView4;
         private System.Windows.Forms.Button button7;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox textBox4;
     }
 }
 

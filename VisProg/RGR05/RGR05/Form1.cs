@@ -109,8 +109,8 @@ namespace RGR05
 
         private void button5_UsersDolg(object sender, EventArgs e)
         {
-            Form3 fr3 = new Form3();
-            fr3.ShowDialog();
+            // Form3 fr3 = new Form3();
+            // fr3.ShowDialog();
         }
         private void button6_Select(object sender, EventArgs e)
         {            /*Теперь мы хотим увидеть названия (не обязательно уникальные)
@@ -141,20 +141,31 @@ WHERE books.author='Dan Brown';*/
             sb.Provider = "Microsoft.ACE.OLEDB.12.0";
             sb.PersistSecurityInfo = false;
             sb.Add("Jet OLEDB:Database Password", "");
-
-
             OpenFileDialog ofd = new OpenFileDialog();
             ofd.Filter = "Accdb files (*.accdb)|*.accdb";
             if (ofd.ShowDialog() == DialogResult.OK)
             {
                 sb.DataSource = ofd.FileName;
-                connection = new OleDbConnection(sb.ConnectionString);
+                connection = new OleDbConnection(sb.ConnectionString);        
             }
+            /*
+            OleDbCommand cmd = connection.CreateCommand();
+            cmd.CommandType = CommandType.Text;
+            cmd.CommandText = "SELECT * FROM Movies WHERE Movie_ID IN (SELECT Movie FROM MoviesUsers WHERE User = ?)";
+            OleDbParameter param = cmd.CreateParameter();
+            param.OleDbType = OleDbType.Integer;
+            param.Value = 4;
+            cmd.Parameters.Add(param);
+            //SqlDataReader reader = cmd.ExecuteReader();//так на сайте. Но в моём случае используется
+             OleDbDataAdapter, а я не знаю как туда это всё подставить.*/
 
             DataTable table = new DataTable();
+            string sel = "SELECT * FROM Movies WHERE Movie_ID IN (SELECT Movie FROM MoviesUsers WHERE User = "+textBox4.Text+")";
+            Console.WriteLine(sel);
             if (!String.IsNullOrEmpty(connection.ConnectionString))
             {
-                table = FillTable("SELECT * FROM Movies");
+                table = FillTable(sel);
+                //table = FillTable("SELECT * FROM Movies WHERE Movie_ID IN (SELECT Movie FROM MoviesUsers WHERE User = 4)");
             }
             dataGridView4.DataSource = table;
         }
