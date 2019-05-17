@@ -20,7 +20,7 @@ namespace L06DataBase
         private void Form1_Load(object sender, EventArgs e)
         {
             // TODO: This line of code loads data into the 'continentsDataSet.Countries' table. You can move, or remove it, as needed.
-            this.countriesTableAdapter.Fill(this.СontinentsDataSet.Countries);
+            this.countriesTableAdapter.Fill(this.continentsDataSet.Countries);
 
         }
 
@@ -37,7 +37,7 @@ namespace L06DataBase
 
         private void button5_Click(object sender, EventArgs e)
         {
-            this.countriesTableAdapter.FillBySouthAm(this.continentsDataSet.Countries, "Южная Америка");
+            this.countriesTableAdapter.Z22(this.continentsDataSet.Countries, "Северная Америка");
         }
     }
 }

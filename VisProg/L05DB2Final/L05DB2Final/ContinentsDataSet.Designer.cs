@@ -946,7 +946,7 @@ namespace L05DB2Final.ContinentsDataSetTableAdapters {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         private void InitCommandCollection() {
-            this._commandCollection = new global::System.Data.OleDb.OleDbCommand[4];
+            this._commandCollection = new global::System.Data.OleDb.OleDbCommand[5];
             this._commandCollection[0] = new global::System.Data.OleDb.OleDbCommand();
             this._commandCollection[0].Connection = this.Connection;
             this._commandCollection[0].CommandText = "SELECT Код, CountryName, Capitol, Continent, Population FROM Countries";
@@ -967,6 +967,12 @@ namespace L05DB2Final.ContinentsDataSetTableAdapters {
             this._commandCollection[3].CommandText = "SELECT        Код, CountryName, Capitol, Continent, Population\r\nFROM            C" +
                 "ountries\r\nWHERE        (CountryName LIKE \'К%\')";
             this._commandCollection[3].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[4] = new global::System.Data.OleDb.OleDbCommand();
+            this._commandCollection[4].Connection = this.Connection;
+            this._commandCollection[4].CommandText = "SELECT Код, CountryName, Capitol, Continent, Population \r\nFROM Countries\r\nWHERE  " +
+                "      (Capitol LIKE @string + \'%\')";
+            this._commandCollection[4].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[4].Parameters.Add(new global::System.Data.OleDb.OleDbParameter("@string", global::System.Data.OleDb.OleDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), null, global::System.Data.DataRowVersion.Current, false, null));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1031,6 +1037,25 @@ namespace L05DB2Final.ContinentsDataSetTableAdapters {
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, false)]
         public virtual int FillByStartsWithK(ContinentsDataSet.CountriesDataTable dataTable) {
             this.Adapter.SelectCommand = this.CommandCollection[3];
+            if ((this.ClearBeforeFill == true)) {
+                dataTable.Clear();
+            }
+            int returnValue = this.Adapter.Fill(dataTable);
+            return returnValue;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, false)]
+        public virtual int Find(ContinentsDataSet.CountriesDataTable dataTable, string @string) {
+            this.Adapter.SelectCommand = this.CommandCollection[4];
+            if ((@string == null)) {
+                throw new global::System.ArgumentNullException("@string");
+            }
+            else {
+                this.Adapter.SelectCommand.Parameters[0].Value = ((string)(@string));
+            }
             if ((this.ClearBeforeFill == true)) {
                 dataTable.Clear();
             }

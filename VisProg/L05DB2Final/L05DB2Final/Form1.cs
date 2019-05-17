@@ -56,5 +56,19 @@ namespace L05DB2Final
             else
                 dataGridView1.Sort(dataGridView1.Columns[4], ListSortDirection.Ascending);
         }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            {
+                try
+                {
+                    this.countriesTableAdapter.Find(this.continentsDataSet.Countries, textBox1.Text);
+                }
+                catch (System.Exception ex)
+                {
+                    System.Windows.Forms.MessageBox.Show(ex.Message);
+                }
+            }
+        }
     }
 }

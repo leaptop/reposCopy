@@ -73,7 +73,7 @@
               <Mapping SourceColumn="Population" DataSetColumn="Population" />
             </Mappings>
             <Sources>
-              <DbSource ConnectionRef="ContinentsConnectionString (Settings)" DbObjectName="Countries" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="FillByContainsK" GenerateMethods="Fill" GenerateShortCommands="true" GeneratorSourceName="FillByContainsK" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy1" UserSourceName="FillByContainsK">
+              <DbSource ConnectionRef="ContinentsConnectionString (Settings)" DbObjectName="Countries" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="FillByContainsK" GenerateMethods="Fill" GenerateShortCommands="true" GeneratorSourceName="FillByContainsK" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy" UserSourceName="FillByContainsK">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>SELECT        Код, CountryName, Capitol, Continent, Population
@@ -83,7 +83,7 @@ WHERE        (CountryName LIKE '%к%')</CommandText>
                   </DbCommand>
                 </SelectCommand>
               </DbSource>
-              <DbSource ConnectionRef="ContinentsConnectionString (Settings)" DbObjectName="" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="FillByContinentEqualsSmth" GenerateMethods="Fill" GenerateShortCommands="true" GeneratorSourceName="FillByContinentEqualsSmth" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy2" UserSourceName="FillByContinentEqualsSmth">
+              <DbSource ConnectionRef="ContinentsConnectionString (Settings)" DbObjectName="" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="FillByContinentEqualsSmth" GenerateMethods="Fill" GenerateShortCommands="true" GeneratorSourceName="FillByContinentEqualsSmth" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy1" UserSourceName="FillByContinentEqualsSmth">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>SELECT        Код, CountryName, Capitol, Continent, Population
@@ -95,13 +95,25 @@ WHERE        Continent = @cap</CommandText>
                   </DbCommand>
                 </SelectCommand>
               </DbSource>
-              <DbSource ConnectionRef="ContinentsConnectionString (Settings)" DbObjectName="Countries" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="FillByStartsWithK" GenerateMethods="Fill" GenerateShortCommands="true" GeneratorSourceName="FillByStartsWithK" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy" UserSourceName="FillByStartsWithK">
+              <DbSource ConnectionRef="ContinentsConnectionString (Settings)" DbObjectName="Countries" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="FillByStartsWithK" GenerateMethods="Fill" GenerateShortCommands="true" GeneratorSourceName="FillByStartsWithK" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy2" UserSourceName="FillByStartsWithK">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>SELECT        Код, CountryName, Capitol, Continent, Population
 FROM            Countries
 WHERE        (CountryName LIKE 'К%')</CommandText>
                     <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+              <DbSource ConnectionRef="ContinentsConnectionString (Settings)" DbObjectName="" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="Find" GenerateMethods="Fill" GenerateShortCommands="true" GeneratorSourceName="Find" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy3" UserSourceName="Find">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT Код, CountryName, Capitol, Continent, Population 
+FROM Countries
+WHERE        (Capitol LIKE @string + '%')</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="AnsiString" Direction="Input" ParameterName="@string" Precision="0" Scale="0" Size="0" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
                   </DbCommand>
                 </SelectCommand>
               </DbSource>
@@ -115,7 +127,7 @@ WHERE        (CountryName LIKE 'К%')</CommandText>
   <xs:element name="ContinentsDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="True" msprop:Generator_DataSetName="ContinentsDataSet" msprop:Generator_UserDSName="ContinentsDataSet">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="Countries" msprop:Generator_TableClassName="CountriesDataTable" msprop:Generator_TableVarName="tableCountries" msprop:Generator_RowChangedName="CountriesRowChanged" msprop:Generator_TablePropName="Countries" msprop:Generator_RowDeletingName="CountriesRowDeleting" msprop:Generator_RowChangingName="CountriesRowChanging" msprop:Generator_RowEvHandlerName="CountriesRowChangeEventHandler" msprop:Generator_RowDeletedName="CountriesRowDeleted" msprop:Generator_RowClassName="CountriesRow" msprop:Generator_UserTableName="Countries" msprop:Generator_RowEvArgName="CountriesRowChangeEvent">
+        <xs:element name="Countries" msprop:Generator_TableClassName="CountriesDataTable" msprop:Generator_TableVarName="tableCountries" msprop:Generator_TablePropName="Countries" msprop:Generator_RowDeletingName="CountriesRowDeleting" msprop:Generator_RowChangingName="CountriesRowChanging" msprop:Generator_RowEvHandlerName="CountriesRowChangeEventHandler" msprop:Generator_RowDeletedName="CountriesRowDeleted" msprop:Generator_UserTableName="Countries" msprop:Generator_RowChangedName="CountriesRowChanged" msprop:Generator_RowEvArgName="CountriesRowChangeEvent" msprop:Generator_RowClassName="CountriesRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="Код" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnКод" msprop:Generator_ColumnPropNameInRow="Код" msprop:Generator_ColumnPropNameInTable="КодColumn" msprop:Generator_UserColumnName="Код" type="xs:int" />

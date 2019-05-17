@@ -39,18 +39,18 @@
             this.button5 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.continentsDataSet = new L05DB2Final.ContinentsDataSet();
-            this.countriesBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.countriesTableAdapter = new L05DB2Final.ContinentsDataSetTableAdapters.CountriesTableAdapter();
             this.кодDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.countryNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.capitolDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.continentDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.populationDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.countriesBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.continentsDataSet = new L05DB2Final.ContinentsDataSet();
+            this.countriesTableAdapter = new L05DB2Final.ContinentsDataSetTableAdapters.CountriesTableAdapter();
             this.textBox1 = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.continentsDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.countriesBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.continentsDataSet)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -156,20 +156,6 @@
             this.dataGridView1.Size = new System.Drawing.Size(567, 291);
             this.dataGridView1.TabIndex = 9;
             // 
-            // continentsDataSet
-            // 
-            this.continentsDataSet.DataSetName = "ContinentsDataSet";
-            this.continentsDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // countriesBindingSource
-            // 
-            this.countriesBindingSource.DataMember = "Countries";
-            this.countriesBindingSource.DataSource = this.continentsDataSet;
-            // 
-            // countriesTableAdapter
-            // 
-            this.countriesTableAdapter.ClearBeforeFill = true;
-            // 
             // кодDataGridViewTextBoxColumn
             // 
             this.кодDataGridViewTextBoxColumn.DataPropertyName = "Код";
@@ -200,12 +186,27 @@
             this.populationDataGridViewTextBoxColumn.HeaderText = "Population";
             this.populationDataGridViewTextBoxColumn.Name = "populationDataGridViewTextBoxColumn";
             // 
+            // countriesBindingSource
+            // 
+            this.countriesBindingSource.DataMember = "Countries";
+            this.countriesBindingSource.DataSource = this.continentsDataSet;
+            // 
+            // continentsDataSet
+            // 
+            this.continentsDataSet.DataSetName = "ContinentsDataSet";
+            this.continentsDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // countriesTableAdapter
+            // 
+            this.countriesTableAdapter.ClearBeforeFill = true;
+            // 
             // textBox1
             // 
             this.textBox1.Location = new System.Drawing.Point(12, 418);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(100, 20);
             this.textBox1.TabIndex = 10;
+            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // Form1
             // 
@@ -227,8 +228,8 @@
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.continentsDataSet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.countriesBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.continentsDataSet)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
