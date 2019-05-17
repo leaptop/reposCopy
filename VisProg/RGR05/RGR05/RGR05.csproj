@@ -49,7 +49,6 @@
   <ItemGroup>
     <Compile Include="Base1DataSet.cs">
       <DependentUpon>Base1DataSet.xsd</DependentUpon>
-      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Base1DataSet.Designer.cs">
       <AutoGen>True</AutoGen>
