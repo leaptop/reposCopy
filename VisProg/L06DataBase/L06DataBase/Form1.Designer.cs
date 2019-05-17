@@ -30,6 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.countriesBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
@@ -40,34 +41,23 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.кодDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.countryNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.capitolDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.continentDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.populationDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.countriesBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.continentsDataSet = new L06DataBase.ContinentsDataSet();
-            this.countriesTableAdapter = new L06DataBase.ContinentsDataSetTableAdapters.CountriesTableAdapter();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.countriesBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.continentsDataSet)).BeginInit();
             this.SuspendLayout();
             // 
             // dataGridView1
             // 
             this.dataGridView1.AutoGenerateColumns = false;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.кодDataGridViewTextBoxColumn,
-            this.countryNameDataGridViewTextBoxColumn,
-            this.capitolDataGridViewTextBoxColumn,
-            this.continentDataGridViewTextBoxColumn,
-            this.populationDataGridViewTextBoxColumn});
             this.dataGridView1.DataSource = this.countriesBindingSource;
             this.dataGridView1.Location = new System.Drawing.Point(21, 156);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.Size = new System.Drawing.Size(646, 284);
             this.dataGridView1.TabIndex = 0;
+            // 
+            // countriesBindingSource
+            // 
+            this.countriesBindingSource.DataMember = "Countries";
             // 
             // textBox1
             // 
@@ -121,6 +111,7 @@
             this.button5.TabIndex = 6;
             this.button5.Text = "Южная Америка";
             this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
             // button6
             // 
@@ -158,50 +149,6 @@
             this.label3.TabIndex = 10;
             this.label3.Text = "Население";
             // 
-            // кодDataGridViewTextBoxColumn
-            // 
-            this.кодDataGridViewTextBoxColumn.DataPropertyName = "Код";
-            this.кодDataGridViewTextBoxColumn.HeaderText = "Код";
-            this.кодDataGridViewTextBoxColumn.Name = "кодDataGridViewTextBoxColumn";
-            // 
-            // countryNameDataGridViewTextBoxColumn
-            // 
-            this.countryNameDataGridViewTextBoxColumn.DataPropertyName = "CountryName";
-            this.countryNameDataGridViewTextBoxColumn.HeaderText = "CountryName";
-            this.countryNameDataGridViewTextBoxColumn.Name = "countryNameDataGridViewTextBoxColumn";
-            // 
-            // capitolDataGridViewTextBoxColumn
-            // 
-            this.capitolDataGridViewTextBoxColumn.DataPropertyName = "Capitol";
-            this.capitolDataGridViewTextBoxColumn.HeaderText = "Capitol";
-            this.capitolDataGridViewTextBoxColumn.Name = "capitolDataGridViewTextBoxColumn";
-            // 
-            // continentDataGridViewTextBoxColumn
-            // 
-            this.continentDataGridViewTextBoxColumn.DataPropertyName = "Continent";
-            this.continentDataGridViewTextBoxColumn.HeaderText = "Continent";
-            this.continentDataGridViewTextBoxColumn.Name = "continentDataGridViewTextBoxColumn";
-            // 
-            // populationDataGridViewTextBoxColumn
-            // 
-            this.populationDataGridViewTextBoxColumn.DataPropertyName = "Population";
-            this.populationDataGridViewTextBoxColumn.HeaderText = "Population";
-            this.populationDataGridViewTextBoxColumn.Name = "populationDataGridViewTextBoxColumn";
-            // 
-            // countriesBindingSource
-            // 
-            this.countriesBindingSource.DataMember = "Countries";
-            this.countriesBindingSource.DataSource = this.continentsDataSet;
-            // 
-            // continentsDataSet
-            // 
-            this.continentsDataSet.DataSetName = "ContinentsDataSet";
-            this.continentsDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // countriesTableAdapter
-            // 
-            this.countriesTableAdapter.ClearBeforeFill = true;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -223,7 +170,6 @@
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.countriesBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.continentsDataSet)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

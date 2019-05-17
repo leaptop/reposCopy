@@ -439,3 +439,9 @@ Report in c# - создаётся сначала форма, потом подг
 https://www.youtube.com/watch?v=0nDldY61whQ
 
 Похоже Access 2016 DB & Visual Studio 2013, 2017 не обеспечивают работоспособность параметризированных sql запросов. Выдаётся ошибка: No Overload For Method 'Z2' takes 2 arguments
+Нет. Всё работает. Просто интерфейс создания запроса интуитивно не определяется. Чтобы сделать выборку нужно ставить галочку Fill a DataTable, а не Return a DataTable.
+
+При создании ДБ внутри вижуалки для коммита данных в ячейку нужно просто нажать enter.
+https://docs.microsoft.com/ru-ru/visualstudio/data-tools/create-a-sql-database-by-using-a-designer?view=vs-2019
+
+Если в таблице значения Continent типа ntext, то их можно кастануть в запросе sql (CAST(Continent AS NVARCHAR(MAX)) = @cap) для сравнения с другой строкой

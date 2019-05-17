@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace L05
+namespace SampleDatabaseWalkthrough
 {
     public partial class Form1 : Form
     {

@@ -10,7 +10,7 @@
 
 #pragma warning disable 1591
 
-namespace L06DataBase {
+namespace L05DB2Final {
     
     
     /// <summary>
@@ -765,7 +765,7 @@ namespace L06DataBase {
         }
     }
 }
-namespace L06DataBase.ContinentsDataSetTableAdapters {
+namespace L05DB2Final.ContinentsDataSetTableAdapters {
     
     
     /// <summary>
@@ -940,7 +940,7 @@ namespace L06DataBase.ContinentsDataSetTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         private void InitConnection() {
             this._connection = new global::System.Data.OleDb.OleDbConnection();
-            this._connection.ConnectionString = global::L06DataBase.Properties.Settings.Default.ContinentsConnectionString;
+            this._connection.ConnectionString = global::L05DB2Final.Properties.Settings.Default.ContinentsConnectionString;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -953,20 +953,20 @@ namespace L06DataBase.ContinentsDataSetTableAdapters {
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[1] = new global::System.Data.OleDb.OleDbCommand();
             this._commandCollection[1].Connection = this.Connection;
-            this._commandCollection[1].CommandText = "SELECT Код, CountryName, Capitol, Continent, Population FROM Countries";
+            this._commandCollection[1].CommandText = "SELECT        Код, CountryName, Capitol, Continent, Population\r\nFROM            C" +
+                "ountries\r\nWHERE        (CountryName LIKE \'%к%\')";
             this._commandCollection[1].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[2] = new global::System.Data.OleDb.OleDbCommand();
             this._commandCollection[2].Connection = this.Connection;
-            this._commandCollection[2].CommandText = "SELECT Код, CountryName, Capitol, Continent, Population FROM Countries\r\nWHERE Con" +
-                "tinent=@cap";
+            this._commandCollection[2].CommandText = "SELECT        Код, CountryName, Capitol, Continent, Population\r\nFROM            C" +
+                "ountries\r\nWHERE        Continent = @cap";
             this._commandCollection[2].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[2].Parameters.Add(new global::System.Data.OleDb.OleDbParameter("@cap", global::System.Data.OleDb.OleDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), null, global::System.Data.DataRowVersion.Current, false, null));
             this._commandCollection[3] = new global::System.Data.OleDb.OleDbCommand();
             this._commandCollection[3].Connection = this.Connection;
-            this._commandCollection[3].CommandText = "SELECT        CountryName, Capitol, Continent, Population\r\nFROM            Countr" +
-                "ies\r\nWHERE        Continent=@cap";
+            this._commandCollection[3].CommandText = "SELECT        Код, CountryName, Capitol, Continent, Population\r\nFROM            C" +
+                "ountries\r\nWHERE        (CountryName LIKE \'К%\')";
             this._commandCollection[3].CommandType = global::System.Data.CommandType.Text;
-            this._commandCollection[3].Parameters.Add(new global::System.Data.OleDb.OleDbParameter("@cap", global::System.Data.OleDb.OleDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), null, global::System.Data.DataRowVersion.Current, false, null));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -997,7 +997,7 @@ namespace L06DataBase.ContinentsDataSetTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, false)]
-        public virtual int F(ContinentsDataSet.CountriesDataTable dataTable) {
+        public virtual int FillByContainsK(ContinentsDataSet.CountriesDataTable dataTable) {
             this.Adapter.SelectCommand = this.CommandCollection[1];
             if ((this.ClearBeforeFill == true)) {
                 dataTable.Clear();
@@ -1009,19 +1009,8 @@ namespace L06DataBase.ContinentsDataSetTableAdapters {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, false)]
-        public virtual ContinentsDataSet.CountriesDataTable GetEverything() {
-            this.Adapter.SelectCommand = this.CommandCollection[1];
-            ContinentsDataSet.CountriesDataTable dataTable = new ContinentsDataSet.CountriesDataTable();
-            this.Adapter.Fill(dataTable);
-            return dataTable;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, false)]
-        public virtual int FillBySouthAm(ContinentsDataSet.CountriesDataTable dataTable, string @cap) {
+        public virtual int FillByContinentEqualsSmth(ContinentsDataSet.CountriesDataTable dataTable, string @cap) {
             this.Adapter.SelectCommand = this.CommandCollection[2];
             if ((@cap == null)) {
                 throw new global::System.ArgumentNullException("@cap");
@@ -1040,14 +1029,8 @@ namespace L06DataBase.ContinentsDataSetTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, false)]
-        public virtual int Z22(ContinentsDataSet.CountriesDataTable dataTable, string @cap) {
+        public virtual int FillByStartsWithK(ContinentsDataSet.CountriesDataTable dataTable) {
             this.Adapter.SelectCommand = this.CommandCollection[3];
-            if ((@cap == null)) {
-                throw new global::System.ArgumentNullException("@cap");
-            }
-            else {
-                this.Adapter.SelectCommand.Parameters[0].Value = ((string)(@cap));
-            }
             if ((this.ClearBeforeFill == true)) {
                 dataTable.Clear();
             }

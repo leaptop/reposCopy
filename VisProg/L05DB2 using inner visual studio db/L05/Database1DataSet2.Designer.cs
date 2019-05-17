@@ -10,7 +10,7 @@
 
 #pragma warning disable 1591
 
-namespace L06DataBase {
+namespace L05 {
     
     
     /// <summary>
@@ -20,17 +20,17 @@ namespace L06DataBase {
     [global::System.ComponentModel.DesignerCategoryAttribute("code")]
     [global::System.ComponentModel.ToolboxItem(true)]
     [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedDataSetSchema")]
-    [global::System.Xml.Serialization.XmlRootAttribute("ContinentsDataSet")]
+    [global::System.Xml.Serialization.XmlRootAttribute("Database1DataSet2")]
     [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.DataSet")]
-    public partial class ContinentsDataSet : global::System.Data.DataSet {
+    public partial class Database1DataSet2 : global::System.Data.DataSet {
         
-        private CountriesDataTable tableCountries;
+        private TableDataTable tableTable;
         
         private global::System.Data.SchemaSerializationMode _schemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-        public ContinentsDataSet() {
+        public Database1DataSet2() {
             this.BeginInit();
             this.InitClass();
             global::System.ComponentModel.CollectionChangeEventHandler schemaChangedHandler = new global::System.ComponentModel.CollectionChangeEventHandler(this.SchemaChanged);
@@ -41,7 +41,7 @@ namespace L06DataBase {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-        protected ContinentsDataSet(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+        protected Database1DataSet2(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
                 base(info, context, false) {
             if ((this.IsBinarySerialized(info, context) == true)) {
                 this.InitVars(false);
@@ -54,8 +54,8 @@ namespace L06DataBase {
             if ((this.DetermineSchemaSerializationMode(info, context) == global::System.Data.SchemaSerializationMode.IncludeSchema)) {
                 global::System.Data.DataSet ds = new global::System.Data.DataSet();
                 ds.ReadXmlSchema(new global::System.Xml.XmlTextReader(new global::System.IO.StringReader(strSchema)));
-                if ((ds.Tables["Countries"] != null)) {
-                    base.Tables.Add(new CountriesDataTable(ds.Tables["Countries"]));
+                if ((ds.Tables["Table"] != null)) {
+                    base.Tables.Add(new TableDataTable(ds.Tables["Table"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -79,9 +79,9 @@ namespace L06DataBase {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.Browsable(false)]
         [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
-        public CountriesDataTable Countries {
+        public TableDataTable Table {
             get {
-                return this.tableCountries;
+                return this.tableTable;
             }
         }
         
@@ -127,7 +127,7 @@ namespace L06DataBase {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         public override global::System.Data.DataSet Clone() {
-            ContinentsDataSet cln = ((ContinentsDataSet)(base.Clone()));
+            Database1DataSet2 cln = ((Database1DataSet2)(base.Clone()));
             cln.InitVars();
             cln.SchemaSerializationMode = this.SchemaSerializationMode;
             return cln;
@@ -152,8 +152,8 @@ namespace L06DataBase {
                 this.Reset();
                 global::System.Data.DataSet ds = new global::System.Data.DataSet();
                 ds.ReadXml(reader);
-                if ((ds.Tables["Countries"] != null)) {
-                    base.Tables.Add(new CountriesDataTable(ds.Tables["Countries"]));
+                if ((ds.Tables["Table"] != null)) {
+                    base.Tables.Add(new TableDataTable(ds.Tables["Table"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -188,10 +188,10 @@ namespace L06DataBase {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         internal void InitVars(bool initTable) {
-            this.tableCountries = ((CountriesDataTable)(base.Tables["Countries"]));
+            this.tableTable = ((TableDataTable)(base.Tables["Table"]));
             if ((initTable == true)) {
-                if ((this.tableCountries != null)) {
-                    this.tableCountries.InitVars();
+                if ((this.tableTable != null)) {
+                    this.tableTable.InitVars();
                 }
             }
         }
@@ -199,18 +199,18 @@ namespace L06DataBase {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         private void InitClass() {
-            this.DataSetName = "ContinentsDataSet";
+            this.DataSetName = "Database1DataSet2";
             this.Prefix = "";
-            this.Namespace = "http://tempuri.org/ContinentsDataSet.xsd";
+            this.Namespace = "http://tempuri.org/Database1DataSet2.xsd";
             this.EnforceConstraints = true;
             this.SchemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
-            this.tableCountries = new CountriesDataTable();
-            base.Tables.Add(this.tableCountries);
+            this.tableTable = new TableDataTable();
+            base.Tables.Add(this.tableTable);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-        private bool ShouldSerializeCountries() {
+        private bool ShouldSerializeTable() {
             return false;
         }
         
@@ -225,7 +225,7 @@ namespace L06DataBase {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedDataSetSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
-            ContinentsDataSet ds = new ContinentsDataSet();
+            Database1DataSet2 ds = new Database1DataSet2();
             global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
             global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
             global::System.Xml.Schema.XmlSchemaAny any = new global::System.Xml.Schema.XmlSchemaAny();
@@ -270,16 +270,16 @@ namespace L06DataBase {
         }
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-        public delegate void CountriesRowChangeEventHandler(object sender, CountriesRowChangeEvent e);
+        public delegate void TableRowChangeEventHandler(object sender, TableRowChangeEvent e);
         
         /// <summary>
         ///Represents the strongly named DataTable class.
         ///</summary>
         [global::System.Serializable()]
         [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
-        public partial class CountriesDataTable : global::System.Data.TypedTableBase<CountriesRow> {
+        public partial class TableDataTable : global::System.Data.TypedTableBase<TableRow> {
             
-            private global::System.Data.DataColumn columnКод;
+            private global::System.Data.DataColumn columnId;
             
             private global::System.Data.DataColumn columnCountryName;
             
@@ -291,8 +291,8 @@ namespace L06DataBase {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public CountriesDataTable() {
-                this.TableName = "Countries";
+            public TableDataTable() {
+                this.TableName = "Table";
                 this.BeginInit();
                 this.InitClass();
                 this.EndInit();
@@ -300,7 +300,7 @@ namespace L06DataBase {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            internal CountriesDataTable(global::System.Data.DataTable table) {
+            internal TableDataTable(global::System.Data.DataTable table) {
                 this.TableName = table.TableName;
                 if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
                     this.CaseSensitive = table.CaseSensitive;
@@ -317,16 +317,16 @@ namespace L06DataBase {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            protected CountriesDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+            protected TableDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
                     base(info, context) {
                 this.InitVars();
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public global::System.Data.DataColumn КодColumn {
+            public global::System.Data.DataColumn IdColumn {
                 get {
-                    return this.columnКод;
+                    return this.columnId;
                 }
             }
             
@@ -373,56 +373,56 @@ namespace L06DataBase {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public CountriesRow this[int index] {
+            public TableRow this[int index] {
                 get {
-                    return ((CountriesRow)(this.Rows[index]));
+                    return ((TableRow)(this.Rows[index]));
                 }
             }
             
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public event CountriesRowChangeEventHandler CountriesRowChanging;
+            public event TableRowChangeEventHandler TableRowChanging;
             
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public event CountriesRowChangeEventHandler CountriesRowChanged;
+            public event TableRowChangeEventHandler TableRowChanged;
             
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public event CountriesRowChangeEventHandler CountriesRowDeleting;
+            public event TableRowChangeEventHandler TableRowDeleting;
             
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public event CountriesRowChangeEventHandler CountriesRowDeleted;
+            public event TableRowChangeEventHandler TableRowDeleted;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public void AddCountriesRow(CountriesRow row) {
+            public void AddTableRow(TableRow row) {
                 this.Rows.Add(row);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public CountriesRow AddCountriesRow(string CountryName, string Capitol, string Continent, int Population) {
-                CountriesRow rowCountriesRow = ((CountriesRow)(this.NewRow()));
+            public TableRow AddTableRow(int Id, string CountryName, string Capitol, string Continent, long Population) {
+                TableRow rowTableRow = ((TableRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
-                        null,
+                        Id,
                         CountryName,
                         Capitol,
                         Continent,
                         Population};
-                rowCountriesRow.ItemArray = columnValuesArray;
-                this.Rows.Add(rowCountriesRow);
-                return rowCountriesRow;
+                rowTableRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowTableRow);
+                return rowTableRow;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public CountriesRow FindByКод(int Код) {
-                return ((CountriesRow)(this.Rows.Find(new object[] {
-                            Код})));
+            public TableRow FindById(int Id) {
+                return ((TableRow)(this.Rows.Find(new object[] {
+                            Id})));
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public override global::System.Data.DataTable Clone() {
-                CountriesDataTable cln = ((CountriesDataTable)(base.Clone()));
+                TableDataTable cln = ((TableDataTable)(base.Clone()));
                 cln.InitVars();
                 return cln;
             }
@@ -430,13 +430,13 @@ namespace L06DataBase {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             protected override global::System.Data.DataTable CreateInstance() {
-                return new CountriesDataTable();
+                return new TableDataTable();
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             internal void InitVars() {
-                this.columnКод = base.Columns["Код"];
+                this.columnId = base.Columns["Id"];
                 this.columnCountryName = base.Columns["CountryName"];
                 this.columnCapitol = base.Columns["Capitol"];
                 this.columnContinent = base.Columns["Continent"];
@@ -446,52 +446,56 @@ namespace L06DataBase {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             private void InitClass() {
-                this.columnКод = new global::System.Data.DataColumn("Код", typeof(int), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnКод);
+                this.columnId = new global::System.Data.DataColumn("Id", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnId);
                 this.columnCountryName = new global::System.Data.DataColumn("CountryName", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnCountryName);
                 this.columnCapitol = new global::System.Data.DataColumn("Capitol", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnCapitol);
                 this.columnContinent = new global::System.Data.DataColumn("Continent", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnContinent);
-                this.columnPopulation = new global::System.Data.DataColumn("Population", typeof(int), null, global::System.Data.MappingType.Element);
+                this.columnPopulation = new global::System.Data.DataColumn("Population", typeof(long), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnPopulation);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
-                                this.columnКод}, true));
-                this.columnКод.AutoIncrement = true;
-                this.columnКод.AutoIncrementSeed = -1;
-                this.columnКод.AutoIncrementStep = -1;
-                this.columnКод.AllowDBNull = false;
-                this.columnКод.Unique = true;
-                this.columnCountryName.MaxLength = 255;
-                this.columnCapitol.MaxLength = 255;
-                this.columnContinent.MaxLength = 255;
+                                this.columnId}, true));
+                this.columnId.AllowDBNull = false;
+                this.columnId.Unique = true;
+                this.columnCountryName.MaxLength = 1073741823;
+                this.columnCapitol.MaxLength = 1073741823;
+                this.columnContinent.MaxLength = 1073741823;
+                this.ExtendedProperties.Add("Generator_RowClassName", "TableRow");
+                this.ExtendedProperties.Add("Generator_RowEvArgName", "TableRowChangeEvent");
+                this.ExtendedProperties.Add("Generator_RowEvHandlerName", "TableRowChangeEventHandler");
+                this.ExtendedProperties.Add("Generator_TableClassName", "TableDataTable");
+                this.ExtendedProperties.Add("Generator_TablePropName", "Table");
+                this.ExtendedProperties.Add("Generator_TableVarName", "tableTable");
+                this.ExtendedProperties.Add("Generator_UserTableName", "Table");
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public CountriesRow NewCountriesRow() {
-                return ((CountriesRow)(this.NewRow()));
+            public TableRow NewTableRow() {
+                return ((TableRow)(this.NewRow()));
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
-                return new CountriesRow(builder);
+                return new TableRow(builder);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             protected override global::System.Type GetRowType() {
-                return typeof(CountriesRow);
+                return typeof(TableRow);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowChanged(e);
-                if ((this.CountriesRowChanged != null)) {
-                    this.CountriesRowChanged(this, new CountriesRowChangeEvent(((CountriesRow)(e.Row)), e.Action));
+                if ((this.TableRowChanged != null)) {
+                    this.TableRowChanged(this, new TableRowChangeEvent(((TableRow)(e.Row)), e.Action));
                 }
             }
             
@@ -499,8 +503,8 @@ namespace L06DataBase {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowChanging(e);
-                if ((this.CountriesRowChanging != null)) {
-                    this.CountriesRowChanging(this, new CountriesRowChangeEvent(((CountriesRow)(e.Row)), e.Action));
+                if ((this.TableRowChanging != null)) {
+                    this.TableRowChanging(this, new TableRowChangeEvent(((TableRow)(e.Row)), e.Action));
                 }
             }
             
@@ -508,8 +512,8 @@ namespace L06DataBase {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowDeleted(e);
-                if ((this.CountriesRowDeleted != null)) {
-                    this.CountriesRowDeleted(this, new CountriesRowChangeEvent(((CountriesRow)(e.Row)), e.Action));
+                if ((this.TableRowDeleted != null)) {
+                    this.TableRowDeleted(this, new TableRowChangeEvent(((TableRow)(e.Row)), e.Action));
                 }
             }
             
@@ -517,14 +521,14 @@ namespace L06DataBase {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowDeleting(e);
-                if ((this.CountriesRowDeleting != null)) {
-                    this.CountriesRowDeleting(this, new CountriesRowChangeEvent(((CountriesRow)(e.Row)), e.Action));
+                if ((this.TableRowDeleting != null)) {
+                    this.TableRowDeleting(this, new TableRowChangeEvent(((TableRow)(e.Row)), e.Action));
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public void RemoveCountriesRow(CountriesRow row) {
+            public void RemoveTableRow(TableRow row) {
                 this.Rows.Remove(row);
             }
             
@@ -533,7 +537,7 @@ namespace L06DataBase {
             public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
                 global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
                 global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
-                ContinentsDataSet ds = new ContinentsDataSet();
+                Database1DataSet2 ds = new Database1DataSet2();
                 global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
                 any1.Namespace = "http://www.w3.org/2001/XMLSchema";
                 any1.MinOccurs = new decimal(0);
@@ -551,7 +555,7 @@ namespace L06DataBase {
                 type.Attributes.Add(attribute1);
                 global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
                 attribute2.Name = "tableTypeName";
-                attribute2.FixedValue = "CountriesDataTable";
+                attribute2.FixedValue = "TableDataTable";
                 type.Attributes.Add(attribute2);
                 type.Particle = sequence;
                 global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
@@ -595,25 +599,25 @@ namespace L06DataBase {
         /// <summary>
         ///Represents strongly named DataRow class.
         ///</summary>
-        public partial class CountriesRow : global::System.Data.DataRow {
+        public partial class TableRow : global::System.Data.DataRow {
             
-            private CountriesDataTable tableCountries;
+            private TableDataTable tableTable;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            internal CountriesRow(global::System.Data.DataRowBuilder rb) : 
+            internal TableRow(global::System.Data.DataRowBuilder rb) : 
                     base(rb) {
-                this.tableCountries = ((CountriesDataTable)(this.Table));
+                this.tableTable = ((TableDataTable)(this.Table));
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public int Код {
+            public int Id {
                 get {
-                    return ((int)(this[this.tableCountries.КодColumn]));
+                    return ((int)(this[this.tableTable.IdColumn]));
                 }
                 set {
-                    this[this.tableCountries.КодColumn] = value;
+                    this[this.tableTable.IdColumn] = value;
                 }
             }
             
@@ -622,14 +626,14 @@ namespace L06DataBase {
             public string CountryName {
                 get {
                     try {
-                        return ((string)(this[this.tableCountries.CountryNameColumn]));
+                        return ((string)(this[this.tableTable.CountryNameColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'CountryName\' in table \'Countries\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'CountryName\' in table \'Table\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableCountries.CountryNameColumn] = value;
+                    this[this.tableTable.CountryNameColumn] = value;
                 }
             }
             
@@ -638,14 +642,14 @@ namespace L06DataBase {
             public string Capitol {
                 get {
                     try {
-                        return ((string)(this[this.tableCountries.CapitolColumn]));
+                        return ((string)(this[this.tableTable.CapitolColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'Capitol\' in table \'Countries\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'Capitol\' in table \'Table\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableCountries.CapitolColumn] = value;
+                    this[this.tableTable.CapitolColumn] = value;
                 }
             }
             
@@ -654,79 +658,79 @@ namespace L06DataBase {
             public string Continent {
                 get {
                     try {
-                        return ((string)(this[this.tableCountries.ContinentColumn]));
+                        return ((string)(this[this.tableTable.ContinentColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'Continent\' in table \'Countries\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'Continent\' in table \'Table\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableCountries.ContinentColumn] = value;
+                    this[this.tableTable.ContinentColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public int Population {
+            public long Population {
                 get {
                     try {
-                        return ((int)(this[this.tableCountries.PopulationColumn]));
+                        return ((long)(this[this.tableTable.PopulationColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'Population\' in table \'Countries\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'Population\' in table \'Table\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableCountries.PopulationColumn] = value;
+                    this[this.tableTable.PopulationColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public bool IsCountryNameNull() {
-                return this.IsNull(this.tableCountries.CountryNameColumn);
+                return this.IsNull(this.tableTable.CountryNameColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public void SetCountryNameNull() {
-                this[this.tableCountries.CountryNameColumn] = global::System.Convert.DBNull;
+                this[this.tableTable.CountryNameColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public bool IsCapitolNull() {
-                return this.IsNull(this.tableCountries.CapitolColumn);
+                return this.IsNull(this.tableTable.CapitolColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public void SetCapitolNull() {
-                this[this.tableCountries.CapitolColumn] = global::System.Convert.DBNull;
+                this[this.tableTable.CapitolColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public bool IsContinentNull() {
-                return this.IsNull(this.tableCountries.ContinentColumn);
+                return this.IsNull(this.tableTable.ContinentColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public void SetContinentNull() {
-                this[this.tableCountries.ContinentColumn] = global::System.Convert.DBNull;
+                this[this.tableTable.ContinentColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public bool IsPopulationNull() {
-                return this.IsNull(this.tableCountries.PopulationColumn);
+                return this.IsNull(this.tableTable.PopulationColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public void SetPopulationNull() {
-                this[this.tableCountries.PopulationColumn] = global::System.Convert.DBNull;
+                this[this.tableTable.PopulationColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -734,22 +738,22 @@ namespace L06DataBase {
         ///Row event argument class
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-        public class CountriesRowChangeEvent : global::System.EventArgs {
+        public class TableRowChangeEvent : global::System.EventArgs {
             
-            private CountriesRow eventRow;
+            private TableRow eventRow;
             
             private global::System.Data.DataRowAction eventAction;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public CountriesRowChangeEvent(CountriesRow row, global::System.Data.DataRowAction action) {
+            public TableRowChangeEvent(TableRow row, global::System.Data.DataRowAction action) {
                 this.eventRow = row;
                 this.eventAction = action;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public CountriesRow Row {
+            public TableRow Row {
                 get {
                     return this.eventRow;
                 }
@@ -765,7 +769,7 @@ namespace L06DataBase {
         }
     }
 }
-namespace L06DataBase.ContinentsDataSetTableAdapters {
+namespace L05.Database1DataSet2TableAdapters {
     
     
     /// <summary>
@@ -777,27 +781,27 @@ namespace L06DataBase.ContinentsDataSetTableAdapters {
     [global::System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner" +
         ", Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
     [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-    public partial class CountriesTableAdapter : global::System.ComponentModel.Component {
+    public partial class TableTableAdapter : global::System.ComponentModel.Component {
         
-        private global::System.Data.OleDb.OleDbDataAdapter _adapter;
+        private global::System.Data.SqlClient.SqlDataAdapter _adapter;
         
-        private global::System.Data.OleDb.OleDbConnection _connection;
+        private global::System.Data.SqlClient.SqlConnection _connection;
         
-        private global::System.Data.OleDb.OleDbTransaction _transaction;
+        private global::System.Data.SqlClient.SqlTransaction _transaction;
         
-        private global::System.Data.OleDb.OleDbCommand[] _commandCollection;
+        private global::System.Data.SqlClient.SqlCommand[] _commandCollection;
         
         private bool _clearBeforeFill;
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-        public CountriesTableAdapter() {
+        public TableTableAdapter() {
             this.ClearBeforeFill = true;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-        protected internal global::System.Data.OleDb.OleDbDataAdapter Adapter {
+        protected internal global::System.Data.SqlClient.SqlDataAdapter Adapter {
             get {
                 if ((this._adapter == null)) {
                     this.InitAdapter();
@@ -808,7 +812,7 @@ namespace L06DataBase.ContinentsDataSetTableAdapters {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-        internal global::System.Data.OleDb.OleDbConnection Connection {
+        internal global::System.Data.SqlClient.SqlConnection Connection {
             get {
                 if ((this._connection == null)) {
                     this.InitConnection();
@@ -828,7 +832,7 @@ namespace L06DataBase.ContinentsDataSetTableAdapters {
                 }
                 for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
                     if ((this.CommandCollection[i] != null)) {
-                        ((global::System.Data.OleDb.OleDbCommand)(this.CommandCollection[i])).Connection = value;
+                        ((global::System.Data.SqlClient.SqlCommand)(this.CommandCollection[i])).Connection = value;
                     }
                 }
             }
@@ -836,7 +840,7 @@ namespace L06DataBase.ContinentsDataSetTableAdapters {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-        internal global::System.Data.OleDb.OleDbTransaction Transaction {
+        internal global::System.Data.SqlClient.SqlTransaction Transaction {
             get {
                 return this._transaction;
             }
@@ -862,7 +866,7 @@ namespace L06DataBase.ContinentsDataSetTableAdapters {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-        protected global::System.Data.OleDb.OleDbCommand[] CommandCollection {
+        protected global::System.Data.SqlClient.SqlCommand[] CommandCollection {
             get {
                 if ((this._commandCollection == null)) {
                     this.InitCommandCollection();
@@ -885,95 +889,83 @@ namespace L06DataBase.ContinentsDataSetTableAdapters {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         private void InitAdapter() {
-            this._adapter = new global::System.Data.OleDb.OleDbDataAdapter();
+            this._adapter = new global::System.Data.SqlClient.SqlDataAdapter();
             global::System.Data.Common.DataTableMapping tableMapping = new global::System.Data.Common.DataTableMapping();
             tableMapping.SourceTable = "Table";
-            tableMapping.DataSetTable = "Countries";
-            tableMapping.ColumnMappings.Add("Код", "Код");
+            tableMapping.DataSetTable = "Table";
+            tableMapping.ColumnMappings.Add("Id", "Id");
             tableMapping.ColumnMappings.Add("CountryName", "CountryName");
             tableMapping.ColumnMappings.Add("Capitol", "Capitol");
             tableMapping.ColumnMappings.Add("Continent", "Continent");
             tableMapping.ColumnMappings.Add("Population", "Population");
             this._adapter.TableMappings.Add(tableMapping);
-            this._adapter.DeleteCommand = new global::System.Data.OleDb.OleDbCommand();
+            this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.DeleteCommand.Connection = this.Connection;
-            this._adapter.DeleteCommand.CommandText = @"DELETE FROM `Countries` WHERE ((`Код` = ?) AND ((? = 1 AND `CountryName` IS NULL) OR (`CountryName` = ?)) AND ((? = 1 AND `Capitol` IS NULL) OR (`Capitol` = ?)) AND ((? = 1 AND `Continent` IS NULL) OR (`Continent` = ?)) AND ((? = 1 AND `Population` IS NULL) OR (`Population` = ?)))";
+            this._adapter.DeleteCommand.CommandText = "DELETE FROM [dbo].[Table] WHERE (([Id] = @Original_Id) AND ((@IsNull_Population =" +
+                " 1 AND [Population] IS NULL) OR ([Population] = @Original_Population)))";
             this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_Код", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "Код", global::System.Data.DataRowVersion.Original, false, null));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_CountryName", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "CountryName", global::System.Data.DataRowVersion.Original, true, null));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_CountryName", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "CountryName", global::System.Data.DataRowVersion.Original, false, null));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_Capitol", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "Capitol", global::System.Data.DataRowVersion.Original, true, null));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_Capitol", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "Capitol", global::System.Data.DataRowVersion.Original, false, null));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_Continent", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "Continent", global::System.Data.DataRowVersion.Original, true, null));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_Continent", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "Continent", global::System.Data.DataRowVersion.Original, false, null));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_Population", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "Population", global::System.Data.DataRowVersion.Original, true, null));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_Population", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "Population", global::System.Data.DataRowVersion.Original, false, null));
-            this._adapter.InsertCommand = new global::System.Data.OleDb.OleDbCommand();
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_Population", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Population", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Population", global::System.Data.SqlDbType.BigInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Population", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = "INSERT INTO `Countries` (`CountryName`, `Capitol`, `Continent`, `Population`) VAL" +
-                "UES (?, ?, ?, ?)";
+            this._adapter.InsertCommand.CommandText = "INSERT INTO [dbo].[Table] ([Id], [CountryName], [Capitol], [Continent], [Populati" +
+                "on]) VALUES (@Id, @CountryName, @Capitol, @Continent, @Population);\r\nSELECT Id, " +
+                "CountryName, Capitol, Continent, Population FROM [Table] WHERE (Id = @Id)";
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("CountryName", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "CountryName", global::System.Data.DataRowVersion.Current, false, null));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Capitol", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "Capitol", global::System.Data.DataRowVersion.Current, false, null));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Continent", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "Continent", global::System.Data.DataRowVersion.Current, false, null));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Population", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "Population", global::System.Data.DataRowVersion.Current, false, null));
-            this._adapter.UpdateCommand = new global::System.Data.OleDb.OleDbCommand();
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CountryName", global::System.Data.SqlDbType.NText, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CountryName", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Capitol", global::System.Data.SqlDbType.NText, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Capitol", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Continent", global::System.Data.SqlDbType.NText, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Continent", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Population", global::System.Data.SqlDbType.BigInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Population", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = @"UPDATE `Countries` SET `CountryName` = ?, `Capitol` = ?, `Continent` = ?, `Population` = ? WHERE ((`Код` = ?) AND ((? = 1 AND `CountryName` IS NULL) OR (`CountryName` = ?)) AND ((? = 1 AND `Capitol` IS NULL) OR (`Capitol` = ?)) AND ((? = 1 AND `Continent` IS NULL) OR (`Continent` = ?)) AND ((? = 1 AND `Population` IS NULL) OR (`Population` = ?)))";
+            this._adapter.UpdateCommand.CommandText = @"UPDATE [dbo].[Table] SET [Id] = @Id, [CountryName] = @CountryName, [Capitol] = @Capitol, [Continent] = @Continent, [Population] = @Population WHERE (([Id] = @Original_Id) AND ((@IsNull_Population = 1 AND [Population] IS NULL) OR ([Population] = @Original_Population)));
+SELECT Id, CountryName, Capitol, Continent, Population FROM [Table] WHERE (Id = @Id)";
             this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("CountryName", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "CountryName", global::System.Data.DataRowVersion.Current, false, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Capitol", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "Capitol", global::System.Data.DataRowVersion.Current, false, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Continent", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "Continent", global::System.Data.DataRowVersion.Current, false, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Population", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "Population", global::System.Data.DataRowVersion.Current, false, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_Код", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "Код", global::System.Data.DataRowVersion.Original, false, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_CountryName", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "CountryName", global::System.Data.DataRowVersion.Original, true, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_CountryName", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "CountryName", global::System.Data.DataRowVersion.Original, false, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_Capitol", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "Capitol", global::System.Data.DataRowVersion.Original, true, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_Capitol", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "Capitol", global::System.Data.DataRowVersion.Original, false, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_Continent", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "Continent", global::System.Data.DataRowVersion.Original, true, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_Continent", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "Continent", global::System.Data.DataRowVersion.Original, false, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_Population", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "Population", global::System.Data.DataRowVersion.Original, true, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_Population", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "Population", global::System.Data.DataRowVersion.Original, false, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CountryName", global::System.Data.SqlDbType.NText, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CountryName", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Capitol", global::System.Data.SqlDbType.NText, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Capitol", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Continent", global::System.Data.SqlDbType.NText, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Continent", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Population", global::System.Data.SqlDbType.BigInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Population", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_Population", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Population", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Population", global::System.Data.SqlDbType.BigInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Population", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         private void InitConnection() {
-            this._connection = new global::System.Data.OleDb.OleDbConnection();
-            this._connection.ConnectionString = global::L06DataBase.Properties.Settings.Default.ContinentsConnectionString;
+            this._connection = new global::System.Data.SqlClient.SqlConnection();
+            this._connection.ConnectionString = global::L05.Properties.Settings.Default.Database1ConnectionString;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         private void InitCommandCollection() {
-            this._commandCollection = new global::System.Data.OleDb.OleDbCommand[4];
-            this._commandCollection[0] = new global::System.Data.OleDb.OleDbCommand();
+            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[3];
+            this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT Код, CountryName, Capitol, Continent, Population FROM Countries";
+            this._commandCollection[0].CommandText = "SELECT Id, CountryName, Capitol, Continent, Population FROM dbo.[Table]";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
-            this._commandCollection[1] = new global::System.Data.OleDb.OleDbCommand();
+            this._commandCollection[1] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[1].Connection = this.Connection;
-            this._commandCollection[1].CommandText = "SELECT Код, CountryName, Capitol, Continent, Population FROM Countries";
+            this._commandCollection[1].CommandText = "SELECT Id, CountryName, Capitol, Continent, Population FROM dbo.[Table]\r\nWHERE (C" +
+                "AST (CountryName AS NVARCHAR(MAX))LIKE \'K%\') ";
             this._commandCollection[1].CommandType = global::System.Data.CommandType.Text;
-            this._commandCollection[2] = new global::System.Data.OleDb.OleDbCommand();
+            this._commandCollection[2] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[2].Connection = this.Connection;
-            this._commandCollection[2].CommandText = "SELECT Код, CountryName, Capitol, Continent, Population FROM Countries\r\nWHERE Con" +
-                "tinent=@cap";
+            this._commandCollection[2].CommandText = "SELECT        Id, CountryName, Capitol, Continent, Population\r\nFROM            [T" +
+                "able]\r\nWHERE        (CAST(Continent AS NVARCHAR(MAX)) = @cap)";
             this._commandCollection[2].CommandType = global::System.Data.CommandType.Text;
-            this._commandCollection[2].Parameters.Add(new global::System.Data.OleDb.OleDbParameter("@cap", global::System.Data.OleDb.OleDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), null, global::System.Data.DataRowVersion.Current, false, null));
-            this._commandCollection[3] = new global::System.Data.OleDb.OleDbCommand();
-            this._commandCollection[3].Connection = this.Connection;
-            this._commandCollection[3].CommandText = "SELECT        CountryName, Capitol, Continent, Population\r\nFROM            Countr" +
-                "ies\r\nWHERE        Continent=@cap";
-            this._commandCollection[3].CommandType = global::System.Data.CommandType.Text;
-            this._commandCollection[3].Parameters.Add(new global::System.Data.OleDb.OleDbParameter("@cap", global::System.Data.OleDb.OleDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), null, global::System.Data.DataRowVersion.Current, false, null));
+            this._commandCollection[2].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@cap", global::System.Data.SqlDbType.NVarChar, 1024, global::System.Data.ParameterDirection.Input, 0, 0, "", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
-        public virtual int Fill(ContinentsDataSet.CountriesDataTable dataTable) {
+        public virtual int Fill(Database1DataSet2.TableDataTable dataTable) {
             this.Adapter.SelectCommand = this.CommandCollection[0];
             if ((this.ClearBeforeFill == true)) {
                 dataTable.Clear();
@@ -986,9 +978,9 @@ namespace L06DataBase.ContinentsDataSetTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
-        public virtual ContinentsDataSet.CountriesDataTable GetData() {
+        public virtual Database1DataSet2.TableDataTable GetData() {
             this.Adapter.SelectCommand = this.CommandCollection[0];
-            ContinentsDataSet.CountriesDataTable dataTable = new ContinentsDataSet.CountriesDataTable();
+            Database1DataSet2.TableDataTable dataTable = new Database1DataSet2.TableDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
         }
@@ -997,7 +989,7 @@ namespace L06DataBase.ContinentsDataSetTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, false)]
-        public virtual int F(ContinentsDataSet.CountriesDataTable dataTable) {
+        public virtual int FillByStartsWithK(Database1DataSet2.TableDataTable dataTable) {
             this.Adapter.SelectCommand = this.CommandCollection[1];
             if ((this.ClearBeforeFill == true)) {
                 dataTable.Clear();
@@ -1009,25 +1001,14 @@ namespace L06DataBase.ContinentsDataSetTableAdapters {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, false)]
-        public virtual ContinentsDataSet.CountriesDataTable GetEverything() {
-            this.Adapter.SelectCommand = this.CommandCollection[1];
-            ContinentsDataSet.CountriesDataTable dataTable = new ContinentsDataSet.CountriesDataTable();
-            this.Adapter.Fill(dataTable);
-            return dataTable;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, false)]
-        public virtual int FillBySouthAm(ContinentsDataSet.CountriesDataTable dataTable, string @cap) {
+        public virtual int Z22(Database1DataSet2.TableDataTable dataTable, string cap) {
             this.Adapter.SelectCommand = this.CommandCollection[2];
-            if ((@cap == null)) {
-                throw new global::System.ArgumentNullException("@cap");
+            if ((cap == null)) {
+                throw new global::System.ArgumentNullException("cap");
             }
             else {
-                this.Adapter.SelectCommand.Parameters[0].Value = ((string)(@cap));
+                this.Adapter.SelectCommand.Parameters[0].Value = ((string)(cap));
             }
             if ((this.ClearBeforeFill == true)) {
                 dataTable.Clear();
@@ -1039,34 +1020,15 @@ namespace L06DataBase.ContinentsDataSetTableAdapters {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, false)]
-        public virtual int Z22(ContinentsDataSet.CountriesDataTable dataTable, string @cap) {
-            this.Adapter.SelectCommand = this.CommandCollection[3];
-            if ((@cap == null)) {
-                throw new global::System.ArgumentNullException("@cap");
-            }
-            else {
-                this.Adapter.SelectCommand.Parameters[0].Value = ((string)(@cap));
-            }
-            if ((this.ClearBeforeFill == true)) {
-                dataTable.Clear();
-            }
-            int returnValue = this.Adapter.Fill(dataTable);
-            return returnValue;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(ContinentsDataSet.CountriesDataTable dataTable) {
+        public virtual int Update(Database1DataSet2.TableDataTable dataTable) {
             return this.Adapter.Update(dataTable);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(ContinentsDataSet dataSet) {
-            return this.Adapter.Update(dataSet, "Countries");
+        public virtual int Update(Database1DataSet2 dataSet) {
+            return this.Adapter.Update(dataSet, "Table");
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1088,39 +1050,15 @@ namespace L06DataBase.ContinentsDataSetTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
-        public virtual int Delete(int Original_Код, string Original_CountryName, string Original_Capitol, string Original_Continent, global::System.Nullable<int> Original_Population) {
-            this.Adapter.DeleteCommand.Parameters[0].Value = ((int)(Original_Код));
-            if ((Original_CountryName == null)) {
+        public virtual int Delete(int Original_Id, global::System.Nullable<long> Original_Population) {
+            this.Adapter.DeleteCommand.Parameters[0].Value = ((int)(Original_Id));
+            if ((Original_Population.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[1].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[2].Value = ((long)(Original_Population.Value));
+            }
+            else {
                 this.Adapter.DeleteCommand.Parameters[1].Value = ((object)(1));
                 this.Adapter.DeleteCommand.Parameters[2].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[1].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[2].Value = ((string)(Original_CountryName));
-            }
-            if ((Original_Capitol == null)) {
-                this.Adapter.DeleteCommand.Parameters[3].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[4].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[3].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[4].Value = ((string)(Original_Capitol));
-            }
-            if ((Original_Continent == null)) {
-                this.Adapter.DeleteCommand.Parameters[5].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[6].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[5].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[6].Value = ((string)(Original_Continent));
-            }
-            if ((Original_Population.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[7].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[8].Value = ((int)(Original_Population.Value));
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[7].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[8].Value = global::System.DBNull.Value;
             }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
             if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
@@ -1142,30 +1080,31 @@ namespace L06DataBase.ContinentsDataSetTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(string CountryName, string Capitol, string Continent, global::System.Nullable<int> Population) {
+        public virtual int Insert(int Id, string CountryName, string Capitol, string Continent, global::System.Nullable<long> Population) {
+            this.Adapter.InsertCommand.Parameters[0].Value = ((int)(Id));
             if ((CountryName == null)) {
-                this.Adapter.InsertCommand.Parameters[0].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[0].Value = ((string)(CountryName));
-            }
-            if ((Capitol == null)) {
                 this.Adapter.InsertCommand.Parameters[1].Value = global::System.DBNull.Value;
             }
             else {
-                this.Adapter.InsertCommand.Parameters[1].Value = ((string)(Capitol));
+                this.Adapter.InsertCommand.Parameters[1].Value = ((string)(CountryName));
             }
-            if ((Continent == null)) {
+            if ((Capitol == null)) {
                 this.Adapter.InsertCommand.Parameters[2].Value = global::System.DBNull.Value;
             }
             else {
-                this.Adapter.InsertCommand.Parameters[2].Value = ((string)(Continent));
+                this.Adapter.InsertCommand.Parameters[2].Value = ((string)(Capitol));
             }
-            if ((Population.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[3].Value = ((int)(Population.Value));
+            if ((Continent == null)) {
+                this.Adapter.InsertCommand.Parameters[3].Value = global::System.DBNull.Value;
             }
             else {
-                this.Adapter.InsertCommand.Parameters[3].Value = global::System.DBNull.Value;
+                this.Adapter.InsertCommand.Parameters[3].Value = ((string)(Continent));
+            }
+            if ((Population.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[4].Value = ((long)(Population.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[4].Value = global::System.DBNull.Value;
             }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
             if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
@@ -1187,63 +1126,40 @@ namespace L06DataBase.ContinentsDataSetTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(string CountryName, string Capitol, string Continent, global::System.Nullable<int> Population, int Original_Код, string Original_CountryName, string Original_Capitol, string Original_Continent, global::System.Nullable<int> Original_Population) {
+        public virtual int Update(int Id, string CountryName, string Capitol, string Continent, global::System.Nullable<long> Population, int Original_Id, global::System.Nullable<long> Original_Population) {
+            this.Adapter.UpdateCommand.Parameters[0].Value = ((int)(Id));
             if ((CountryName == null)) {
-                this.Adapter.UpdateCommand.Parameters[0].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[0].Value = ((string)(CountryName));
-            }
-            if ((Capitol == null)) {
                 this.Adapter.UpdateCommand.Parameters[1].Value = global::System.DBNull.Value;
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[1].Value = ((string)(Capitol));
+                this.Adapter.UpdateCommand.Parameters[1].Value = ((string)(CountryName));
             }
-            if ((Continent == null)) {
+            if ((Capitol == null)) {
                 this.Adapter.UpdateCommand.Parameters[2].Value = global::System.DBNull.Value;
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[2].Value = ((string)(Continent));
+                this.Adapter.UpdateCommand.Parameters[2].Value = ((string)(Capitol));
             }
-            if ((Population.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[3].Value = ((int)(Population.Value));
-            }
-            else {
+            if ((Continent == null)) {
                 this.Adapter.UpdateCommand.Parameters[3].Value = global::System.DBNull.Value;
             }
-            this.Adapter.UpdateCommand.Parameters[4].Value = ((int)(Original_Код));
-            if ((Original_CountryName == null)) {
-                this.Adapter.UpdateCommand.Parameters[5].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[6].Value = global::System.DBNull.Value;
+            else {
+                this.Adapter.UpdateCommand.Parameters[3].Value = ((string)(Continent));
+            }
+            if ((Population.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[4].Value = ((long)(Population.Value));
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[5].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[6].Value = ((string)(Original_CountryName));
+                this.Adapter.UpdateCommand.Parameters[4].Value = global::System.DBNull.Value;
             }
-            if ((Original_Capitol == null)) {
-                this.Adapter.UpdateCommand.Parameters[7].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[8].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[7].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[8].Value = ((string)(Original_Capitol));
-            }
-            if ((Original_Continent == null)) {
-                this.Adapter.UpdateCommand.Parameters[9].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[10].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[9].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[10].Value = ((string)(Original_Continent));
-            }
+            this.Adapter.UpdateCommand.Parameters[5].Value = ((int)(Original_Id));
             if ((Original_Population.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[11].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[12].Value = ((int)(Original_Population.Value));
+                this.Adapter.UpdateCommand.Parameters[6].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[7].Value = ((long)(Original_Population.Value));
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[11].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[12].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[6].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[7].Value = global::System.DBNull.Value;
             }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
             if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
@@ -1260,6 +1176,14 @@ namespace L06DataBase.ContinentsDataSetTableAdapters {
                 }
             }
         }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
+        public virtual int Update(string CountryName, string Capitol, string Continent, global::System.Nullable<long> Population, int Original_Id, global::System.Nullable<long> Original_Population) {
+            return this.Update(Original_Id, CountryName, Capitol, Continent, Population, Original_Id, Original_Population);
+        }
     }
     
     /// <summary>
@@ -1274,7 +1198,7 @@ namespace L06DataBase.ContinentsDataSetTableAdapters {
         
         private UpdateOrderOption _updateOrder;
         
-        private CountriesTableAdapter _countriesTableAdapter;
+        private TableTableAdapter _tableTableAdapter;
         
         private bool _backupDataSetBeforeUpdate;
         
@@ -1296,12 +1220,12 @@ namespace L06DataBase.ContinentsDataSetTableAdapters {
         [global::System.ComponentModel.EditorAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterManagerPropertyEditor, Microso" +
             "ft.VSDesigner, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3" +
             "a", "System.Drawing.Design.UITypeEditor")]
-        public CountriesTableAdapter CountriesTableAdapter {
+        public TableTableAdapter TableTableAdapter {
             get {
-                return this._countriesTableAdapter;
+                return this._tableTableAdapter;
             }
             set {
-                this._countriesTableAdapter = value;
+                this._tableTableAdapter = value;
             }
         }
         
@@ -1324,9 +1248,9 @@ namespace L06DataBase.ContinentsDataSetTableAdapters {
                 if ((this._connection != null)) {
                     return this._connection;
                 }
-                if (((this._countriesTableAdapter != null) 
-                            && (this._countriesTableAdapter.Connection != null))) {
-                    return this._countriesTableAdapter.Connection;
+                if (((this._tableTableAdapter != null) 
+                            && (this._tableTableAdapter.Connection != null))) {
+                    return this._tableTableAdapter.Connection;
                 }
                 return null;
             }
@@ -1341,7 +1265,7 @@ namespace L06DataBase.ContinentsDataSetTableAdapters {
         public int TableAdapterInstanceCount {
             get {
                 int count = 0;
-                if ((this._countriesTableAdapter != null)) {
+                if ((this._tableTableAdapter != null)) {
                     count = (count + 1);
                 }
                 return count;
@@ -1353,14 +1277,14 @@ namespace L06DataBase.ContinentsDataSetTableAdapters {
         ///</summary>
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-        private int UpdateUpdatedRows(ContinentsDataSet dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows, global::System.Collections.Generic.List<global::System.Data.DataRow> allAddedRows) {
+        private int UpdateUpdatedRows(Database1DataSet2 dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows, global::System.Collections.Generic.List<global::System.Data.DataRow> allAddedRows) {
             int result = 0;
-            if ((this._countriesTableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.Countries.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+            if ((this._tableTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.Table.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
                 updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
                 if (((updatedRows != null) 
                             && (0 < updatedRows.Length))) {
-                    result = (result + this._countriesTableAdapter.Update(updatedRows));
+                    result = (result + this._tableTableAdapter.Update(updatedRows));
                     allChangedRows.AddRange(updatedRows);
                 }
             }
@@ -1372,13 +1296,13 @@ namespace L06DataBase.ContinentsDataSetTableAdapters {
         ///</summary>
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-        private int UpdateInsertedRows(ContinentsDataSet dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allAddedRows) {
+        private int UpdateInsertedRows(Database1DataSet2 dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allAddedRows) {
             int result = 0;
-            if ((this._countriesTableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.Countries.Select(null, null, global::System.Data.DataViewRowState.Added);
+            if ((this._tableTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.Table.Select(null, null, global::System.Data.DataViewRowState.Added);
                 if (((addedRows != null) 
                             && (0 < addedRows.Length))) {
-                    result = (result + this._countriesTableAdapter.Update(addedRows));
+                    result = (result + this._tableTableAdapter.Update(addedRows));
                     allAddedRows.AddRange(addedRows);
                 }
             }
@@ -1390,13 +1314,13 @@ namespace L06DataBase.ContinentsDataSetTableAdapters {
         ///</summary>
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-        private int UpdateDeletedRows(ContinentsDataSet dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows) {
+        private int UpdateDeletedRows(Database1DataSet2 dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows) {
             int result = 0;
-            if ((this._countriesTableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.Countries.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+            if ((this._tableTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.Table.Select(null, null, global::System.Data.DataViewRowState.Deleted);
                 if (((deletedRows != null) 
                             && (0 < deletedRows.Length))) {
-                    result = (result + this._countriesTableAdapter.Update(deletedRows));
+                    result = (result + this._tableTableAdapter.Update(deletedRows));
                     allChangedRows.AddRange(deletedRows);
                 }
             }
@@ -1432,15 +1356,15 @@ namespace L06DataBase.ContinentsDataSetTableAdapters {
         ///</summary>
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-        public virtual int UpdateAll(ContinentsDataSet dataSet) {
+        public virtual int UpdateAll(Database1DataSet2 dataSet) {
             if ((dataSet == null)) {
                 throw new global::System.ArgumentNullException("dataSet");
             }
             if ((dataSet.HasChanges() == false)) {
                 return 0;
             }
-            if (((this._countriesTableAdapter != null) 
-                        && (this.MatchTableAdapterConnection(this._countriesTableAdapter.Connection) == false))) {
+            if (((this._tableTableAdapter != null) 
+                        && (this.MatchTableAdapterConnection(this._tableTableAdapter.Connection) == false))) {
                 throw new global::System.ArgumentException("All TableAdapters managed by a TableAdapterManager must use the same connection s" +
                         "tring.");
             }
@@ -1476,13 +1400,13 @@ namespace L06DataBase.ContinentsDataSetTableAdapters {
             try {
                 // ---- Prepare for update -----------
                 //
-                if ((this._countriesTableAdapter != null)) {
-                    revertConnections.Add(this._countriesTableAdapter, this._countriesTableAdapter.Connection);
-                    this._countriesTableAdapter.Connection = ((global::System.Data.OleDb.OleDbConnection)(workConnection));
-                    this._countriesTableAdapter.Transaction = ((global::System.Data.OleDb.OleDbTransaction)(workTransaction));
-                    if (this._countriesTableAdapter.Adapter.AcceptChangesDuringUpdate) {
-                        this._countriesTableAdapter.Adapter.AcceptChangesDuringUpdate = false;
-                        adaptersWithAcceptChangesDuringUpdate.Add(this._countriesTableAdapter.Adapter);
+                if ((this._tableTableAdapter != null)) {
+                    revertConnections.Add(this._tableTableAdapter, this._tableTableAdapter.Connection);
+                    this._tableTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(workConnection));
+                    this._tableTableAdapter.Transaction = ((global::System.Data.SqlClient.SqlTransaction)(workTransaction));
+                    if (this._tableTableAdapter.Adapter.AcceptChangesDuringUpdate) {
+                        this._tableTableAdapter.Adapter.AcceptChangesDuringUpdate = false;
+                        adaptersWithAcceptChangesDuringUpdate.Add(this._tableTableAdapter.Adapter);
                     }
                 }
                 // 
@@ -1543,9 +1467,9 @@ namespace L06DataBase.ContinentsDataSetTableAdapters {
                 if (workConnOpened) {
                     workConnection.Close();
                 }
-                if ((this._countriesTableAdapter != null)) {
-                    this._countriesTableAdapter.Connection = ((global::System.Data.OleDb.OleDbConnection)(revertConnections[this._countriesTableAdapter]));
-                    this._countriesTableAdapter.Transaction = null;
+                if ((this._tableTableAdapter != null)) {
+                    this._tableTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._tableTableAdapter]));
+                    this._tableTableAdapter.Transaction = null;
                 }
                 if ((0 < adaptersWithAcceptChangesDuringUpdate.Count)) {
                     global::System.Data.Common.DataAdapter[] adapters = new System.Data.Common.DataAdapter[adaptersWithAcceptChangesDuringUpdate.Count];
